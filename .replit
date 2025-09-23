@@ -5,6 +5,7 @@ integrations = ["flask_authentication:1.0.0"]
 
 [nix]
 channel = "stable-25_05"
+packages = ["openssl", "postgresql"]
 
 [workflows]
 runButton = "Project"
@@ -16,10 +17,10 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "RekoBuku Flask App"
+args = "Flask App"
 
 [[workflows.workflow]]
-name = "RekoBuku Flask App"
+name = "Flask App"
 author = "agent"
 
 [[workflows.workflow.tasks]]
@@ -33,3 +34,7 @@ outputType = "webview"
 [[ports]]
 localPort = 5000
 externalPort = 80
+
+[deployment]
+deploymentTarget = "autoscale"
+run = ["gunicorn", "--bind", "0.0.0.0:5000", "--reuse-port", "app:app"]

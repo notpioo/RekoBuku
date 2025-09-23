@@ -101,3 +101,40 @@ class User(UserMixin):
     
     def is_pengguna(self):
         return self.role == 'pengguna'
+    
+    def update(self, nama=None, email=None, role=None, password=None):
+        """Update user information"""
+        if nama is not None:
+            self.nama = nama
+        if email is not None:
+            self.email = email
+        if role is not None:
+            self.role = role
+        if password is not None:
+            self.password_hash = generate_password_hash(password)
+        self.save()
+    
+    @classmethod
+    def delete(cls, user_id):
+        """Delete a user by ID"""
+        users = cls.get_all()
+        users = [user for user in users if user.id != user_id]
+        
+        # Save updated users list
+        users_data = []
+        for user in users:
+            users_data.append({
+                'id': user.id,
+                'nama': user.nama,
+                'email': user.email,
+                'password_hash': user.password_hash,
+                'favorites': user.favorites,
+                'profile_image': user.profile_image,
+                'role': getattr(user, 'role', 'pengguna')
+            })
+        
+        # Ensure directory exists
+        os.makedirs(os.path.dirname(cls.get_users_file()), exist_ok=True)
+        
+        with open(cls.get_users_file(), 'w', encoding='utf-8') as f:
+            json.dump(users_data, f, indent=2, ensure_ascii=False)

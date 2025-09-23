@@ -1,0 +1,177 @@
+{% extends "admin/base_admin.html" %}
+
+{% block title %}{{ title }} - Admin Panel{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row mb-4">
+        <div class="col">
+            <h1 class="admin-page-title">{{ title }}</h1>
+            <p class="admin-page-subtitle">{% if book %}Edit informasi buku{% else %}Tambahkan buku baru ke koleksi{% endif %}</p>
+        </div>
+        <div class="col-auto">
+            <a href="{{ url_for('admin_books') }}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left me-2"></i>Kembali
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-body">
+                    <form method="POST" action="" enctype="multipart/form-data">
+                        {{ form.hidden_tag() }}
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-8">
+                                {{ form.judul.label(class="form-label fw-bold") }}
+                                {{ form.judul(class="form-control") }}
+                                {% for error in form.judul.errors %}
+                                    <div class="text-danger small mt-1">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                            <div class="col-md-4">
+                                {{ form.penulis.label(class="form-label fw-bold") }}
+                                {{ form.penulis(class="form-control") }}
+                                {% for error in form.penulis.errors %}
+                                    <div class="text-danger small mt-1">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form.foto.label(class="form-label fw-bold") }}
+                            {{ form.foto(class="form-control", accept="image/*") }}
+                            {% for error in form.foto.errors %}
+                                <div class="text-danger small mt-1">{{ error }}</div>
+                            {% endfor %}
+                            <div class="form-text">
+                                {% if book %}
+                                    Upload file gambar baru (opsional). Biarkan kosong untuk mempertahankan foto lama. Format: JPG, JPEG, PNG, atau GIF, maksimal 5MB.
+                                {% else %}
+                                    Upload file gambar (JPG, JPEG, PNG, atau GIF, maksimal 5MB)
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form.deskripsi_singkat.label(class="form-label fw-bold") }}
+                            {{ form.deskripsi_singkat(class="form-control", rows="4") }}
+                            {% for error in form.deskripsi_singkat.errors %}
+                                <div class="text-danger small mt-1">{{ error }}</div>
+                            {% endfor %}
+                            <div class="form-text">Maksimal 800 karakter</div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="tag" class="form-label fw-bold">Tag <span id="tag-count"></span></label>
+                            {{ form.tag(class="form-select", id="tag", multiple=True) }}
+                            {% for error in form.tag.errors %}
+                                <div class="text-danger small mt-1">{{ error }}</div>
+                            {% endfor %}
+                            <div class="form-text">Pilih satu atau lebih tag yang sesuai dengan buku</div>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            {{ form.submit(class="btn btn-primary") }}
+                            <a href="{{ url_for('admin_books') }}" class="btn btn-outline-secondary">Batal</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">Preview Cover</h6>
+                    <div class="text-center">
+                        <img id="cover-preview" 
+                             src="{% if book and book.foto %}{{ book.foto }}{% else %}https://via.placeholder.com/150x200/6c757d/ffffff?text=Preview{% endif %}" 
+                             alt="Cover Preview" 
+                             class="img-fluid rounded" 
+                             style="max-height: 250px;">
+                    </div>
+                    <small class="text-muted d-block mt-2">Preview otomatis akan diperbarui saat Anda memasukkan URL gambar.</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block scripts %}
+<script>
+    // Auto-update cover preview for file upload
+    document.getElementById('foto').addEventListener('change', function() {
+        const file = this.files[0];
+        const preview = document.getElementById('cover-preview');
+        
+        if (file) {
+            // Check file size (5MB limit)
+            if (file.size > 5 * 1024 * 1024) {
+                alert('Ukuran file terlalu besar. Maksimal 5MB.');
+                this.value = '';
+                preview.src = 'https://via.placeholder.com/150x200/6c757d/ffffff?text=Preview';
+                return;
+            }
+            
+            // Check file type
+            const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
+            if (!allowedTypes.includes(file.type)) {
+                alert('Format file tidak didukung. Gunakan JPG, JPEG, PNG, atau GIF.');
+                this.value = '';
+                preview.src = 'https://via.placeholder.com/150x200/6c757d/ffffff?text=Preview';
+                return;
+            }
+            
+            // Preview the image
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = 'https://via.placeholder.com/150x200/6c757d/ffffff?text=Preview';
+        }
+    });
+    
+    // Initialize Choices.js for tag selection
+    document.addEventListener('DOMContentLoaded', function() {
+        const tagSelect = new Choices('#tag', {
+            removeItemButton: true,
+            searchEnabled: true,
+            placeholderValue: 'Pilih tag yang sesuai...',
+            shouldSort: false,
+            position: 'bottom',
+            searchPlaceholderValue: 'Cari tag...',
+            noResultsText: 'Tidak ada tag yang cocok',
+            noChoicesText: 'Tidak ada tag lagi',
+            itemSelectText: 'Tekan untuk memilih',
+            maxItemCount: -1,
+            classNames: {
+                containerInner: 'choices__inner choices__inner--tag-select',
+            }
+        });
+        
+        // Update tag count
+        function updateTagCount() {
+            const selectedTags = tagSelect.getValue();
+            const countElement = document.getElementById('tag-count');
+            if (selectedTags.length > 0) {
+                countElement.textContent = `(${selectedTags.length} dipilih)`;
+                countElement.className = 'text-primary';
+            } else {
+                countElement.textContent = '';
+            }
+        }
+        
+        // Listen for changes
+        document.getElementById('tag').addEventListener('change', updateTagCount);
+        
+        // Initial count update
+        updateTagCount();
+    });
+</script>
+{% endblock %}
+{% endblock %}

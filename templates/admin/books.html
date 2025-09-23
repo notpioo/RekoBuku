@@ -4,6 +4,10 @@
 {% block title %}Data Buku - Admin Panel{% endblock %}
 
 {% block content %}
+<!-- Hidden form for CSRF token -->
+<form style="display: none;">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+</form>
 <div class="container-fluid py-4">
     <div class="row mb-4">
         <div class="col">
@@ -11,9 +15,9 @@
             <p class="admin-page-subtitle">Kelola koleksi buku di RekoBuku</p>
         </div>
         <div class="col-auto">
-            <button class="btn btn-primary">
+            <a href="{{ url_for('add_book') }}" class="btn btn-primary">
                 <i class="fas fa-plus me-2"></i>Tambah Buku
-            </button>
+            </a>
         </div>
     </div>
 
@@ -26,8 +30,8 @@
                         <th>Cover</th>
                         <th>Judul</th>
                         <th>Penulis</th>
-                        <th>Genre</th>
-                        <th>Rating</th>
+                        <th>Tag</th>
+                        <th>Deskripsi</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -35,31 +39,29 @@
                     {% for book in books %}
                     <tr>
                         <td>
-                            <img src="{{ book.cover_image }}" alt="{{ book.title }}" class="rounded" width="40" height="60" style="object-fit: cover;">
+                            <img src="{{ book.foto if book.foto else '/static/images/no-image.png' }}" alt="{{ book.judul }}" class="rounded" width="40" height="60" style="object-fit: cover;">
                         </td>
                         <td>
-                            <strong>{{ book.title }}</strong>
+                            <strong>{{ book.judul }}</strong>
                         </td>
-                        <td>{{ book.author }}</td>
+                        <td>{{ book.penulis }}</td>
                         <td>
-                            {% for genre in book.genre[:2] %}
-                                <span class="badge bg-secondary me-1">{{ genre }}</span>
+                            {% for tag in book.tag[:2] %}
+                                <span class="badge bg-secondary me-1">{{ tag }}</span>
                             {% endfor %}
-                            {% if book.genre|length > 2 %}
-                                <span class="text-muted">+{{ book.genre|length - 2 }}</span>
+                            {% if book.tag|length > 2 %}
+                                <span class="text-muted">+{{ book.tag|length - 2 }}</span>
                             {% endif %}
                         </td>
                         <td>
-                            <span class="badge bg-warning">
-                                <i class="fas fa-star"></i> {{ book.rating }}
-                            </span>
+                            <small class="text-muted">{{ book.deskripsi_singkat[:50] }}{% if book.deskripsi_singkat|length > 50 %}...{% endif %}</small>
                         </td>
                         <td>
                             <div class="btn-group btn-group-sm">
-                                <button class="btn btn-outline-primary" title="Edit">
+                                <a href="{{ url_for('edit_book', book_id=book.id) }}" class="btn btn-outline-primary" title="Edit">
                                     <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="btn btn-outline-danger" title="Hapus">
+                                </a>
+                                <button class="btn btn-outline-danger" title="Hapus" onclick="confirmDelete('{{ book.id }}', '{{ book.judul }}')">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </div>
@@ -77,31 +79,30 @@
             {% for book in books %}
             <div class="mobile-book-item">
                 <div class="d-flex align-items-start">
-                    <img src="{{ book.cover_image }}" alt="{{ book.title }}" class="mobile-book-cover me-3">
+                    <img src="{{ book.foto if book.foto else '/static/images/no-image.png' }}" alt="{{ book.judul }}" class="mobile-book-cover me-3">
                     <div class="flex-grow-1">
                         <div class="d-flex justify-content-between align-items-start mb-2">
-                            <h6 class="mobile-book-title mb-1">{{ book.title }}</h6>
+                            <h6 class="mobile-book-title mb-1">{{ book.judul }}</h6>
                             <div class="mobile-book-actions">
-                                <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
+                                <a href="{{ url_for('edit_book', book_id=book.id) }}" class="btn btn-sm btn-outline-primary me-1" title="Edit">
                                     <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="btn btn-sm btn-outline-danger" title="Hapus">
+                                </a>
+                                <button class="btn btn-sm btn-outline-danger" title="Hapus" onclick="confirmDelete('{{ book.id }}', '{{ book.judul }}')">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </div>
                         </div>
-                        <p class="mobile-book-author text-muted mb-2">{{ book.author }}</p>
+                        <p class="mobile-book-author text-muted mb-2">{{ book.penulis }}</p>
                         <div class="mobile-book-genres mb-2">
-                            {% for genre in book.genre[:3] %}
-                                <span class="badge mobile-genre-badge me-1">{{ genre }}</span>
+                            {% for tag in book.tag[:3] %}
+                                <span class="badge mobile-genre-badge me-1">{{ tag }}</span>
                             {% endfor %}
-                            {% if book.genre|length > 3 %}
-                                <span class="text-muted small">+{{ book.genre|length - 3 }}</span>
+                            {% if book.tag|length > 3 %}
+                                <span class="text-muted small">+{{ book.tag|length - 3 }}</span>
                             {% endif %}
                         </div>
-                        <div class="mobile-book-rating">
-                            <i class="fas fa-star text-warning"></i>
-                            <span class="fw-bold">{{ book.rating }}</span>
+                        <div class="mobile-book-description">
+                            <small class="text-muted">{{ book.deskripsi_singkat[:80] }}{% if book.deskripsi_singkat|length > 80 %}...{% endif %}</small>
                         </div>
                     </div>
                 </div>
@@ -111,4 +112,59 @@
     </div>
     
 </div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Hapus</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Apakah Anda yakin ingin menghapus buku "<span id="bookTitle"></span>"?</p>
+                <p class="text-danger small">Tindakan ini tidak dapat dibatalkan.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Hapus</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+let bookIdToDelete = null;
+
+function confirmDelete(bookId, bookTitle) {
+    bookIdToDelete = bookId;
+    document.getElementById('bookTitle').textContent = bookTitle;
+    new bootstrap.Modal(document.getElementById('deleteModal')).show();
+}
+
+document.getElementById('confirmDeleteBtn').addEventListener('click', function() {
+    if (bookIdToDelete) {
+        fetch('/admin/books/delete/' + bookIdToDelete, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': document.querySelector('[name=csrf_token]').value
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                location.reload(); // Refresh the page to show updated list
+            } else {
+                alert('Error: ' + (data.error || 'Gagal menghapus buku'));
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Terjadi kesalahan saat menghapus buku');
+        });
+        
+        bootstrap.Modal.getInstance(document.getElementById('deleteModal')).hide();
+    }
+});
+</script>
 {% endblock %}
