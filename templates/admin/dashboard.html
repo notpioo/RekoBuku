@@ -1,0 +1,166 @@
+
+{% extends "admin/base_admin.html" %}
+
+{% block title %}Dashboard - Admin Panel{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row mb-4">
+        <div class="col">
+            <h1 class="admin-page-title">Dashboard Admin</h1>
+            <p class="admin-page-subtitle">Selamat datang di panel administrasi RekoBuku</p>
+        </div>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="row mb-4">
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="card admin-stat-card h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h3 class="card-title mb-1 fw-bold">{{ total_users }}</h3>
+                            <p class="card-text mb-0">Total Pengguna</p>
+                        </div>
+                        <div class="text-end">
+                            <i class="fas fa-users fa-3x opacity-75"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="card admin-stat-card bg-success h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h3 class="card-title mb-1 fw-bold">{{ total_books }}</h3>
+                            <p class="card-text mb-0">Total Buku</p>
+                        </div>
+                        <div class="text-end">
+                            <i class="fas fa-book fa-3x opacity-75"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="card admin-stat-card bg-warning h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h3 class="card-title mb-1 fw-bold">{{ admin_users }}</h3>
+                            <p class="card-text mb-0">Admin</p>
+                        </div>
+                        <div class="text-end">
+                            <i class="fas fa-shield-alt fa-3x opacity-75"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="card admin-stat-card bg-info h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h3 class="card-title mb-1 fw-bold">{{ regular_users }}</h3>
+                            <p class="card-text mb-0">Pengguna Reguler</p>
+                        </div>
+                        <div class="text-end">
+                            <i class="fas fa-user fa-3x opacity-75"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="row">
+        <div class="col-lg-8 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-bolt me-2"></i>Aksi Cepat
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="admin-action-card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-plus fa-2x text-primary mb-3"></i>
+                                    <h6 class="fw-bold mb-2">Tambah Buku Baru</h6>
+                                    <p class="text-muted small mb-3">Menambahkan koleksi buku terbaru</p>
+                                    <a href="{{ url_for('admin_books') }}" class="btn btn-primary">Kelola Buku</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="admin-action-card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-user-plus fa-2x text-success mb-3"></i>
+                                    <h6 class="fw-bold mb-2">Kelola Pengguna</h6>
+                                    <p class="text-muted small mb-3">Manajemen akun dan role pengguna</p>
+                                    <a href="{{ url_for('admin_users') }}" class="btn btn-success">Kelola Pengguna</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="admin-action-card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-brain fa-2x text-warning mb-3"></i>
+                                    <h6 class="fw-bold mb-2">Update Model NLP</h6>
+                                    <p class="text-muted small mb-3">Tingkatkan akurasi rekomendasi</p>
+                                    <a href="{{ url_for('admin_nlp') }}" class="btn btn-warning">Model NLP</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="admin-action-card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-cog fa-2x text-info mb-3"></i>
+                                    <h6 class="fw-bold mb-2">Pengaturan Sistem</h6>
+                                    <p class="text-muted small mb-3">Konfigurasi aplikasi dan sistem</p>
+                                    <a href="{{ url_for('admin_settings') }}" class="btn btn-info">Pengaturan</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-info-circle me-2"></i>Informasi Sistem
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2">
+                            <strong>Versi Aplikasi:</strong> 1.0.0
+                        </li>
+                        <li class="mb-2">
+                            <strong>Database:</strong> JSON File-based
+                        </li>
+                        <li class="mb-2">
+                            <strong>Framework:</strong> Flask
+                        </li>
+                        <li class="mb-2">
+                            <strong>Status Sistem:</strong> 
+                            <span class="badge bg-success">Online</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,877 @@
+/* Custom CSS for RekoBuku */
+
+:root {
+    --primary-color: #4f46e5;
+    --secondary-color: #6b7280;
+    --success-color: #059669;
+    --warning-color: #d97706;
+    --danger-color: #dc2626;
+    --light-bg: #f8fafc;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--light-bg);
+}
+
+/* Navigation */
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.nav-link {
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+    color: var(--primary-color) !important;
+}
+
+.nav-link.active {
+    color: var(--primary-color) !important;
+    font-weight: 600;
+}
+
+/* Book Cards */
+.book-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.book-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+
+.book-cover {
+    height: 200px;
+    object-fit: cover;
+    border-radius: 0.375rem 0.375rem 0 0;
+}
+
+.book-card .card-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1.3;
+    height: 2.6rem;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.book-card .card-text {
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Buttons */
+.btn {
+    font-weight: 500;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: #3730a3;
+    border-color: #3730a3;
+    transform: translateY(-1px);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    transform: translateY(-1px);
+}
+
+.btn-outline-danger:hover {
+    transform: translateY(-1px);
+}
+
+/* Genre badges */
+.badge {
+    font-size: 0.7rem;
+    font-weight: 500;
+}
+
+/* Cards */
+.card {
+    border: none;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+/* Forms */
+.form-control {
+    border-radius: 0.5rem;
+    border: 1.5px solid #e5e7eb;
+    padding: 0.75rem 1rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(79, 70, 229, 0.15);
+}
+
+.form-label {
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 0.5rem;
+}
+
+/* Alerts */
+.alert {
+    border: none;
+    border-radius: 0.75rem;
+    font-weight: 500;
+}
+
+/* Hero section */
+.display-4 {
+    font-weight: 800;
+    letter-spacing: -0.025em;
+}
+
+.lead {
+    font-size: 1.125rem;
+    font-weight: 400;
+}
+
+/* Profile image */
+.rounded-circle {
+    border: 2px solid #e5e7eb;
+}
+
+/* Mobile Navigation Styles */
+.mobile-header {
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+}
+
+.mobile-profile img {
+    border: 2px solid var(--primary-color);
+}
+
+/* Mobile Bottom Navigation */
+.mobile-bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    border-top: 1px solid #e5e7eb;
+    padding: 0.5rem 0;
+    z-index: 1030;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 70px;
+}
+
+.mobile-bottom-nav .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5rem 0.75rem;
+    text-decoration: none;
+    color: #6b7280;
+    transition: all 0.2s ease;
+    border-radius: 0.5rem;
+    min-width: 60px;
+}
+
+.mobile-bottom-nav .nav-item:hover {
+    color: var(--primary-color);
+    background-color: rgba(79, 70, 229, 0.1);
+    text-decoration: none;
+}
+
+.mobile-bottom-nav .nav-item.active {
+    color: var(--primary-color);
+    background-color: rgba(79, 70, 229, 0.15);
+}
+
+.mobile-bottom-nav .nav-item i {
+    font-size: 1.2rem;
+    margin-bottom: 0.25rem;
+}
+
+.mobile-bottom-nav .nav-item span {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+/* Main content margin for mobile with bottom nav */
+@media (max-width: 991px) {
+    .main-content {
+        padding-bottom: 20px; /* Reduced since body also has padding */
+    }
+}
+
+/* Body padding for mobile to prevent footer overlap - only when authenticated */
+@media (max-width: 991px) {
+    body.authenticated {
+        padding-bottom: 80px;
+    }
+    
+    body:not(.authenticated) {
+        padding-bottom: 0;
+    }
+}
+
+/* Horizontal Scroll for Books */
+.horizontal-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 0.5rem;
+}
+
+/* Hide scrollbar for WebKit browsers */
+.horizontal-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.book-cards-container {
+    display: flex;
+    gap: 1rem;
+    padding: 0.5rem;
+    min-width: max-content;
+}
+
+.book-card-mobile {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    width: 140px; /* Fixed width for better appearance */
+}
+
+/* Mobile specific adjustments */
+@media (max-width: 991px) {
+    .book-card-mobile {
+        width: 140px; /* Consistent width on mobile */
+    }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
+    .book-card-mobile {
+        width: 150px; /* Made wider for better proportion */
+    }
+    
+    .book-cards-container {
+        gap: 0.75rem; /* Reduce gap on small screens */
+        padding: 0.5rem 0.75rem; /* Reduce horizontal padding */
+    }
+    
+    .book-cover-mobile {
+        height: 180px; /* Reduced height for better proportion on small screens */
+    }
+}
+
+.book-card-mobile .card {
+    width: 100%;
+    border-radius: 1rem;
+}
+
+.book-cover-mobile {
+    height: 200px;
+    object-fit: cover;
+    border-radius: 1rem 1rem 0 0;
+}
+
+.book-card-mobile .card-body {
+    padding: 1rem 0.75rem;
+}
+
+.book-card-mobile .card-title {
+    font-size: 0.85rem;
+    line-height: 1.2;
+    height: 2.4rem;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.book-card-mobile .card-text {
+    font-size: 0.75rem;
+}
+
+.book-card-mobile .badge {
+    font-size: 0.65rem;
+    padding: 0.25rem 0.4rem;
+}
+
+.book-card-mobile .btn {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.75rem;
+    border-radius: 0.5rem;
+}
+
+/* Desktop book card styles */
+.book-card-desktop {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    width: 260px; /* Made wider for better desktop experience */
+}
+
+.book-cover-desktop {
+    height: 240px; /* Reduced height for better proportion */
+    object-fit: cover;
+    border-radius: 0.375rem 0.375rem 0 0;
+}
+
+.book-card-desktop .card {
+    width: 100%;
+    border-radius: 1rem;
+}
+
+.book-card-desktop .card-body {
+    padding: 1.25rem;
+}
+
+.book-card-desktop .card-title {
+    font-size: 0.95rem;
+    line-height: 1.3;
+    height: 2.6rem;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    font-weight: 600;
+}
+
+.book-card-desktop .card-text {
+    font-size: 0.85rem;
+}
+
+.book-card-desktop .badge {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.5rem;
+}
+
+.book-card-desktop .btn {
+    font-size: 0.8rem;
+    padding: 0.5rem 0.8rem;
+    border-radius: 0.5rem;
+}
+
+/* Desktop responsive improvements */
+@media (min-width: 992px) {
+    .main-content {
+        padding-bottom: 0;
+    }
+    
+    body {
+        padding-bottom: 0;
+    }
+    
+    /* Enable horizontal scroll on desktop */
+    .horizontal-scroll {
+        display: block;
+        overflow-x: auto;
+        cursor: grab;
+    }
+    
+    .horizontal-scroll:active {
+        cursor: grabbing;
+    }
+    
+    /* Desktop book cards container */
+    .book-cards-container {
+        display: flex;
+        gap: 1.5rem;
+        padding: 0.5rem 0.25rem;
+    }
+    
+    /* Improve scrolling experience on desktop */
+    .horizontal-scroll {
+        padding-bottom: 10px;
+        margin-bottom: -10px;
+    }
+}
+
+/* Footer */
+footer {
+    margin-top: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .book-card .card-title {
+        font-size: 0.85rem;
+        height: auto;
+        -webkit-line-clamp: 3;
+    }
+    
+    .display-4 {
+        font-size: 2rem;
+    }
+    
+    .lead {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    .book-cover {
+        height: 180px;
+    }
+}
+
+/* Animation for favorite button */
+.book-favorite-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.book-favorite-btn.favorited {
+    background-color: var(--danger-color);
+    border-color: var(--danger-color);
+    color: white;
+}
+
+/* Loading state */
+.btn-loading {
+    position: relative;
+    color: transparent;
+}
+
+.btn-loading::after {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    left: 50%;
+    margin-left: -8px;
+    margin-top: -8px;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Admin Panel Styles */
+.admin-panel {
+    background-color: var(--light-bg);
+}
+
+/* Admin Navigation */
+.admin-navbar {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #6366f1 100%);
+    box-shadow: 0 4px 16px rgba(79, 70, 229, 0.15);
+}
+
+.admin-navbar .navbar-brand {
+    color: white !important;
+    font-weight: 700;
+}
+
+.admin-navbar .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    margin: 0 0.25rem;
+    transition: all 0.2s ease;
+}
+
+.admin-navbar .navbar-nav .nav-link:hover {
+    color: white !important;
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.admin-navbar .navbar-nav .nav-link.active {
+    color: white !important;
+    background-color: rgba(255, 255, 255, 0.2);
+    font-weight: 600;
+}
+
+/* Admin Bottom Navigation */
+.admin-bottom-nav {
+    background: white;
+    border-top: 1px solid #e5e7eb;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+}
+
+.admin-bottom-nav .nav-item {
+    color: var(--secondary-color);
+}
+
+.admin-bottom-nav .nav-item:hover {
+    color: var(--primary-color);
+    background-color: rgba(79, 70, 229, 0.1);
+}
+
+.admin-bottom-nav .nav-item.active {
+    color: var(--primary-color);
+    background-color: rgba(79, 70, 229, 0.15);
+}
+
+/* Admin Cards */
+.admin-panel .card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+.admin-panel .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+}
+
+.admin-panel .card-header {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #6366f1 100%);
+    color: white;
+    border: none;
+    border-radius: 1rem 1rem 0 0 !important;
+    padding: 1.25rem 1.5rem;
+}
+
+.admin-panel .card-header h5 {
+    margin-bottom: 0;
+    font-weight: 600;
+}
+
+.admin-panel .card-body {
+    padding: 1.5rem;
+}
+
+/* Admin Statistics Cards */
+.admin-stat-card {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #6366f1 100%);
+    border: none;
+    border-radius: 1rem;
+    color: white;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(79, 70, 229, 0.3);
+}
+
+.admin-stat-card.bg-success {
+    background: linear-gradient(135deg, var(--success-color) 0%, #10b981 100%) !important;
+}
+
+.admin-stat-card.bg-warning {
+    background: linear-gradient(135deg, var(--warning-color) 0%, #f59e0b 100%) !important;
+}
+
+.admin-stat-card.bg-info {
+    background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%) !important;
+}
+
+/* Admin Tables */
+.admin-panel .table-responsive {
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+.admin-panel .table {
+    margin-bottom: 0;
+}
+
+.admin-panel .table th {
+    font-weight: 600;
+    border-top: none;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem;
+}
+
+.admin-panel .table td {
+    padding: 1rem;
+    border-color: #f1f5f9;
+}
+
+.admin-panel .table tbody tr:hover {
+    background-color: rgba(79, 70, 229, 0.05);
+}
+
+/* Admin Buttons */
+.admin-panel .btn-primary {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #6366f1 100%);
+    border: none;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+}
+
+.admin-panel .btn-primary:hover {
+    background: linear-gradient(135deg, #3730a3 0%, #4f46e5 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(79, 70, 229, 0.3);
+}
+
+.admin-panel .btn-outline-primary {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    font-weight: 600;
+    border-radius: 0.75rem;
+}
+
+.admin-panel .btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+/* Admin Action Cards */
+.admin-action-card {
+    border: 2px solid #e5e7eb;
+    border-radius: 1rem;
+    transition: all 0.2s ease;
+    background: white;
+}
+
+.admin-action-card:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(79, 70, 229, 0.15);
+}
+
+.admin-action-card .card-body {
+    padding: 2rem;
+}
+
+/* Mobile admin adjustments */
+@media (max-width: 991px) {
+    .admin-panel .card-body {
+        padding: 1rem;
+    }
+    
+    .admin-panel .btn-group-sm .btn {
+        padding: 0.25rem 0.4rem;
+        font-size: 0.7rem;
+        border-radius: 0.375rem;
+    }
+    
+    .admin-panel .table-responsive {
+        font-size: 0.85rem;
+    }
+    
+    .admin-panel .table th,
+    .admin-panel .table td {
+        padding: 0.75rem 0.5rem;
+    }
+    
+    .admin-action-card .card-body {
+        padding: 1.25rem;
+    }
+    
+    .admin-stat-card .card-body {
+        padding: 1.25rem;
+    }
+}
+
+/* Admin Page Titles */
+.admin-page-title {
+    color: var(--primary-color);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.admin-page-subtitle {
+    color: var(--secondary-color);
+    font-size: 1.1rem;
+}
+
+/* Admin Badges */
+.admin-panel .badge {
+    font-weight: 600;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+}
+
+/* Admin Form Controls */
+.admin-panel .form-control {
+    border-radius: 0.75rem;
+    border: 2px solid #e5e7eb;
+    padding: 0.75rem 1rem;
+}
+
+.admin-panel .form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(79, 70, 229, 0.15);
+}
+
+.admin-panel .form-select {
+    border-radius: 0.75rem;
+    border: 2px solid #e5e7eb;
+    padding: 0.75rem 1rem;
+}
+
+.admin-panel .form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(79, 70, 229, 0.15);
+}
+
+/* Mobile Book List Styles */
+.mobile-book-list {
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    overflow: hidden;
+}
+
+.mobile-book-item {
+    padding: 1rem;
+    border-bottom: 1px solid #f1f5f9;
+    transition: background-color 0.2s ease;
+}
+
+.mobile-book-item:last-child {
+    border-bottom: none;
+}
+
+.mobile-book-item:hover {
+    background-color: rgba(79, 70, 229, 0.02);
+}
+
+.mobile-book-cover {
+    width: 50px;
+    height: 75px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.mobile-book-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1f2937;
+    line-height: 1.3;
+    margin-bottom: 0.25rem;
+}
+
+.mobile-book-author {
+    font-size: 0.85rem;
+    color: #6b7280;
+    margin-bottom: 0.5rem;
+}
+
+.mobile-book-genres {
+    margin-bottom: 0.5rem;
+}
+
+.mobile-genre-badge {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.5rem;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 0.375rem;
+    font-weight: 500;
+}
+
+.mobile-book-rating {
+    font-size: 0.85rem;
+    color: #374151;
+}
+
+.mobile-book-rating .fas {
+    font-size: 0.8rem;
+    margin-right: 0.25rem;
+}
+
+.mobile-book-actions {
+    display: flex;
+    gap: 0.25rem;
+}
+
+.mobile-book-actions .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    border-radius: 0.375rem;
+}
+
+/* Very small mobile adjustments */
+@media (max-width: 480px) {
+    .mobile-book-item {
+        padding: 0.75rem;
+    }
+    
+    .mobile-book-cover {
+        width: 45px;
+        height: 68px;
+    }
+    
+    .mobile-book-title {
+        font-size: 0.9rem;
+    }
+    
+    .mobile-book-author {
+        font-size: 0.8rem;
+    }
+    
+    .mobile-book-actions .btn {
+        padding: 0.2rem 0.4rem;
+        font-size: 0.7rem;
+    }
+}
+
+/* Profile page specific styles */
+.profile-header {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #6366f1 100%);
+    color: white;
+    border-radius: 0.75rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.profile-stats {
+    background: white;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+/* Book detail page */
+.book-detail-img {
+    max-width: 300px;
+    border-radius: 0.75rem;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+}
+
+.book-detail-content {
+    padding-left: 2rem;
+}
+
+@media (max-width: 768px) {
+    .book-detail-content {
+        padding-left: 0;
+        margin-top: 1.5rem;
+    }
+}

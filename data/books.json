@@ -1,0 +1,66 @@
+[
+  {
+    "id": "1",
+    "title": "Laskar Pelangi",
+    "author": "Andrea Hirata",
+    "genre": ["Drama", "Inspiratif"],
+    "cover_image": "https://via.placeholder.com/150x200/4f46e5/ffffff?text=Laskar+Pelangi",
+    "description": "Novel yang menceritakan perjuangan anak-anak di Belitung untuk mendapatkan pendidikan."
+  },
+  {
+    "id": "2", 
+    "title": "Bumi Manusia",
+    "author": "Pramoedya Ananta Toer",
+    "genre": ["Sejarah", "Drama"],
+    "cover_image": "https://via.placeholder.com/150x200/059669/ffffff?text=Bumi+Manusia",
+    "description": "Bagian pertama dari tetralogi Buru yang mengisahkan kehidupan Minke."
+  },
+  {
+    "id": "3",
+    "title": "Ayat-Ayat Cinta",
+    "author": "Habiburrahman El Shirazy",
+    "genre": ["Religi", "Romance"],
+    "cover_image": "https://via.placeholder.com/150x200/dc2626/ffffff?text=Ayat+Ayat+Cinta",
+    "description": "Novel yang mengisahkan perjalanan cinta dan kehidupan seorang mahasiswa Indonesia di Mesir."
+  },
+  {
+    "id": "4",
+    "title": "Perahu Kertas",
+    "author": "Dee Lestari",
+    "genre": ["Romance", "Drama"],
+    "cover_image": "https://via.placeholder.com/150x200/7c3aed/ffffff?text=Perahu+Kertas",
+    "description": "Novel tentang persahabatan dan cinta yang bermula dari sebuah perahu kertas."
+  },
+  {
+    "id": "5",
+    "title": "Negeri 5 Menara",
+    "author": "Ahmad Fuadi",
+    "genre": ["Inspiratif", "Pendidikan"],
+    "cover_image": "https://via.placeholder.com/150x200/ea580c/ffffff?text=Negeri+5+Menara",
+    "description": "Kisah perjuangan dan persahabatan di pesantren Ponorogo."
+  },
+  {
+    "id": "6",
+    "title": "Saman",
+    "author": "Ayu Utami",
+    "genre": ["Kontemporer", "Drama"],
+    "cover_image": "https://via.placeholder.com/150x200/be185d/ffffff?text=Saman",
+    "description": "Novel kontroversial yang mengangkat isu sosial dan politik Indonesia."
+  },
+  {
+    "id": "7",
+    "title": "Cantik Itu Luka",
+    "author": "Eka Kurniawan",
+    "genre": ["Magis Realisme", "Sejarah"],
+    "cover_image": "https://via.placeholder.com/150x200/0891b2/ffffff?text=Cantik+Itu+Luka",
+    "description": "Novel yang menggabungkan unsur magis dengan sejarah Indonesia."
+  },
+  {
+    "id": "8",
+    "title": "Dilan 1990",
+    "author": "Pidi Baiq",
+    "genre": ["Romance", "Remaja"],
+    "cover_image": "https://via.placeholder.com/150x200/16a34a/ffffff?text=Dilan+1990",
+    "description": "Kisah cinta remaja yang penuh dengan kenangan manis dan romantis."
+  }
+]

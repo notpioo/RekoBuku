@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Jelajah Buku - RekoBuku{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="h2 mb-0">
+                    <i class="fas fa-search text-primary me-2"></i>Jelajah Buku
+                </h1>
+            </div>
+            
+            <p class="text-muted mb-4">Temukan semua koleksi buku yang tersedia dan tambahkan ke favorit Anda.</p>
+            
+            <div class="row">
+                {% for book in books %}
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="card h-100 book-card">
+                        <img src="{{ book.cover_image }}" class="card-img-top book-cover" alt="{{ book.title }}">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">{{ book.title }}</h5>
+                            <p class="card-text text-muted">{{ book.author }}</p>
+                            <div class="genres mb-3">
+                                {% for genre in book.genre %}
+                                <span class="badge bg-secondary me-1">{{ genre }}</span>
+                                {% endfor %}
+                            </div>
+                            <p class="card-text small text-muted flex-grow-1">{{ book.description[:100] }}{% if book.description|length > 100 %}...{% endif %}</p>
+                            <div class="mt-auto">
+                                <div class="d-flex gap-2">
+                                    <a href="{{ url_for('book_detail', book_id=book.id) }}" class="btn btn-outline-primary flex-fill">
+                                        <i class="fas fa-eye me-1"></i>Lihat Detail
+                                    </a>
+                                    <button onclick="toggleFavorite('{{ book.id }}')" class="btn btn-outline-danger book-favorite-btn" data-book-id="{{ book.id }}">
+                                        <i class="{% if current_user.is_favorite(book.id) %}fas{% else %}far{% endif %} fa-heart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            
+            {% if not books %}
+            <div class="text-center py-5">
+                <i class="fas fa-books fa-4x text-muted mb-3"></i>
+                <h3 class="text-muted">Belum ada buku tersedia</h3>
+                <p class="text-muted">Koleksi buku akan segera ditambahkan.</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

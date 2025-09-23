@@ -1,0 +1,20 @@
+[
+  {
+    "id": "2df98e25-6bb4-4b3d-9a88-7a36e6c40f3c",
+    "nama": "Avionika Ramdan Iswani",
+    "email": "afio12327@gmail.com",
+    "password_hash": "scrypt:32768:8:1$6l0GYCEjbWaDyBrA$804193317d3488546dfcc72d8c5f8bf708a5cb0ff8aa74f846b5f67656abfbac2b49aa98f2b046d3265f42acd0963e288372884dc965ae023c335e68e1c4280a",
+    "favorites": [],
+    "profile_image": "https://via.placeholder.com/40x40/6b7280/ffffff?text=User",
+    "role": "pengguna"
+  },
+  {
+    "id": "0f9e9b00-ebdc-49a5-9654-15cd975e9e41",
+    "nama": "admin",
+    "email": "admin@gmail.com",
+    "password_hash": "scrypt:32768:8:1$0MWTSoVjanhkaNwY$e1cc9083f5addb7c49949c4ae17a26b5ab76c5b4c31378ac132620c89dbd228f0a961775a49fa9bb7e0de815f6c3a9e5614fec5279ca63108b320603aba73b02",
+    "favorites": [],
+    "profile_image": "https://via.placeholder.com/40x40/6b7280/ffffff?text=User",
+    "role": "admin"
+  }
+]

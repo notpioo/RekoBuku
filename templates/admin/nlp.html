@@ -1,0 +1,120 @@
+
+{% extends "admin/base_admin.html" %}
+
+{% block title %}Model NLP - Admin Panel{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row mb-4">
+        <div class="col">
+            <h1 class="admin-page-title">Manajemen Model NLP</h1>
+            <p class="admin-page-subtitle">Kelola model pembelajaran mesin untuk rekomendasi</p>
+        </div>
+    </div>
+
+    <!-- Model Status -->
+    <div class="row mb-4">
+        <div class="col-lg-6 mb-3">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-brain me-2"></i>Status Model
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="flex-grow-1">
+                            <h6 class="mb-0">Model Rekomendasi</h6>
+                            <small class="text-muted">Versi 1.0.0</small>
+                        </div>
+                        <span class="badge bg-success">Aktif</span>
+                    </div>
+                    <div class="progress mb-3" style="height: 8px;">
+                        <div class="progress-bar bg-success" style="width: 85%"></div>
+                    </div>
+                    <p class="small text-muted mb-0">Akurasi: 85% | Terlatih dengan 1000+ data</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-6 mb-3">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-chart-line me-2"></i>Performa Model
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-4">
+                            <h4 class="text-primary mb-0">85%</h4>
+                            <small class="text-muted">Akurasi</small>
+                        </div>
+                        <div class="col-4">
+                            <h4 class="text-success mb-0">92%</h4>
+                            <small class="text-muted">Precision</small>
+                        </div>
+                        <div class="col-4">
+                            <h4 class="text-warning mb-0">78%</h4>
+                            <small class="text-muted">Recall</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Model Actions -->
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title mb-0">
+                <i class="fas fa-tools me-2"></i>Aksi Model
+            </h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="admin-action-card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-sync-alt fa-2x text-primary mb-3"></i>
+                            <h6 class="fw-bold mb-2">Retrain Model</h6>
+                            <p class="text-muted small mb-3">Latih ulang model dengan data terbaru</p>
+                            <button class="btn btn-primary">Mulai Training</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="admin-action-card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-upload fa-2x text-success mb-3"></i>
+                            <h6 class="fw-bold mb-2">Upload Model Baru</h6>
+                            <p class="text-muted small mb-3">Unggah model yang sudah dilatih</p>
+                            <button class="btn btn-success">Upload Model</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="admin-action-card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-download fa-2x text-info mb-3"></i>
+                            <h6 class="fw-bold mb-2">Export Model</h6>
+                            <p class="text-muted small mb-3">Download model untuk backup</p>
+                            <button class="btn btn-info">Download</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="admin-action-card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-chart-bar fa-2x text-warning mb-3"></i>
+                            <h6 class="fw-bold mb-2">Analisis Performa</h6>
+                            <p class="text-muted small mb-3">Lihat detail performa model</p>
+                            <button class="btn btn-warning">Lihat Analisis</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

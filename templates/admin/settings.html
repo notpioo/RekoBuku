@@ -1,0 +1,122 @@
+
+{% extends "admin/base_admin.html" %}
+
+{% block title %}Pengaturan - Admin Panel{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row mb-4">
+        <div class="col">
+            <h1 class="admin-page-title">Pengaturan Sistem</h1>
+            <p class="admin-page-subtitle">Konfigurasi aplikasi RekoBuku</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- General Settings -->
+        <div class="col-lg-6 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-cog me-2"></i>Pengaturan Umum
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Nama Aplikasi</label>
+                            <input type="text" class="form-control" value="RekoBuku">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Deskripsi</label>
+                            <textarea class="form-control" rows="3">Sistem rekomendasi buku personal</textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email Admin</label>
+                            <input type="email" class="form-control" value="admin@rekobuku.com">
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="maintenance" checked>
+                                <label class="form-check-label" for="maintenance">
+                                    Mode Maintenance
+                                </label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Simpan Pengaturan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recommendation Settings -->
+        <div class="col-lg-6 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-star me-2"></i>Pengaturan Rekomendasi
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Jumlah Rekomendasi Cepat</label>
+                            <select class="form-select">
+                                <option value="7" selected>7 Buku</option>
+                                <option value="10">10 Buku</option>
+                                <option value="15">15 Buku</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Jumlah Rekomendasi Personal</label>
+                            <select class="form-select">
+                                <option value="7" selected>7 Buku</option>
+                                <option value="10">10 Buku</option>
+                                <option value="15">15 Buku</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Algoritma Rekomendasi</label>
+                            <select class="form-select">
+                                <option value="collaborative" selected>Collaborative Filtering</option>
+                                <option value="content">Content-Based</option>
+                                <option value="hybrid">Hybrid</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-success">Update Rekomendasi</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- System Info -->
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title mb-0">
+                <i class="fas fa-info-circle me-2"></i>Informasi Sistem
+            </h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <strong>Framework:</strong><br>
+                    <span class="text-muted">Flask 3.1.2</span>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <strong>Python Version:</strong><br>
+                    <span class="text-muted">3.11+</span>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <strong>Database:</strong><br>
+                    <span class="text-muted">JSON File-based</span>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <strong>Server:</strong><br>
+                    <span class="text-muted">Replit</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

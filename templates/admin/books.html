@@ -1,0 +1,114 @@
+
+{% extends "admin/base_admin.html" %}
+
+{% block title %}Data Buku - Admin Panel{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row mb-4">
+        <div class="col">
+            <h1 class="admin-page-title">Manajemen Data Buku</h1>
+            <p class="admin-page-subtitle">Kelola koleksi buku di RekoBuku</p>
+        </div>
+        <div class="col-auto">
+            <button class="btn btn-primary">
+                <i class="fas fa-plus me-2"></i>Tambah Buku
+            </button>
+        </div>
+    </div>
+
+    <!-- Books Table for Desktop -->
+    <div class="card d-none d-md-block">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Cover</th>
+                        <th>Judul</th>
+                        <th>Penulis</th>
+                        <th>Genre</th>
+                        <th>Rating</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for book in books %}
+                    <tr>
+                        <td>
+                            <img src="{{ book.cover_image }}" alt="{{ book.title }}" class="rounded" width="40" height="60" style="object-fit: cover;">
+                        </td>
+                        <td>
+                            <strong>{{ book.title }}</strong>
+                        </td>
+                        <td>{{ book.author }}</td>
+                        <td>
+                            {% for genre in book.genre[:2] %}
+                                <span class="badge bg-secondary me-1">{{ genre }}</span>
+                            {% endfor %}
+                            {% if book.genre|length > 2 %}
+                                <span class="text-muted">+{{ book.genre|length - 2 }}</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <span class="badge bg-warning">
+                                <i class="fas fa-star"></i> {{ book.rating }}
+                            </span>
+                        </td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-primary" title="Edit">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-outline-danger" title="Hapus">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Mobile Book List -->
+    <div class="d-md-none">
+        <div class="mobile-book-list">
+            {% for book in books %}
+            <div class="mobile-book-item">
+                <div class="d-flex align-items-start">
+                    <img src="{{ book.cover_image }}" alt="{{ book.title }}" class="mobile-book-cover me-3">
+                    <div class="flex-grow-1">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h6 class="mobile-book-title mb-1">{{ book.title }}</h6>
+                            <div class="mobile-book-actions">
+                                <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger" title="Hapus">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mobile-book-author text-muted mb-2">{{ book.author }}</p>
+                        <div class="mobile-book-genres mb-2">
+                            {% for genre in book.genre[:3] %}
+                                <span class="badge mobile-genre-badge me-1">{{ genre }}</span>
+                            {% endfor %}
+                            {% if book.genre|length > 3 %}
+                                <span class="text-muted small">+{{ book.genre|length - 3 }}</span>
+                            {% endif %}
+                        </div>
+                        <div class="mobile-book-rating">
+                            <i class="fas fa-star text-warning"></i>
+                            <span class="fw-bold">{{ book.rating }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+</div>
+{% endblock %}

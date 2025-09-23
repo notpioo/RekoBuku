@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-4">
+    <!-- Hero Section -->
+    <div class="row mb-5">
+        <div class="col-lg-8 mx-auto text-center">
+            <h1 class="display-4 fw-bold text-primary mb-3">Selamat Datang di RekoBuku</h1>
+            <p class="lead text-muted">
+                Temukan buku-buku terbaik yang sesuai dengan selera Anda. 
+                Dapatkan rekomendasi personal berdasarkan preferensi dan genre favorit Anda.
+            </p>
+        </div>
+    </div>
+
+    <!-- Quick Recommendations -->
+    <section class="mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="h3 mb-0">
+                <i class="fas fa-star text-warning me-2"></i>Rekomendasi Cepat
+            </h2>
+        </div>
+
+        <!-- Desktop Horizontal Scroll Layout -->
+        <div class="d-none d-lg-block">
+            <div class="horizontal-scroll">
+                <div class="book-cards-container">
+                    {% for book in quick_recommendations %}
+                    <div class="book-card-desktop">
+                        <div class="card h-100 book-card">
+                            <img src="{{ book.cover_image }}" class="card-img-top book-cover-desktop" alt="{{ book.title }}">
+                            <div class="card-body d-flex flex-column">
+                                <h6 class="card-title mb-2">{{ book.title }}</h6>
+                                <p class="card-text text-muted small">{{ book.author }}</p>
+                                <div class="mt-auto">
+                                    <div class="d-flex gap-2">
+                                        <a href="{{ url_for('book_detail', book_id=book.id) }}" class="btn btn-sm btn-outline-primary flex-fill">
+                                            <i class="fas fa-eye me-1"></i>Lihat
+                                        </a>
+                                        {% if current_user.is_authenticated %}
+                                        <button onclick="toggleFavorite('{{ book.id }}')" class="btn btn-sm btn-outline-danger book-favorite-btn" data-book-id="{{ book.id }}">
+                                            <i class="{% if current_user.is_favorite(book.id) %}fas{% else %}far{% endif %} fa-heart"></i>
+                                        </button>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Horizontal Scroll -->
+        <div class="d-lg-none">
+            <div class="horizontal-scroll">
+                <div class="book-cards-container">
+                    {% for book in quick_recommendations %}
+                    <div class="book-card-mobile">
+                        <div class="card h-100 book-card">
+                            <img src="{{ book.cover_image }}" class="card-img-top book-cover-mobile" alt="{{ book.title }}">
+                            <div class="card-body d-flex flex-column">
+                                <h6 class="card-title mb-2">{{ book.title }}</h6>
+                                <p class="card-text text-muted small">{{ book.author }}</p>
+                                <div class="mt-auto">
+                                    <div class="d-flex flex-column gap-2">
+                                        <a href="{{ url_for('book_detail', book_id=book.id) }}" class="btn btn-sm btn-outline-primary">
+                                            <i class="fas fa-eye me-1"></i>Lihat
+                                        </a>
+                                        {% if current_user.is_authenticated %}
+                                        <button onclick="toggleFavorite('{{ book.id }}')" class="btn btn-sm btn-outline-danger book-favorite-btn" data-book-id="{{ book.id }}">
+                                            <i class="{% if current_user.is_favorite(book.id) %}fas{% else %}far{% endif %} fa-heart me-1"></i>Favorit
+                                        </button>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Personal Recommendations -->
+    <section>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="h3 mb-0">
+                <i class="fas fa-user-cog text-primary me-2"></i>
+                {% if current_user.is_authenticated %}
+                    Rekomendasi Personal untuk {{ current_user.nama }}
+                {% else %}
+                    Rekomendasi untuk Anda
+                {% endif %}
+            </h2>
+        </div>
+
+        {% if not current_user.is_authenticated %}
+        <div class="alert alert-info">
+            <i class="fas fa-info-circle me-2"></i>
+            <strong>Tips:</strong> Masuk ke akun Anda untuk mendapatkan rekomendasi yang lebih personal berdasarkan genre favorit!
+        </div>
+        {% endif %}
+
+        <!-- Desktop Horizontal Scroll Layout -->
+        <div class="d-none d-lg-block">
+            <div class="horizontal-scroll">
+                <div class="book-cards-container">
+                    {% for book in personal_recommendations %}
+                    <div class="book-card-desktop">
+                        <div class="card h-100 book-card">
+                            <img src="{{ book.cover_image }}" class="card-img-top book-cover-desktop" alt="{{ book.title }}">
+                            <div class="card-body d-flex flex-column">
+                                <h6 class="card-title mb-2">{{ book.title }}</h6>
+                                <p class="card-text text-muted small">{{ book.author }}</p>
+                                <div class="genres mb-2">
+                                    {% for genre in book.genre %}
+                                    <span class="badge bg-secondary me-1">{{ genre }}</span>
+                                    {% endfor %}
+                                </div>
+                                <div class="mt-auto">
+                                    <div class="d-flex gap-2">
+                                        <a href="{{ url_for('book_detail', book_id=book.id) }}" class="btn btn-sm btn-outline-primary flex-fill">
+                                            <i class="fas fa-eye me-1"></i>Lihat
+                                        </a>
+                                        {% if current_user.is_authenticated %}
+                                        <button onclick="toggleFavorite('{{ book.id }}')" class="btn btn-sm btn-outline-danger book-favorite-btn" data-book-id="{{ book.id }}">
+                                            <i class="{% if current_user.is_favorite(book.id) %}fas{% else %}far{% endif %} fa-heart"></i>
+                                        </button>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Horizontal Scroll -->
+        <div class="d-lg-none">
+            <div class="horizontal-scroll">
+                <div class="book-cards-container">
+                    {% for book in personal_recommendations %}
+                    <div class="book-card-mobile">
+                        <div class="card h-100 book-card">
+                            <img src="{{ book.cover_image }}" class="card-img-top book-cover-mobile" alt="{{ book.title }}">
+                            <div class="card-body d-flex flex-column">
+                                <h6 class="card-title mb-2">{{ book.title }}</h6>
+                                <p class="card-text text-muted small">{{ book.author }}</p>
+                                <div class="genres mb-2">
+                                    {% for genre in book.genre %}
+                                    <span class="badge bg-secondary me-1 small">{{ genre }}</span>
+                                    {% endfor %}
+                                </div>
+                                <div class="mt-auto">
+                                    <div class="d-flex flex-column gap-2">
+                                        <a href="{{ url_for('book_detail', book_id=book.id) }}" class="btn btn-sm btn-outline-primary">
+                                            <i class="fas fa-eye me-1"></i>Lihat
+                                        </a>
+                                        {% if current_user.is_authenticated %}
+                                        <button onclick="toggleFavorite('{{ book.id }}')" class="btn btn-sm btn-outline-danger book-favorite-btn" data-book-id="{{ book.id }}">
+                                            <i class="{% if current_user.is_favorite(book.id) %}fas{% else %}far{% endif %} fa-heart me-1"></i>Favorit
+                                        </button>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
