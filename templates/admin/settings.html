@@ -13,37 +13,30 @@
     </div>
 
     <div class="row">
-        <!-- General Settings -->
+        <!-- Maintenance Mode -->
         <div class="col-lg-6 mb-4">
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title mb-0">
-                        <i class="fas fa-cog me-2"></i>Pengaturan Umum
+                        <i class="fas fa-wrench me-2"></i>Mode Maintenance
                     </h5>
                 </div>
                 <div class="card-body">
-                    <form>
+                    <form method="POST" action="{{ url_for('admin_settings') }}">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                         <div class="mb-3">
-                            <label class="form-label">Nama Aplikasi</label>
-                            <input type="text" class="form-control" value="RekoBuku">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Deskripsi</label>
-                            <textarea class="form-control" rows="3">Sistem rekomendasi buku personal</textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Email Admin</label>
-                            <input type="email" class="form-control" value="admin@rekobuku.com">
-                        </div>
-                        <div class="mb-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="maintenance" checked>
-                                <label class="form-check-label" for="maintenance">
-                                    Mode Maintenance
+                            <p class="text-muted mb-3">Aktifkan mode maintenance untuk mencegah pengguna biasa mengakses sistem. Admin tetap dapat mengakses semua fitur.</p>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="maintenance_mode" name="maintenance_mode" {% if maintenance_status %}checked{% endif %}>
+                                <label class="form-check-label" for="maintenance_mode">
+                                    <strong>{% if maintenance_status %}Aktif - Sistem dalam mode maintenance{% else %}Nonaktif - Sistem berjalan normal{% endif %}</strong>
                                 </label>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Simpan Pengaturan</button>
+                        <button type="submit" class="btn btn-{% if maintenance_status %}danger{% else %}warning{% endif %}">
+                            <i class="fas fa-{% if maintenance_status %}play{% else %}pause{% endif %} me-2"></i>
+                            {% if maintenance_status %}Nonaktifkan Maintenance{% else %}Aktifkan Maintenance{% endif %}
+                        </button>
                     </form>
                 </div>
             </div>
@@ -58,65 +51,34 @@
                     </h5>
                 </div>
                 <div class="card-body">
-                    <form>
+                    <form method="POST" action="{{ url_for('admin_settings') }}">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                         <div class="mb-3">
                             <label class="form-label">Jumlah Rekomendasi Cepat</label>
-                            <select class="form-select">
-                                <option value="7" selected>7 Buku</option>
-                                <option value="10">10 Buku</option>
-                                <option value="15">15 Buku</option>
+                            <select class="form-select" name="quick_count">
+                                <option value="5" {% if quick_count == 5 %}selected{% endif %}>5 Buku</option>
+                                <option value="7" {% if quick_count == 7 %}selected{% endif %}>7 Buku</option>
+                                <option value="10" {% if quick_count == 10 %}selected{% endif %}>10 Buku</option>
+                                <option value="15" {% if quick_count == 15 %}selected{% endif %}>15 Buku</option>
                             </select>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Jumlah Rekomendasi Personal</label>
-                            <select class="form-select">
-                                <option value="7" selected>7 Buku</option>
-                                <option value="10">10 Buku</option>
-                                <option value="15">15 Buku</option>
+                            <select class="form-select" name="personal_count">
+                                <option value="5" {% if personal_count == 5 %}selected{% endif %}>5 Buku</option>
+                                <option value="7" {% if personal_count == 7 %}selected{% endif %}>7 Buku</option>
+                                <option value="10" {% if personal_count == 10 %}selected{% endif %}>10 Buku</option>
+                                <option value="15" {% if personal_count == 15 %}selected{% endif %}>15 Buku</option>
                             </select>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label">Algoritma Rekomendasi</label>
-                            <select class="form-select">
-                                <option value="collaborative" selected>Collaborative Filtering</option>
-                                <option value="content">Content-Based</option>
-                                <option value="hybrid">Hybrid</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-success">Update Rekomendasi</button>
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-save me-2"></i>Update Rekomendasi
+                        </button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- System Info -->
-    <div class="card">
-        <div class="card-header">
-            <h5 class="card-title mb-0">
-                <i class="fas fa-info-circle me-2"></i>Informasi Sistem
-            </h5>
-        </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-3 mb-3">
-                    <strong>Framework:</strong><br>
-                    <span class="text-muted">Flask 3.1.2</span>
-                </div>
-                <div class="col-md-3 mb-3">
-                    <strong>Python Version:</strong><br>
-                    <span class="text-muted">3.11+</span>
-                </div>
-                <div class="col-md-3 mb-3">
-                    <strong>Database:</strong><br>
-                    <span class="text-muted">JSON File-based</span>
-                </div>
-                <div class="col-md-3 mb-3">
-                    <strong>Server:</strong><br>
-                    <span class="text-muted">Replit</span>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 {% endblock %}

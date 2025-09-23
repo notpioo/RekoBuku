@@ -1,13 +1,13 @@
 [
   {
     "id": "1",
-    "judul": "Laskar Pelangi",
+    "judul": "logika informatika",
     "penulis": "Andrea Hirata",
     "tag": [
       "Algoritma"
     ],
     "foto": "/static/uploads/books/gambar_di_login.jpg",
-    "deskripsi_singkat": "Novel yang menceritakan perjuangan anak-anak di Belitung untuk mendapatkan pendidikan."
+    "deskripsi_singkat": "buku ini tentang algoritma pemograman"
   },
   {
     "id": "2",

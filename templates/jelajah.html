@@ -14,44 +14,315 @@
             
             <p class="text-muted mb-4">Temukan semua koleksi buku yang tersedia dan tambahkan ke favorit Anda.</p>
             
-            <div class="row">
-                {% for book in books %}
-                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                    <div class="card h-100 book-card">
-                        <img src="{{ book.cover_image }}" class="card-img-top book-cover" alt="{{ book.title }}">
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">{{ book.title }}</h5>
-                            <p class="card-text text-muted">{{ book.author }}</p>
-                            <div class="genres mb-3">
-                                {% for genre in book.genre %}
-                                <span class="badge bg-secondary me-1">{{ genre }}</span>
-                                {% endfor %}
-                            </div>
-                            <p class="card-text small text-muted flex-grow-1">{{ book.description[:100] }}{% if book.description|length > 100 %}...{% endif %}</p>
-                            <div class="mt-auto">
-                                <div class="d-flex gap-2">
-                                    <a href="{{ url_for('book_detail', book_id=book.id) }}" class="btn btn-outline-primary flex-fill">
-                                        <i class="fas fa-eye me-1"></i>Lihat Detail
-                                    </a>
-                                    <button onclick="toggleFavorite('{{ book.id }}')" class="btn btn-outline-danger book-favorite-btn" data-book-id="{{ book.id }}">
-                                        <i class="{% if current_user.is_favorite(book.id) %}fas{% else %}far{% endif %} fa-heart"></i>
-                                    </button>
-                                </div>
-                            </div>
+            <!-- Panel Input NLP -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="fas fa-robot text-primary me-2"></i>Tanya AI untuk Rekomendasi Buku
+                    </h5>
+                    <p class="text-muted mb-3">Tanyakan kepada AI tentang buku yang Anda cari berdasarkan genre, tema, mood, atau kriteria lainnya.</p>
+                    
+                    <!-- Contoh Pertanyaan -->
+                    <div class="mb-3">
+                        <small class="text-muted">Contoh pertanyaan:</small><br>
+                        <div class="mt-2">
+                            <button type="button" class="btn btn-sm btn-outline-secondary me-2 mb-1 example-query" data-query="Buku motivasi untuk anak muda">Buku motivasi untuk anak muda</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary me-2 mb-1 example-query" data-query="Novel romance yang ringan dan menghibur">Novel romance ringan</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary me-2 mb-1 example-query" data-query="Buku tentang algoritma dan pemrograman">Buku algoritma</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary me-2 mb-1 example-query" data-query="Cerita petualangan yang seru">Cerita petualangan</button>
+                        </div>
+                    </div>
+                    
+                    <form id="nlp-search-form" class="mb-3">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="nlp-query" name="query" 
+                                   placeholder="Contoh: 'Buku motivasi untuk anak muda', 'Novel romance yang ringan', 'Buku tentang algoritma', atau 'Cerita petualangan yang seru'" 
+                                   required>
+                            <button class="btn btn-primary" type="submit" id="nlp-search-btn">
+                                <i class="fas fa-search me-2"></i>Cari dengan AI
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <div id="nlp-loading" class="text-center py-3" style="display: none;">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Memproses...</span>
+                        </div>
+                        <p class="mt-2 text-muted">AI sedang mencari rekomendasi terbaik untuk Anda...</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Area Rekomendasi Hasil NLP -->
+            <div id="nlp-results" class="mb-4" style="display: none;">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">
+                            <i class="fas fa-lightbulb text-warning me-2"></i>Rekomendasi AI
+                        </h5>
+                        <button type="button" class="btn-close" id="close-nlp-results" aria-label="Close"></button>
+                    </div>
+                    <div class="card-body">
+                        <div id="nlp-explanation" class="alert alert-info mb-3"></div>
+                        <div class="row" id="nlp-books-grid"></div>
+                    </div>
+                </div>
+                
+                <!-- Buku Serupa -->
+                <div id="similar-books-section" class="mt-4" style="display: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">
+                                <i class="fas fa-copy text-info me-2"></i>Buku Serupa Lainnya
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row" id="similar-books-grid"></div>
                         </div>
                     </div>
                 </div>
-                {% endfor %}
             </div>
             
-            {% if not books %}
-            <div class="text-center py-5">
-                <i class="fas fa-books fa-4x text-muted mb-3"></i>
-                <h3 class="text-muted">Belum ada buku tersedia</h3>
-                <p class="text-muted">Koleksi buku akan segera ditambahkan.</p>
+            <!-- Semua Buku -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-books text-secondary me-2"></i>Semua Koleksi Buku
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row" id="all-books-grid">
+                        {% for book in books %}
+                        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                            <div class="card h-100 book-card">
+                                {% if book.foto %}
+                                    <img src="{{ book.foto }}" class="card-img-top book-cover" alt="{{ book.judul }}" style="height: 250px; object-fit: cover;">
+                                {% else %}
+                                    <div class="card-img-top d-flex align-items-center justify-content-center bg-light" style="height: 250px;">
+                                        <i class="fas fa-book fa-3x text-muted"></i>
+                                    </div>
+                                {% endif %}
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title">{{ book.judul }}</h5>
+                                    <p class="card-text text-muted">{{ book.penulis }}</p>
+                                    {% if book.tag %}
+                                    <div class="genres mb-3">
+                                        {% for tag in book.tag %}
+                                        <span class="badge bg-secondary me-1">{{ tag }}</span>
+                                        {% endfor %}
+                                    </div>
+                                    {% endif %}
+                                    <p class="card-text small text-muted flex-grow-1">{{ book.deskripsi_singkat[:100] if book.deskripsi_singkat else 'Tidak ada deskripsi tersedia.' }}{% if book.deskripsi_singkat and book.deskripsi_singkat|length > 100 %}...{% endif %}</p>
+                                    <div class="mt-auto">
+                                        <div class="d-flex gap-2">
+                                            <a href="{{ url_for('book_detail', book_id=book.id) }}" class="btn btn-outline-primary flex-fill">
+                                                <i class="fas fa-eye me-1"></i>Lihat
+                                            </a>
+                                            {% if current_user.is_authenticated %}
+                                            <button onclick="toggleFavorite('{{ book.id }}')" class="btn btn-outline-danger book-favorite-btn" data-book-id="{{ book.id }}">
+                                                <i class="{% if current_user.is_favorite(book.id) %}fas{% else %}far{% endif %} fa-heart"></i>
+                                            </button>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
             </div>
-            {% endif %}
+                    
+                        {% if not books %}
+                        <div class="text-center py-5">
+                            <i class="fas fa-books fa-4x text-muted mb-3"></i>
+                            <h3 class="text-muted">Belum ada buku tersedia</h3>
+                            <p class="text-muted">Koleksi buku akan segera ditambahkan.</p>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// JavaScript untuk contoh pertanyaan
+document.querySelectorAll('.example-query').forEach(button => {
+    button.addEventListener('click', function() {
+        const query = this.getAttribute('data-query');
+        document.getElementById('nlp-query').value = query;
+    });
+});
+
+// JavaScript untuk fitur NLP
+document.getElementById('nlp-search-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const query = document.getElementById('nlp-query').value.trim();
+    if (!query) {
+        alert('Mohon masukkan pertanyaan Anda');
+        return;
+    }
+    
+    // Show loading
+    document.getElementById('nlp-loading').style.display = 'block';
+    document.getElementById('nlp-results').style.display = 'none';
+    document.getElementById('nlp-search-btn').disabled = true;
+    
+    // Create timeout promise
+    const timeoutPromise = new Promise((_, reject) => {
+        setTimeout(() => reject(new Error('Request timeout')), 30000); // 30 second timeout
+    });
+    
+    // Send request to backend with timeout
+    Promise.race([
+        fetch('/nlp-recommendation', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': document.querySelector('input[name="csrf_token"]').value
+            },
+            body: JSON.stringify({ query: query })
+        }),
+        timeoutPromise
+    ])
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        document.getElementById('nlp-loading').style.display = 'none';
+        document.getElementById('nlp-search-btn').disabled = false;
+        
+        if (data.error) {
+            console.error('Server error:', data.error);
+            // Show user-friendly error message
+            displayErrorMessage('Maaf, layanan AI sedang tidak tersedia. Silakan coba lagi dalam beberapa saat.');
+            return;
+        }
+        
+        // Show results
+        displayNLPResults(data);
+    })
+    .catch(error => {
+        console.error('Fetch error:', error);
+        document.getElementById('nlp-loading').style.display = 'none';
+        document.getElementById('nlp-search-btn').disabled = false;
+        
+        // Show user-friendly error message instead of alert
+        displayErrorMessage('Koneksi bermasalah. Silakan periksa koneksi internet Anda dan coba lagi.');
+    });
+});
+
+function displayErrorMessage(message) {
+    const resultsDiv = document.getElementById('nlp-results');
+    const explanationDiv = document.getElementById('nlp-explanation');
+    const booksGrid = document.getElementById('nlp-books-grid');
+    
+    // Show error message in results area
+    explanationDiv.innerHTML = `<i class="fas fa-exclamation-triangle me-2"></i>${message}`;
+    explanationDiv.className = 'alert alert-warning mb-3';
+    booksGrid.innerHTML = '';
+    resultsDiv.style.display = 'block';
+    
+    // Hide similar books section
+    document.getElementById('similar-books-section').style.display = 'none';
+}
+
+function displayNLPResults(data) {
+    const resultsDiv = document.getElementById('nlp-results');
+    const explanationDiv = document.getElementById('nlp-explanation');
+    const booksGrid = document.getElementById('nlp-books-grid');
+    
+    // Show explanation
+    explanationDiv.innerHTML = data.explanation || 'Berikut adalah rekomendasi buku berdasarkan pertanyaan Anda:';
+    
+    // Clear and populate books grid
+    booksGrid.innerHTML = '';
+    
+    if (data.books && data.books.length > 0) {
+        data.books.forEach(book => {
+            const bookCard = createBookCard(book, data.reasons ? data.reasons[book.id] : null);
+            booksGrid.appendChild(bookCard);
+        });
+        
+        resultsDiv.style.display = 'block';
+        
+        // Show similar books if available
+        if (data.similar_books && data.similar_books.length > 0) {
+            displaySimilarBooks(data.similar_books);
+        }
+    } else {
+        explanationDiv.innerHTML = 'Maaf, tidak ditemukan buku yang sesuai dengan kriteria Anda. Silakan coba dengan kata kunci yang berbeda.';
+        resultsDiv.style.display = 'block';
+    }
+}
+
+function displaySimilarBooks(similarBooks) {
+    const similarSection = document.getElementById('similar-books-section');
+    const similarGrid = document.getElementById('similar-books-grid');
+    
+    similarGrid.innerHTML = '';
+    
+    similarBooks.forEach(book => {
+        const bookCard = createBookCard(book);
+        similarGrid.appendChild(bookCard);
+    });
+    
+    similarSection.style.display = 'block';
+}
+
+function createBookCard(book, reason = null) {
+    const col = document.createElement('div');
+    col.className = 'col-lg-3 col-md-4 col-sm-6 mb-4';
+    
+    const isFavorite = book.is_favorite || false;
+    const favoriteIcon = isFavorite ? 'fas' : 'far';
+    
+    col.innerHTML = `
+        <div class="card h-100 book-card">
+            ${book.foto ? 
+                `<img src="${book.foto}" class="card-img-top book-cover" alt="${book.judul}" style="height: 250px; object-fit: cover;">` :
+                `<div class="card-img-top d-flex align-items-center justify-content-center bg-light" style="height: 250px;"><i class="fas fa-book fa-3x text-muted"></i></div>`
+            }
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">${book.judul}</h5>
+                <p class="card-text text-muted">${book.penulis}</p>
+                ${book.tag ? `
+                    <div class="genres mb-3">
+                        ${book.tag.split(',').map(tag => `<span class="badge bg-secondary me-1">${tag.trim()}</span>`).join('')}
+                    </div>
+                ` : ''}
+                ${reason ? `<div class="alert alert-light small mb-2"><i class="fas fa-info-circle me-1"></i>${reason}</div>` : ''}
+                <p class="card-text small text-muted flex-grow-1">${book.deskripsi_singkat ? book.deskripsi_singkat.substring(0, 100) + (book.deskripsi_singkat.length > 100 ? '...' : '') : 'Tidak ada deskripsi tersedia.'}</p>
+                <div class="mt-auto">
+                    <div class="d-flex gap-2">
+                        <a href="/book/${book.id}" class="btn btn-outline-primary flex-fill">
+                            <i class="fas fa-eye me-1"></i>Lihat
+                        </a>
+                        ${book.show_favorite_btn !== false ? `
+                            <button onclick="toggleFavorite('${book.id}')" class="btn btn-outline-danger book-favorite-btn" data-book-id="${book.id}">
+                                <i class="${favoriteIcon} fa-heart"></i>
+                            </button>
+                        ` : ''}
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    return col;
+}
+
+// Close NLP results
+document.getElementById('close-nlp-results').addEventListener('click', function() {
+    document.getElementById('nlp-results').style.display = 'none';
+    document.getElementById('similar-books-section').style.display = 'none';
+});
+</script>
 {% endblock %}

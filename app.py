@@ -5,6 +5,10 @@ from werkzeug.utils import secure_filename
 from functools import wraps
 import os
 from urllib.parse import urlparse, urljoin
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 app = Flask(__name__)
 # Require SESSION_SECRET to be set for security
@@ -35,9 +39,38 @@ def admin_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
+# Apply maintenance check to all routes
+@app.before_request
+def check_maintenance():
+    # Always allow access to static files and specific auth routes
+    if request.endpoint == 'static' or request.endpoint is None:
+        return None
+    
+    # Always allow access to authentication routes regardless of maintenance mode
+    if request.endpoint in ['login', 'register'] or \
+       request.path in ['/login', '/register']:
+        return None
+        
+    # Always allow access to maintenance page
+    if request.endpoint == 'maintenance_page' or request.path == '/maintenance':
+        return None
+    
+    # Skip maintenance check for admin users
+    if current_user.is_authenticated and current_user.is_admin():
+        return None
+    
+    # Check if maintenance mode is enabled for all other routes
+    if Settings.is_maintenance_mode():
+        return render_template('maintenance.html'), 503
+
 # Import models and forms
 from app.models.user import User
 from app.models.book import Book
+from app.models.settings import Settings
+try:
+    from app.services.gemini_service import GeminiBookRecommendationService
+except ImportError:
+    GeminiBookRecommendationService = None
 from app.forms.auth import LoginForm, RegisterForm
 from app.forms.book import BookForm, EditBookForm
 from app.forms.user import UserForm, EditUserForm
@@ -135,11 +168,39 @@ def admin_users():
 def admin_nlp():
     return render_template('admin/nlp.html')
 
-@app.route('/admin/settings')
+@app.route('/admin/settings', methods=['GET', 'POST'])
 @login_required
 @admin_required
 def admin_settings():
-    return render_template('admin/settings.html')
+    if request.method == 'POST':
+        # Handle recommendation settings update (check this first)
+        if 'quick_count' in request.form and 'personal_count' in request.form:
+            try:
+                quick_count = int(request.form.get('quick_count', 7))
+                personal_count = int(request.form.get('personal_count', 7))
+                Settings.update_recommendations_count(quick_count, personal_count)
+                flash('Pengaturan rekomendasi berhasil diupdate!', 'success')
+            except ValueError:
+                flash('Nilai pengaturan rekomendasi tidak valid!', 'danger')
+            return redirect(url_for('admin_settings'))
+        
+        # Handle maintenance mode toggle
+        else:
+            maintenance_mode = 'maintenance_mode' in request.form
+            Settings.set_maintenance_mode(maintenance_mode)
+            
+            action = 'diaktifkan' if maintenance_mode else 'dinonaktifkan'
+            flash(f'Mode maintenance berhasil {action}!', 'success')
+            return redirect(url_for('admin_settings'))
+    
+    maintenance_status = Settings.is_maintenance_mode()
+    quick_count = Settings.get_quick_recommendations_count()
+    personal_count = Settings.get_personal_recommendations_count()
+    
+    return render_template('admin/settings.html', 
+                         maintenance_status=maintenance_status,
+                         quick_count=quick_count,
+                         personal_count=personal_count)
 
 # Book Management Routes
 @app.route('/admin/books/add', methods=['GET', 'POST'])
@@ -184,7 +245,7 @@ def edit_book(book_id):
     form = EditBookForm(obj=book) # Use EditBookForm here
     if form.validate_on_submit():
         foto_path = book.foto # Keep existing photo if not updated
-        if form.foto.data:
+        if form.foto.data and hasattr(form.foto.data, 'filename'):
             # Create upload folder if it doesn't exist
             upload_folder = 'static/uploads/books'
             os.makedirs(upload_folder, exist_ok=True)
@@ -302,14 +363,16 @@ def delete_user(user_id):
 
 @app.route('/')
 def home():
-    # Get quick recommendations (random books) - limit to 7 for mobile scroll
-    quick_recommendations = Book.get_random(7)
+    # Get quick recommendations using settings
+    quick_count = Settings.get_quick_recommendations_count()
+    quick_recommendations = Book.get_random(quick_count)
 
-    # Get personalized recommendations - limit to 7 for mobile scroll
+    # Get personalized recommendations using settings
+    personal_count = Settings.get_personal_recommendations_count()
     if current_user.is_authenticated:
-        personal_recommendations = Book.get_recommendations_for_user(current_user)[:7]
+        personal_recommendations = Book.get_recommendations_for_user(current_user)[:personal_count]
     else:
-        personal_recommendations = Book.get_random(7)
+        personal_recommendations = Book.get_random(personal_count)
 
     return render_template('home.html', 
                          quick_recommendations=quick_recommendations,
@@ -366,6 +429,132 @@ def toggle_favorite(book_id):
         'message': message,
         'is_favorite': is_favorite
     })
+
+@app.route('/maintenance')
+def maintenance_page():
+    """Dedicated maintenance page route"""
+    return render_template('maintenance.html'), 503
+
+@app.route('/nlp-recommendation', methods=['POST'])
+@login_required
+def nlp_recommendation():
+    """Handle NLP book recommendation requests"""
+    import logging
+    
+    try:
+        # Get query from request
+        data = request.get_json()
+        if not data or 'query' not in data:
+            logging.error("No query found in request")
+            return jsonify({"error": "Query tidak ditemukan"}), 400
+        
+        user_query = data['query'].strip()
+        if not user_query:
+            logging.error("Empty query provided")
+            return jsonify({"error": "Query tidak boleh kosong"}), 400
+        
+        logging.info(f"Processing NLP query: {user_query}")
+        
+        # Get all available books
+        all_books = Book.get_all()
+        if not all_books:
+            logging.error("No books available")
+            return jsonify({"error": "Belum ada buku tersedia"}), 404
+        
+        logging.info(f"Found {len(all_books)} books in database")
+        
+        # Convert books to dict format for Gemini
+        books_data = []
+        for book in all_books:
+            books_data.append({
+                'id': book.id,
+                'judul': book.judul,
+                'penulis': book.penulis,
+                'tag': book.tag,
+                'deskripsi_singkat': book.deskripsi_singkat
+            })
+        
+        # Check if Gemini service is available
+        try:
+            gemini_service = GeminiBookRecommendationService()
+            logging.info("Gemini service initialized successfully")
+        except Exception as init_error:
+            logging.error(f"Failed to initialize Gemini service: {str(init_error)}")
+            # Return user-friendly error message
+            return jsonify({
+                "error": "Layanan AI rekomendasi sedang tidak tersedia. Silakan coba lagi dalam beberapa saat."
+            }), 503
+        
+        # Get recommendations from Gemini
+        logging.info("Getting recommendations from Gemini...")
+        recommendation_result = gemini_service.get_book_recommendations(user_query, books_data)
+        
+        if 'error' in recommendation_result:
+            logging.error(f"Gemini returned error: {recommendation_result['error']}")
+            return jsonify({
+                "error": "Layanan AI mengalami gangguan. Silakan coba dengan kata kunci yang berbeda atau coba lagi nanti."
+            }), 503
+        
+        # Process recommended books
+        recommended_books = []
+        reasons = {}
+        
+        if 'recommended_books' in recommendation_result:
+            logging.info(f"Found {len(recommendation_result['recommended_books'])} recommendations")
+            for rec in recommendation_result['recommended_books']:
+                book_id = rec.get('id')
+                book = Book.get(book_id)
+                if book:
+                    book_dict = {
+                        'id': book.id,
+                        'judul': book.judul,
+                        'penulis': book.penulis,
+                        'tag': book.tag,
+                        'foto': book.foto,
+                        'deskripsi_singkat': book.deskripsi_singkat,
+                        'is_favorite': current_user.is_favorite(book.id) if current_user.is_authenticated else False
+                    }
+                    recommended_books.append(book_dict)
+                    reasons[book.id] = rec.get('reason', '')
+        
+        # Get similar books for the first recommended book
+        similar_books = []
+        if recommended_books:
+            first_book_dict = {
+                'id': recommended_books[0]['id'],
+                'judul': recommended_books[0]['judul'],
+                'penulis': recommended_books[0]['penulis'],
+                'tag': recommended_books[0]['tag'],
+                'deskripsi_singkat': recommended_books[0]['deskripsi_singkat']
+            }
+            
+            similar_results = gemini_service.find_similar_books(first_book_dict, books_data, limit=3)
+            
+            for sim in similar_results:
+                book_id = sim.get('id')
+                book = Book.get(book_id)
+                if book:
+                    similar_books.append({
+                        'id': book.id,
+                        'judul': book.judul,
+                        'penulis': book.penulis,
+                        'tag': book.tag,
+                        'foto': book.foto,
+                        'deskripsi_singkat': book.deskripsi_singkat,
+                        'is_favorite': current_user.is_favorite(book.id) if current_user.is_authenticated else False
+                    })
+        
+        logging.info("Successfully processed NLP recommendation")
+        return jsonify({
+            'books': recommended_books,
+            'reasons': reasons,
+            'explanation': recommendation_result.get('explanation', 'Berikut adalah rekomendasi buku berdasarkan pertanyaan Anda:'),
+            'similar_books': similar_books
+        })
+        
+    except Exception as e:
+        logging.error(f"Unexpected error in NLP recommendation: {str(e)}")
+        return jsonify({"error": f"Terjadi kesalahan yang tidak terduga: {str(e)}"}), 500
 
 def is_safe_url(target):
     """Check if the target URL is safe for redirects (prevents open redirect attacks)"""
