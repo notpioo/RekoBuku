@@ -16,5 +16,14 @@
     "favorites": [],
     "profile_image": "https://via.placeholder.com/40x40/6b7280/ffffff?text=User",
     "role": "admin"
+  },
+  {
+    "id": "43a7e194-fb7b-4a3e-b07f-63ec3a05e319",
+    "nama": "Islamidina",
+    "email": "islamidinaa123@gmail.com",
+    "password_hash": "scrypt:32768:8:1$sNjrnHaDnGXLb4MJ$a5cc8beafad1cccd3413124cc42c32672a551fbcc92a8eb601e00596d4bd316284162157393514a73785b1d2df7860cfe2551e22ffef92ee37c4da53d05dd759",
+    "favorites": [],
+    "profile_image": "https://via.placeholder.com/40x40/6b7280/ffffff?text=User",
+    "role": "pengguna"
   }
 ]

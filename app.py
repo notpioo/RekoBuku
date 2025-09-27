@@ -215,12 +215,19 @@ def add_book():
             upload_folder = 'static/uploads/books'
             os.makedirs(upload_folder, exist_ok=True)
             
-            # Save the file
-            filename = secure_filename(form.foto.data.filename)
-            foto_full_path = os.path.join(upload_folder, filename)
-            form.foto.data.save(foto_full_path)
-            # Store the web-accessible path (with /static/ prefix)
-            foto_path = f"/static/uploads/books/{filename}"
+            # Handle camera captured images or regular file uploads
+            if hasattr(form.foto.data, 'filename') and form.foto.data.filename:
+                filename = secure_filename(form.foto.data.filename)
+                
+                # If it's a camera capture, generate a unique filename
+                if filename == 'camera-capture.jpg':
+                    import time
+                    filename = f"camera_capture_{int(time.time())}.jpg"
+                
+                foto_full_path = os.path.join(upload_folder, filename)
+                form.foto.data.save(foto_full_path)
+                # Store the web-accessible path (with /static/ prefix)
+                foto_path = f"/static/uploads/books/{filename}"
 
         Book.create(
             judul=form.judul.data,
@@ -245,13 +252,19 @@ def edit_book(book_id):
     form = EditBookForm(obj=book) # Use EditBookForm here
     if form.validate_on_submit():
         foto_path = book.foto # Keep existing photo if not updated
-        if form.foto.data and hasattr(form.foto.data, 'filename'):
+        if form.foto.data and hasattr(form.foto.data, 'filename') and form.foto.data.filename:
             # Create upload folder if it doesn't exist
             upload_folder = 'static/uploads/books'
             os.makedirs(upload_folder, exist_ok=True)
 
-            # Save the new file
+            # Handle camera captured images or regular file uploads
             filename = secure_filename(form.foto.data.filename)
+            
+            # If it's a camera capture, generate a unique filename
+            if filename == 'camera-capture.jpg':
+                import time
+                filename = f"camera_capture_{int(time.time())}.jpg"
+
             foto_full_path = os.path.join(upload_folder, filename)
             form.foto.data.save(foto_full_path)
             # Store the web-accessible path (with /static/ prefix)
@@ -545,12 +558,14 @@ def nlp_recommendation():
                     })
         
         logging.info("Successfully processed NLP recommendation")
-        return jsonify({
+        response_data = {
             'books': recommended_books,
             'reasons': reasons,
             'explanation': recommendation_result.get('explanation', 'Berikut adalah rekomendasi buku berdasarkan pertanyaan Anda:'),
             'similar_books': similar_books
-        })
+        }
+        logging.info(f"Response data: {response_data}")
+        return jsonify(response_data)
         
     except Exception as e:
         logging.error(f"Unexpected error in NLP recommendation: {str(e)}")

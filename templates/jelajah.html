@@ -83,65 +83,6 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Semua Buku -->
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="mb-0">
-                        <i class="fas fa-books text-secondary me-2"></i>Semua Koleksi Buku
-                    </h5>
-                </div>
-                <div class="card-body">
-                    <div class="row" id="all-books-grid">
-                        {% for book in books %}
-                        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                            <div class="card h-100 book-card">
-                                {% if book.foto %}
-                                    <img src="{{ book.foto }}" class="card-img-top book-cover" alt="{{ book.judul }}" style="height: 250px; object-fit: cover;">
-                                {% else %}
-                                    <div class="card-img-top d-flex align-items-center justify-content-center bg-light" style="height: 250px;">
-                                        <i class="fas fa-book fa-3x text-muted"></i>
-                                    </div>
-                                {% endif %}
-                                <div class="card-body d-flex flex-column">
-                                    <h5 class="card-title">{{ book.judul }}</h5>
-                                    <p class="card-text text-muted">{{ book.penulis }}</p>
-                                    {% if book.tag %}
-                                    <div class="genres mb-3">
-                                        {% for tag in book.tag %}
-                                        <span class="badge bg-secondary me-1">{{ tag }}</span>
-                                        {% endfor %}
-                                    </div>
-                                    {% endif %}
-                                    <p class="card-text small text-muted flex-grow-1">{{ book.deskripsi_singkat[:100] if book.deskripsi_singkat else 'Tidak ada deskripsi tersedia.' }}{% if book.deskripsi_singkat and book.deskripsi_singkat|length > 100 %}...{% endif %}</p>
-                                    <div class="mt-auto">
-                                        <div class="d-flex gap-2">
-                                            <a href="{{ url_for('book_detail', book_id=book.id) }}" class="btn btn-outline-primary flex-fill">
-                                                <i class="fas fa-eye me-1"></i>Lihat
-                                            </a>
-                                            {% if current_user.is_authenticated %}
-                                            <button onclick="toggleFavorite('{{ book.id }}')" class="btn btn-outline-danger book-favorite-btn" data-book-id="{{ book.id }}">
-                                                <i class="{% if current_user.is_favorite(book.id) %}fas{% else %}far{% endif %} fa-heart"></i>
-                                            </button>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {% endfor %}
-            </div>
-                    
-                        {% if not books %}
-                        <div class="text-center py-5">
-                            <i class="fas fa-books fa-4x text-muted mb-3"></i>
-                            <h3 class="text-muted">Belum ada buku tersedia</h3>
-                            <p class="text-muted">Koleksi buku akan segera ditambahkan.</p>
-                        </div>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
@@ -196,6 +137,8 @@ document.getElementById('nlp-search-form').addEventListener('submit', function(e
         return response.json();
     })
     .then(data => {
+        console.log('Response data received:', data); // Debug log
+        
         document.getElementById('nlp-loading').style.display = 'none';
         document.getElementById('nlp-search-btn').disabled = false;
         
@@ -206,8 +149,11 @@ document.getElementById('nlp-search-form').addEventListener('submit', function(e
             return;
         }
         
-        // Show results
-        displayNLPResults(data);
+        // Show results with a small delay to ensure DOM is ready
+        console.log('Calling displayNLPResults with data:', data); // Debug log
+        setTimeout(() => {
+            displayNLPResults(data);
+        }, 100);
     })
     .catch(error => {
         console.error('Fetch error:', error);
@@ -235,9 +181,49 @@ function displayErrorMessage(message) {
 }
 
 function displayNLPResults(data) {
+    console.log('displayNLPResults called with:', data); // Debug
+    
     const resultsDiv = document.getElementById('nlp-results');
-    const explanationDiv = document.getElementById('nlp-explanation');
+    let explanationDiv = document.getElementById('nlp-explanation');
     const booksGrid = document.getElementById('nlp-books-grid');
+    
+    console.log('Elements found:', {resultsDiv, explanationDiv, booksGrid}); // Debug
+    
+    // If explanationDiv is null, try to find it within resultsDiv
+    if (!explanationDiv && resultsDiv) {
+        explanationDiv = resultsDiv.querySelector('#nlp-explanation');
+        console.log('Retried finding explanationDiv:', explanationDiv); // Debug
+    }
+    
+    // Check if elements exist before manipulating them
+    if (!resultsDiv || !explanationDiv || !booksGrid) {
+        console.error('Required DOM elements not found:', {
+            resultsDiv: !!resultsDiv,
+            explanationDiv: !!explanationDiv,
+            booksGrid: !!booksGrid
+        });
+        
+        // Try to create missing elements if resultsDiv exists
+        if (resultsDiv && !explanationDiv) {
+            const cardBody = resultsDiv.querySelector('.card-body');
+            if (cardBody) {
+                const newExplanationDiv = document.createElement('div');
+                newExplanationDiv.id = 'nlp-explanation';
+                newExplanationDiv.className = 'alert alert-info mb-3';
+                cardBody.insertBefore(newExplanationDiv, cardBody.firstChild);
+                explanationDiv = newExplanationDiv;
+                console.log('Created new explanationDiv:', explanationDiv); // Debug
+            }
+        }
+        
+        if (!explanationDiv) {
+            console.error('Still cannot find or create explanationDiv');
+            return;
+        }
+    }
+    
+    // Reset alert class
+    explanationDiv.className = 'alert alert-info mb-3';
     
     // Show explanation
     explanationDiv.innerHTML = data.explanation || 'Berikut adalah rekomendasi buku berdasarkan pertanyaan Anda:';
@@ -246,20 +232,28 @@ function displayNLPResults(data) {
     booksGrid.innerHTML = '';
     
     if (data.books && data.books.length > 0) {
+        console.log('Processing books:', data.books); // Debug
         data.books.forEach(book => {
+            console.log('Creating card for book:', book); // Debug
             const bookCard = createBookCard(book, data.reasons ? data.reasons[book.id] : null);
+            console.log('Book card created:', bookCard); // Debug
             booksGrid.appendChild(bookCard);
         });
         
+        // Force display and scroll to results
         resultsDiv.style.display = 'block';
+        resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        console.log('Results div should be visible now'); // Debug
         
         // Show similar books if available
         if (data.similar_books && data.similar_books.length > 0) {
             displaySimilarBooks(data.similar_books);
         }
     } else {
+        console.log('No books found in response'); // Debug
         explanationDiv.innerHTML = 'Maaf, tidak ditemukan buku yang sesuai dengan kriteria Anda. Silakan coba dengan kata kunci yang berbeda.';
         resultsDiv.style.display = 'block';
+        resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 }
 
@@ -278,28 +272,36 @@ function displaySimilarBooks(similarBooks) {
 }
 
 function createBookCard(book, reason = null) {
+    console.log('Creating book card for:', book.judul, 'with reason:', reason); // Debug
+    
     const col = document.createElement('div');
     col.className = 'col-lg-3 col-md-4 col-sm-6 mb-4';
     
     const isFavorite = book.is_favorite || false;
     const favoriteIcon = isFavorite ? 'fas' : 'far';
     
+    // Safely handle tags
+    let tagsHtml = '';
+    if (book.tag) {
+        if (Array.isArray(book.tag)) {
+            tagsHtml = book.tag.map(tag => `<span class="badge bg-secondary me-1">${tag.trim()}</span>`).join('');
+        } else if (typeof book.tag === 'string') {
+            tagsHtml = book.tag.split(',').map(tag => `<span class="badge bg-secondary me-1">${tag.trim()}</span>`).join('');
+        }
+    }
+    
     col.innerHTML = `
         <div class="card h-100 book-card">
             ${book.foto ? 
-                `<img src="${book.foto}" class="card-img-top book-cover" alt="${book.judul}" style="height: 250px; object-fit: cover;">` :
+                `<img src="${book.foto}" class="card-img-top book-cover" alt="${book.judul || 'Book cover'}" style="height: 250px; object-fit: cover;">` :
                 `<div class="card-img-top d-flex align-items-center justify-content-center bg-light" style="height: 250px;"><i class="fas fa-book fa-3x text-muted"></i></div>`
             }
             <div class="card-body d-flex flex-column">
-                <h5 class="card-title">${book.judul}</h5>
-                <p class="card-text text-muted">${book.penulis}</p>
-                ${book.tag ? `
-                    <div class="genres mb-3">
-                        ${book.tag.split(',').map(tag => `<span class="badge bg-secondary me-1">${tag.trim()}</span>`).join('')}
-                    </div>
-                ` : ''}
+                <h5 class="card-title">${book.judul || 'Judul tidak tersedia'}</h5>
+                <p class="card-text text-muted">${book.penulis || 'Penulis tidak diketahui'}</p>
+                ${tagsHtml ? `<div class="genres mb-3">${tagsHtml}</div>` : ''}
                 ${reason ? `<div class="alert alert-light small mb-2"><i class="fas fa-info-circle me-1"></i>${reason}</div>` : ''}
-                <p class="card-text small text-muted flex-grow-1">${book.deskripsi_singkat ? book.deskripsi_singkat.substring(0, 100) + (book.deskripsi_singkat.length > 100 ? '...' : '') : 'Tidak ada deskripsi tersedia.'}</p>
+                <p class="card-text small text-muted flex-grow-1">${book.deskripsi_singkat ? (book.deskripsi_singkat.length > 100 ? book.deskripsi_singkat.substring(0, 100) + '...' : book.deskripsi_singkat) : 'Tidak ada deskripsi tersedia.'}</p>
                 <div class="mt-auto">
                     <div class="d-flex gap-2">
                         <a href="/book/${book.id}" class="btn btn-outline-primary flex-fill">
@@ -316,6 +318,7 @@ function createBookCard(book, reason = null) {
         </div>
     `;
     
+    console.log('Book card HTML created successfully'); // Debug
     return col;
 }
 

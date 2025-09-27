@@ -22,7 +22,7 @@
                 <div class="card-body">
                     <form method="POST" action="" enctype="multipart/form-data">
                         {{ form.hidden_tag() }}
-                        
+
                         <div class="row mb-3">
                             <div class="col-md-8">
                                 {{ form.judul.label(class="form-label fw-bold") }}
@@ -42,7 +42,53 @@
 
                         <div class="mb-3">
                             {{ form.foto.label(class="form-label fw-bold") }}
-                            {{ form.foto(class="form-control", accept="image/*") }}
+
+                            <!-- Upload method selection -->
+                            <div class="mb-2">
+                                <div class="btn-group d-flex" role="group" aria-label="Upload method">
+                                    <input type="radio" class="btn-check" name="upload-method" id="file-upload" autocomplete="off" checked>
+                                    <label class="btn btn-outline-primary flex-fill" for="file-upload">
+                                        <i class="fas fa-file-upload me-1"></i>Pilih File
+                                    </label>
+
+                                    <input type="radio" class="btn-check" name="upload-method" id="camera-capture" autocomplete="off">
+                                    <label class="btn btn-outline-primary flex-fill" for="camera-capture">
+                                        <i class="fas fa-camera me-1"></i>Ambil Foto
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- File upload input -->
+                            <div id="file-upload-section">
+                                {{ form.foto(class="form-control", accept="image/*", id="foto-file") }}
+                            </div>
+
+                            <!-- Camera capture section -->
+                            <div id="camera-capture-section" style="display: none;">
+                                <div class="camera-container mb-3">
+                                    <video id="camera-video" class="w-100 rounded" style="max-height: 300px; display: none;" autoplay playsinline></video>
+                                    <canvas id="camera-canvas" style="display: none;"></canvas>
+                                    <div id="camera-placeholder" class="text-center p-4 border rounded bg-light">
+                                        <i class="fas fa-camera fa-3x text-muted mb-2"></i>
+                                        <p class="text-muted mb-0">Klik "Buka Kamera" untuk mulai mengambil foto</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex gap-2 flex-wrap">
+                                    <button type="button" id="start-camera" class="btn btn-primary">
+                                        <i class="fas fa-video me-1"></i>Buka Kamera
+                                    </button>
+                                    <button type="button" id="capture-photo" class="btn btn-success" style="display: none;">
+                                        <i class="fas fa-camera me-1"></i>Ambil Foto
+                                    </button>
+                                    <button type="button" id="retake-photo" class="btn btn-warning" style="display: none;">
+                                        <i class="fas fa-redo me-1"></i>Ambil Ulang
+                                    </button>
+                                    <button type="button" id="stop-camera" class="btn btn-secondary" style="display: none;">
+                                        <i class="fas fa-stop me-1"></i>Tutup Kamera
+                                    </button>
+                                </div>
+                            </div>
+
                             {% for error in form.foto.errors %}
                                 <div class="text-danger small mt-1">{{ error }}</div>
                             {% endfor %}
@@ -94,48 +140,349 @@
                              style="max-height: 250px;">
                     </div>
                     <small class="text-muted d-block mt-2">Preview otomatis akan diperbarui saat Anda memasukkan URL gambar.</small>
+                    
+                    <button type="button" id="crop-image-btn" class="btn btn-info mt-3 w-100" style="display: none;">
+                        <i class="fas fa-crop me-1"></i> Crop Gambar
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Crop Modal -->
+<div class="modal fade" id="cropModal" tabindex="-1" aria-labelledby="cropModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cropModalLabel">
+                    <i class="fas fa-crop me-2"></i>Crop Foto Cover Buku
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center mb-3">
+                    <small class="text-muted">
+                        <i class="fas fa-info-circle me-1"></i>
+                        Seret untuk memindahkan area crop, gunakan sudut untuk mengubah ukuran
+                    </small>
+                </div>
+                <div class="img-container crop-container">
+                    <img id="image-to-crop" src="" alt="Image to crop" style="max-width: 100%; height: auto;">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-1"></i>Batal
+                </button>
+                <button type="button" id="crop-save-btn" class="btn btn-primary">
+                    <i class="fas fa-check me-1"></i>Simpan Hasil Crop
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 {% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet">
 <script>
+    let currentStream = null;
+    let capturedImageData = null;
+    let cropper = null;
+    let currentImageFile = null;
+    let cropModal = null;
+
+    // Initialize modal
+    document.addEventListener('DOMContentLoaded', function() {
+        cropModal = new bootstrap.Modal(document.getElementById('cropModal'));
+
+        const fileInput = document.getElementById('foto-file');
+        const uploadMethodChecked = document.querySelector('input[name="upload-method"]:checked');
+
+        // Make sure file input is enabled by default (for file upload method)
+        if (uploadMethodChecked && uploadMethodChecked.id === 'file-upload') {
+            fileInput.disabled = false;
+        }
+    });
+
+    // Upload method toggle
+    document.querySelectorAll('input[name="upload-method"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            const fileSection = document.getElementById('file-upload-section');
+            const cameraSection = document.getElementById('camera-capture-section');
+            const fileInput = document.getElementById('foto-file');
+            const cropBtn = document.getElementById('crop-image-btn');
+
+            if (this.id === 'file-upload') {
+                fileSection.style.display = 'block';
+                cameraSection.style.display = 'none';
+                // Reset camera data when switching to file upload
+                capturedImageData = null;
+                stopCamera();
+                // Make sure file input is enabled
+                fileInput.disabled = false;
+                // Hide crop button if no image is selected
+                cropBtn.style.display = fileInput.value ? 'inline-block' : 'none';
+            } else {
+                fileSection.style.display = 'none';
+                cameraSection.style.display = 'block';
+                // Disable file input when using camera
+                fileInput.disabled = true;
+                // Clear file input value
+                fileInput.value = '';
+                // Hide crop button
+                cropBtn.style.display = 'none';
+            }
+        });
+    });
+
+    // Camera functionality
+    const video = document.getElementById('camera-video');
+    const canvas = document.getElementById('camera-canvas');
+    const placeholder = document.getElementById('camera-placeholder');
+    const startBtn = document.getElementById('start-camera');
+    const captureBtn = document.getElementById('capture-photo');
+    const retakeBtn = document.getElementById('retake-photo');
+    const stopBtn = document.getElementById('stop-camera');
+
+    startBtn.addEventListener('click', startCamera);
+    captureBtn.addEventListener('click', capturePhoto);
+    retakeBtn.addEventListener('click', retakePhoto);
+    stopBtn.addEventListener('click', stopCamera);
+
+    async function startCamera() {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ 
+                video: { 
+                    facingMode: 'environment',
+                    width: { ideal: 1280 },
+                    height: { ideal: 720 }
+                } 
+            });
+
+            currentStream = stream;
+            video.srcObject = stream;
+
+            placeholder.style.display = 'none';
+            video.style.display = 'block';
+            startBtn.style.display = 'none';
+            captureBtn.style.display = 'inline-block';
+            stopBtn.style.display = 'inline-block';
+
+        } catch (err) {
+            console.error('Error accessing camera:', err);
+            alert('Tidak dapat mengakses kamera. Pastikan Anda memberikan izin kamera dan menggunakan HTTPS.');
+        }
+    }
+
+    function capturePhoto() {
+        const context = canvas.getContext('2d');
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        context.drawImage(video, 0, 0);
+
+        // Convert to blob and create file
+        canvas.toBlob(function(blob) {
+            capturedImageData = blob;
+
+            // Update preview
+            const preview = document.getElementById('cover-preview');
+            preview.src = canvas.toDataURL('image/jpeg');
+
+            // Hide video, show canvas
+            video.style.display = 'none';
+            canvas.style.display = 'block';
+
+            // Update buttons
+            captureBtn.style.display = 'none';
+            retakeBtn.style.display = 'inline-block';
+
+            // Show crop button
+            document.getElementById('crop-image-btn').style.display = 'inline-block';
+
+        }, 'image/jpeg', 0.8);
+    }
+
+    function retakePhoto() {
+        canvas.style.display = 'none';
+        video.style.display = 'block';
+        captureBtn.style.display = 'inline-block';
+        retakeBtn.style.display = 'none';
+        capturedImageData = null;
+    }
+
+    function stopCamera() {
+        if (currentStream) {
+            currentStream.getTracks().forEach(track => track.stop());
+            currentStream = null;
+        }
+
+        video.style.display = 'none';
+        canvas.style.display = 'none';
+        placeholder.style.display = 'block';
+
+        startBtn.style.display = 'inline-block';
+        captureBtn.style.display = 'none';
+        retakeBtn.style.display = 'none';
+        stopBtn.style.display = 'none';
+
+        capturedImageData = null;
+
+        // Reset preview
+        const preview = document.getElementById('cover-preview');
+        preview.src = '{% if book and book.foto %}{{ book.foto }}{% else %}https://via.placeholder.com/150x200/6c757d/ffffff?text=Preview{% endif %}';
+    }
+
     // Auto-update cover preview for file upload
-    document.getElementById('foto').addEventListener('change', function() {
+    document.getElementById('foto-file').addEventListener('change', function() {
         const file = this.files[0];
         const preview = document.getElementById('cover-preview');
-        
+        const cropBtn = document.getElementById('crop-image-btn');
+        const defaultPreviewSrc = '{% if book and book.foto %}{{ book.foto }}{% else %}https://via.placeholder.com/150x200/6c757d/ffffff?text=Preview{% endif %}';
+
+        // Clear previous blob URLs to prevent memory leaks
+        if (preview.src.startsWith('blob:')) {
+            URL.revokeObjectURL(preview.src);
+        }
+
         if (file) {
             // Check file size (5MB limit)
             if (file.size > 5 * 1024 * 1024) {
                 alert('Ukuran file terlalu besar. Maksimal 5MB.');
                 this.value = '';
-                preview.src = 'https://via.placeholder.com/150x200/6c757d/ffffff?text=Preview';
+                preview.src = defaultPreviewSrc;
+                cropBtn.style.display = 'none';
+                currentImageFile = null;
                 return;
             }
-            
+
             // Check file type
             const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
             if (!allowedTypes.includes(file.type)) {
                 alert('Format file tidak didukung. Gunakan JPG, JPEG, PNG, atau GIF.');
                 this.value = '';
-                preview.src = 'https://via.placeholder.com/150x200/6c757d/ffffff?text=Preview';
+                preview.src = defaultPreviewSrc;
+                cropBtn.style.display = 'none';
+                currentImageFile = null;
                 return;
             }
-            
+
+            // Store the file for cropping
+            currentImageFile = file;
+
             // Preview the image
             const reader = new FileReader();
             reader.onload = function(e) {
                 preview.src = e.target.result;
+                cropBtn.style.display = 'inline-block'; // Show crop button
             };
             reader.readAsDataURL(file);
         } else {
-            preview.src = 'https://via.placeholder.com/150x200/6c757d/ffffff?text=Preview';
+            preview.src = defaultPreviewSrc;
+            cropBtn.style.display = 'none';
+            currentImageFile = null;
         }
     });
-    
+
+    // Crop Image functionality
+    document.getElementById('crop-image-btn').addEventListener('click', function() {
+        const imageElement = document.getElementById('image-to-crop');
+        const preview = document.getElementById('cover-preview');
+
+        if (currentImageFile || capturedImageData) {
+            // Set the image source for cropping
+            imageElement.src = preview.src;
+
+            // Initialize Cropper.js
+            if (cropper) {
+                cropper.destroy();
+            }
+            cropper = new Cropper(imageElement, {
+                aspectRatio: 2 / 3, // 2:3 aspect ratio for book covers
+                viewMode: 1,
+                responsive: true,
+                autoCropArea: 0.8,
+                zoomable: true,
+                scalable: true,
+                rotatable: true,
+                background: true,
+                modal: true,
+                guides: true,
+                center: true,
+                highlight: true,
+                cropBoxMovable: true,
+                cropBoxResizable: true,
+                toggleDragModeOnDblclick: true,
+                minContainerWidth: 300,
+                minContainerHeight: 400,
+                ready: function() {
+                    // Ensure cropper is initialized before showing modal
+                    cropModal.show();
+                }
+            });
+
+            // Show the modal
+            // cropModal.show(); // Moved to 'ready' event of cropper
+        } else {
+            alert('Pilih atau ambil gambar terlebih dahulu.');
+        }
+    });
+
+    document.getElementById('crop-save-btn').addEventListener('click', function() {
+        if (cropper) {
+            // Get cropped image data as a Blob
+            cropper.getCroppedCanvas().toBlob((blob) => {
+                // Create a new filename for the cropped image
+                const filename = `cropped_image_${Date.now()}.jpg`;
+                
+                // Create a new File object from the blob
+                const croppedFile = new File([blob], filename, { type: 'image/jpeg' });
+                
+                // Update the preview only for this specific form
+                const preview = document.getElementById('cover-preview');
+                const newImageUrl = URL.createObjectURL(blob);
+                
+                // Revoke old object URL to prevent memory leaks
+                if (preview.src.startsWith('blob:')) {
+                    URL.revokeObjectURL(preview.src);
+                }
+                
+                preview.src = newImageUrl;
+
+                // Store the cropped blob for form submission
+                if (document.querySelector('input[name="upload-method"]:checked').id === 'file-upload') {
+                    currentImageFile = croppedFile;
+                } else {
+                    capturedImageData = croppedFile;
+                }
+
+                // Destroy cropper instance
+                cropper.destroy();
+                cropper = null;
+
+                // Close the modal
+                cropModal.hide();
+            }, 'image/jpeg', 0.8); // Adjust quality as needed
+        }
+    });
+
+    // Handle modal hidden event to clean up cropper
+    document.getElementById('cropModal').addEventListener('hidden.bs.modal', function (e) {
+        if (cropper) {
+            cropper.destroy();
+            cropper = null;
+        }
+        // Clear the crop image source to prevent memory leaks
+        const imageElement = document.getElementById('image-to-crop');
+        if (imageElement.src.startsWith('blob:')) {
+            URL.revokeObjectURL(imageElement.src);
+        }
+        imageElement.src = '';
+    });
+
+
     // Initialize Choices.js for tag selection
     document.addEventListener('DOMContentLoaded', function() {
         const tagSelect = new Choices('#tag', {
@@ -153,7 +500,7 @@
                 containerInner: 'choices__inner choices__inner--tag-select',
             }
         });
-        
+
         // Update tag count
         function updateTagCount() {
             const selectedTags = tagSelect.getValue();
@@ -165,12 +512,115 @@
                 countElement.textContent = '';
             }
         }
-        
+
         // Listen for changes
         document.getElementById('tag').addEventListener('change', updateTagCount);
-        
+
         // Initial count update
         updateTagCount();
+    });
+
+    // Handle form submission
+    document.querySelector('form').addEventListener('submit', function(e) {
+        const uploadMethod = document.querySelector('input[name="upload-method"]:checked').id;
+        const form = this;
+        const isEditMode = {% if book %}true{% else %}false{% endif %};
+
+        // Camera capture mode
+        if (uploadMethod === 'camera-capture') {
+            e.preventDefault();
+            if (capturedImageData) {
+                const formData = new FormData(form);
+                formData.delete('foto');
+                formData.append('foto', capturedImageData, 'camera-capture.jpg');
+
+                submitForm(formData, form.action);
+            } else {
+                alert('Silakan ambil foto terlebih dahulu.');
+            }
+            return;
+        }
+
+        // File upload mode
+        if (uploadMethod === 'file-upload') {
+            const fileInput = document.getElementById('foto-file');
+            const hasFileSelected = fileInput.files.length > 0;
+            
+            // For add mode, file is required
+            if (!isEditMode && !hasFileSelected && !currentImageFile) {
+                e.preventDefault();
+                alert("Harap pilih file gambar.");
+                return;
+            }
+
+            // If cropped image exists, handle it
+            if (currentImageFile && currentImageFile instanceof Blob) {
+                e.preventDefault();
+                const formData = new FormData(form);
+                formData.delete('foto');
+                formData.append('foto', currentImageFile, currentImageFile.name || 'cropped-image.jpg');
+                
+                // Validate file size
+                if (currentImageFile.size > 5 * 1024 * 1024) {
+                    alert('Ukuran file terlalu besar. Maksimal 5MB.');
+                    return;
+                }
+                
+                submitForm(formData, form.action);
+                return;
+            }
+
+            // For edit mode without new file, allow normal submission
+            if (isEditMode && !hasFileSelected) {
+                // Let the form submit normally
+                return;
+            }
+
+            // For other cases, let the form submit normally
+            // The server-side validation will handle any issues
+        }
+    });
+
+    // Helper function to submit form data
+    function submitForm(formData, actionUrl) {
+        fetch(actionUrl, {
+            method: 'POST',
+            body: formData
+        }).then(response => {
+            if (response.ok) {
+                // Get the redirect URL from the response
+                if (response.redirected) {
+                    window.location.href = response.url;
+                } else {
+                    // Fallback to admin books page
+                    window.location.href = '{{ url_for("admin_books") }}';
+                }
+            } else {
+                response.text().then(text => {
+                    console.error('Server response:', text);
+                    alert('Terjadi kesalahan saat menyimpan data.');
+                });
+            }
+        }).catch(error => {
+            console.error('Error:', error);
+            alert('Terjadi kesalahan koneksi saat menyimpan data.');
+        });
+    }
+
+    // Cleanup camera and blob URLs on page unload
+    window.addEventListener('beforeunload', function() {
+        stopCamera();
+        
+        // Clean up any blob URLs to prevent memory leaks
+        const preview = document.getElementById('cover-preview');
+        if (preview && preview.src.startsWith('blob:')) {
+            URL.revokeObjectURL(preview.src);
+        }
+        
+        const cropImage = document.getElementById('image-to-crop');
+        if (cropImage && cropImage.src.startsWith('blob:')) {
+            URL.revokeObjectURL(cropImage.src);
+        }
     });
 </script>
 {% endblock %}

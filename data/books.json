@@ -1,89 +1,951 @@
 [
   {
-    "id": "1",
-    "judul": "logika informatika",
-    "penulis": "Andrea Hirata",
+    "id": "9",
+    "judul": "pemrograman python",
+    "penulis": "R.H Sinipar & Hamzan Wadi",
+    "tag": [
+      "Pemrograman"
+    ],
+    "foto": "/static/uploads/books/foto_python.jpg",
+    "deskripsi_singkat": "Buku ini membahas bahasa pemrograman Python secara lengkap mulai dari konsep dasar hingga implementasi pada berbagai bidang. Penyajiannya dirancang sistematis agar mudah dipahami oleh pemula maupun pengembang yang ingin memperdalam pemrograman Python.Materi yang dibahas mencakup dasar-dasar Python, struktur data seperti list, tuple, set, dan dictionaries, perulangan serta pengendalian kondisi, penggunaan fungsi dan modul, pemrosesan file, hingga pemrograman berorientasi objek dengan kelas dan objek. Selain itu, buku ini juga mengulas penanganan eksepsi, pemrograman database, pembuatan antarmuka grafis (GUI), dan pemrograman web. Penyajian materi yang sistematis serta dilengkapi dengan contoh implementasi program membuat buku ini cocok digunakan sebagai bahan ajar, referensi belajar mandiri"
+  },
+  {
+    "id": "11",
+    "judul": "sistem informasi",
+    "penulis": "informatika",
+    "tag": [
+      "Struktur Data",
+      "Sistem Operasi"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758811969609.jpg",
+    "deskripsi_singkat": "Buku berjudul Sistem Informasi yang diterbitkan oleh Penerbit Informatika ini berisi kumpulan makalah yang membahas sistem informasi dari berbagai perspektif. Isi buku mengupas keterkaitan antara manusia dan sistem informasi, peran organisasi dalam penerapan sistem informasi, serta hubungan antara teknologi dan sistem informasi dalam mendukung pengelolaan data dan pengambilan keputusan."
+  },
+  {
+    "id": "12",
+    "judul": "Pemograman PHP",
+    "penulis": "Abdul Kodir",
+    "tag": [
+      "Pemrograman"
+    ],
+    "foto": "/static/uploads/books/WhatsApp_Image_2025-09-24_at_07.58.01_4de9beae.jpg",
+    "deskripsi_singkat": "Buku Pemrograman PHP karya Abdul Kadir membahas tentang cara membuat aplikasi web menggunakan bahasa pemrograman PHP. Isi buku mencakup pengenalan dasar PHP, cara mengolah data, penggunaan form, pengelolaan database, hingga pembuatan aplikasi web dinamis. Buku ini ditulis dengan metode belajar mandiri sehingga pembaca bisa mengikuti penjelasan secara bertahap, dilengkapi dengan contoh program dan latihan. Buku ini cocok untuk pemula yang ingin memulai belajar pemrograman web maupun untuk pembaca yang ingin memperdalam kemampuan dalam mengembangkan aplikasi berbasis PHP."
+  },
+  {
+    "id": "13",
+    "judul": "Analisis dan Perancangan Sistem Basis Data",
+    "penulis": "Wahyuni Reksoatmodjo",
+    "tag": [
+      "Basis Data"
+    ],
+    "foto": "/static/uploads/books/Gambar_WhatsApp_2025-09-24_pukul_07.58.15_619fcc00.jpg",
+    "deskripsi_singkat": "Buku ini tampaknya membahas teori serta praktik tentang analisis dan perancangan sistem basis data, yang merupakan bidang penting dalam ilmu komputer, khususnya terkait perancangan struktur data, model basis data, hingga implementasi sistem manajemen basis data."
+  },
+  {
+    "id": "14",
+    "judul": "Membangun GUI JAVA Netbeans",
+    "penulis": "Wahana komputer",
+    "tag": [
+      "Pemrograman"
+    ],
+    "foto": "/static/uploads/books/gui.jpg",
+    "deskripsi_singkat": "Buku ini tampaknya merupakan panduan praktis untuk membangun aplikasi Java berbasis GUI (Graphical User Interface) menggunakan IDE NetBeans versi 6.5, dengan pendekatan tutorial yang bisa diselesaikan dalam waktu singkat (5 hari)."
+  },
+  {
+    "id": "15",
+    "judul": "Membuat Sendri Templat Blogspot",
+    "penulis": "Teguh Wahyono",
+    "tag": [
+      "Struktur Data"
+    ],
+    "foto": "/static/uploads/books/blog.jpg",
+    "deskripsi_singkat": "Buku ini tampaknya berisi panduan membuat, memodifikasi, dan memasang template Blogspot (Blogger) sehingga pembaca bisa mempercantik atau mempersonalisasi blog mereka. Cocok untuk pemula yang ingin belajar kustomisasi tampilan blog tanpa harus terlalu mendalam di dunia pemrograman."
+  },
+  {
+    "id": "16",
+    "judul": "Pemograman C++ ",
+    "penulis": "Abdul Kadir",
+    "tag": [
+      "Pemrograman"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758812348541.jpg",
+    "deskripsi_singkat": "Buku “Pemrograman C++” membahas dasar-dasar hingga konsep lanjutan bahasa pemrograman C++, salah satu bahasa populer yang banyak digunakan dalam pengembangan perangkat lunak, aplikasi desktop, sistem operasi, hingga game. Materi disusun secara bertahap mulai dari pengenalan sintaks, struktur program, variabel, tipe data, operator, percabangan, perulangan, fungsi, hingga konsep pemrograman berorientasi objek (OOP) seperti kelas, objek, pewarisan, dan polimorfisme."
+  },
+  {
+    "id": "18",
+    "judul": "Kimia pangan",
+    "penulis": "Dr.lr feri Kusnandar, MSc ",
+    "tag": [
+      "Kecerdasan Buatan"
+    ],
+    "foto": "/static/uploads/books/camera_capture_1758681077.jpg",
+    "deskripsi_singkat": "Buku referensi bagi mahasiswa di bidang ilmu dan teknologi pangan, teknologi hasil pertanian, dan bidang ilmu lain yang terkait. Disusun"
+  },
+  {
+    "id": "19",
+    "judul": "Teknik plambing",
+    "penulis": "Daryanto",
+    "tag": [
+      "Pembelajaran Mesin"
+    ],
+    "foto": "/static/uploads/books/camera_capture_1758681161.jpg",
+    "deskripsi_singkat": "membahas tentang konstruksi instalasi pipa pembuangan air kotor pada gedung bertingkat dan proses pemasangannya, dengan fokus pada penyelesaian masalah dalam sistem plambing."
+  },
+  {
+    "id": "20",
+    "judul": "Lembaga Kimia",
+    "penulis": "Prof.Dr.Ir.ign.Suharno,APU",
+    "tag": [
+      "Sistem Operasi"
+    ],
+    "foto": "/static/uploads/books/IMG20250924093438.jpg",
+    "deskripsi_singkat": "Limbah Kimia dalam Pencemaran Udara dan Air\". Buku ini membahas secara mendalam mengenai limbah kimia, pencemaran udara, dan pencemaran air, diterbitkan oleh Penerbit Andi pada tahun 2011. "
+  },
+  {
+    "id": "21",
+    "judul": "Fisika Mekanika ",
+    "penulis": "KHDE UAD TUNG",
+    "tag": [
+      "Basis Data"
+    ],
+    "foto": "/static/uploads/books/IMG20250924093431.jpg",
+    "deskripsi_singkat": "buku ini ditujukan juga bagi para pengajar fisika agar mereka dapat menggunakannya sebagai salah satu bahan pengajaran"
+  },
+  {
+    "id": "22",
+    "judul": "pemrograman java script",
+    "penulis": "R.H Sianipar",
+    "tag": [
+      "Pembelajaran Mesin"
+    ],
+    "foto": "/static/uploads/books/IMG_0633.jpeg",
+    "deskripsi_singkat": "Buku “Pemrograman JavaScript” membahas dasar hingga lanjutan bahasa pemrograman JavaScript, yang merupakan salah satu teknologi utama dalam pengembangan aplikasi web. Materi disajikan secara sistematis mulai dari pengenalan sintaks dasar, variabel, fungsi, objek, hingga konsep DOM (Document Object Model), event handling, dan manipulasi elemen web."
+  },
+  {
+    "id": "23",
+    "judul": "Kalkulus 1",
+    "penulis": "JASMAN PARDEDE",
     "tag": [
       "Algoritma"
     ],
-    "foto": "/static/uploads/books/gambar_di_login.jpg",
-    "deskripsi_singkat": "buku ini tentang algoritma pemograman"
+    "foto": "/static/uploads/books/IMG20250924093420.jpg",
+    "deskripsi_singkat": "Buku ini jelas ditujukan sebagai buku teks mata kuliah Kalkulus Dasar (Kalkulus I), yang biasanya membahas limit, turunan, integral, serta fungsi dasar."
   },
   {
-    "id": "2",
-    "judul": "Bumi Manusia",
-    "penulis": "Pramoedya Ananta Toer",
+    "id": "24",
+    "judul": "Audit sistem informasi + pendekatan CobIT",
+    "penulis": "Drs.Sanyoto SE.,MKom.,MComm.(SI).,PIA.,Akuntam",
     "tag": [
-      "Sejarah",
-      "Drama"
+      "Sistem Operasi"
     ],
-    "foto": "https://via.placeholder.com/150x200/059669/ffffff?text=Bumi+Manusia",
-    "deskripsi_singkat": "Bagian pertama dari tetralogi Buru yang mengisahkan kehidupan Minke."
+    "foto": "/static/uploads/books/IMG-20250924-WA0035.jpg",
+    "deskripsi_singkat": "Buku ini membahas secara komprehensif tentang audit sistem informasi dengan menggunakan kerangka kerja CobIT (Control Objectives for Information and Related Technologies) sebagai pendekatan utama. Melalui penjelasan yang sistematis, buku ini menguraikan konsep dasar audit sistem informasi, prinsip tata kelola TI, serta langkah-langkah praktis dalam melakukan evaluasi terhadap efektivitas, efisiensi, dan keamanan sistem informasi di sebuah organisasi."
   },
   {
-    "id": "3",
-    "judul": "Ayat-Ayat Cinta",
-    "penulis": "Habiburrahman El Shirazy",
+    "id": "25",
+    "judul": "Buku pintar jQuery dan php",
+    "penulis": "Abdul Kodir",
     "tag": [
-      "Religi",
-      "Romance"
+      "Pemrograman"
     ],
-    "foto": "https://via.placeholder.com/150x200/dc2626/ffffff?text=Ayat+Ayat+Cinta",
-    "deskripsi_singkat": "Novel yang mengisahkan perjalanan cinta dan kehidupan seorang mahasiswa Indonesia di Mesir."
+    "foto": "/static/uploads/books/IMG-20250924-WA0036.jpg",
+    "deskripsi_singkat": "Buku ini merupakan panduan praktis bagi siapa saja yang ingin menguasai pengembangan web menggunakan jQuery dan PHP. Disajikan dengan bahasa yang sederhana dan sistematis, buku ini membantu pembaca memahami dasar-dasar pemrograman PHP sebagai bahasa server-side serta pemanfaatan jQuery untuk mempercantik dan memperkuat interaksi pada sisi client-side."
   },
   {
-    "id": "4",
-    "judul": "Perahu Kertas",
-    "penulis": "Dee Lestari",
+    "id": "26",
+    "judul": "24 jam belajar PHP",
+    "penulis": "Edy Winarno ST, M.Eng",
     "tag": [
-      "Romance",
-      "Drama"
+      "Pemrograman"
     ],
-    "foto": "https://via.placeholder.com/150x200/7c3aed/ffffff?text=Perahu+Kertas",
-    "deskripsi_singkat": "Novel tentang persahabatan dan cinta yang bermula dari sebuah perahu kertas."
+    "foto": "/static/uploads/books/cropped-image.jpg",
+    "deskripsi_singkat": "Buku “24 Jam Belajar PHP” disusun sebagai panduan cepat untuk memahami dasar-dasar pemrograman web menggunakan PHP. Dalam waktu singkat, pembaca diajak untuk mengenal konsep fundamental PHP, mulai dari sintaks dasar, variabel, struktur kontrol, fungsi, hingga pemrosesan form dan interaksi dengan basis data.\r\nDisajikan dengan format pembelajaran bertahap, buku ini dirancang agar materi dapat dipelajari dalam 24 jam atau 24 sesi belajar. Setiap bab dilengkapi dengan contoh kode yang praktis dan mudah dipahami, sehingga sangat membantu pemula yang ingin segera membuat aplikasi web sederhana dengan PHP."
   },
   {
-    "id": "5",
-    "judul": "Negeri 5 Menara",
-    "penulis": "Ahmad Fuadi",
+    "id": "27",
+    "judul": "Menguasai Pemeograman Arduino Dan Robotik",
+    "penulis": "Prof. Dr. Ir. Widodo BUDIHARTO",
     "tag": [
-      "Inspiratif",
-      "Pendidikan"
+      "Pemrograman"
     ],
-    "foto": "https://via.placeholder.com/150x200/ea580c/ffffff?text=Negeri+5+Menara",
-    "deskripsi_singkat": "Kisah perjuangan dan persahabatan di pesantren Ponorogo."
+    "foto": "/static/uploads/books/IMG-20250924-WA0038.jpg",
+    "deskripsi_singkat": "Buku “Menguasai Pemrograman Arduino dan Robotik” membahas secara lengkap dasar-dasar pemrograman Arduino serta penerapannya dalam bidang robotika. Disusun dengan bahasa yang mudah dipahami, buku ini mengajak pembaca memahami konsep mikrokontroler, komponen elektronik dasar, serta cara mengintegrasikan sensor, aktuator, dan modul tambahan ke dalam proyek robotik."
   },
   {
-    "id": "6",
-    "judul": "Saman",
-    "penulis": "Ayu Utami",
+    "id": "28",
+    "judul": "Kimia Minyak Atsiri",
+    "penulis": "Hardjono Sastrohamodjojo",
     "tag": [
-      "Kontemporer",
-      "Drama"
+      "Kecerdasan Buatan"
     ],
-    "foto": "https://via.placeholder.com/150x200/be185d/ffffff?text=Saman",
-    "deskripsi_singkat": "Novel kontroversial yang mengangkat isu sosial dan politik Indonesia."
+    "foto": "/static/uploads/books/IMG20250924093424.jpg",
+    "deskripsi_singkat": "buku ini merupakan literatur ilmiah untuk mahasiswa kimia, farmasi, biologi, atau teknologi pangan yang mempelajari komposisi, reaksi, analisis, dan aplikasi minyak atsiri."
   },
   {
-    "id": "7",
-    "judul": "Cantik Itu Luka",
-    "penulis": "Eka Kurniawan",
+    "id": "29",
+    "judul": "Kalkulus Lanjutan",
+    "penulis": "Alit Bondan",
     "tag": [
-      "Magis Realisme",
-      "Sejarah"
+      "Pemrograman"
     ],
-    "foto": "https://via.placeholder.com/150x200/0891b2/ffffff?text=Cantik+Itu+Luka",
-    "deskripsi_singkat": "Novel yang menggabungkan unsur magis dengan sejarah Indonesia."
+    "foto": "/static/uploads/books/IMG20250924093413.jpg",
+    "deskripsi_singkat": "Buku ini kemungkinan berisi materi lanjutan dari Kalkulus Dasar, seperti: integral lipat, integral garis dan permukaan, deret tak hingga, serta aplikasi kalkulus pada fungsi banyak variabel."
   },
   {
-    "id": "8",
-    "judul": "Dilan 1990",
-    "penulis": "Pidi Baiq",
+    "id": "30",
+    "judul": "Karat dan Pencegahanya",
+    "penulis": "Dri Widharto",
     "tag": [
-      "Romance",
-      "Remaja"
+      "Pembelajaran Mesin"
     ],
-    "foto": "https://via.placeholder.com/150x200/16a34a/ffffff?text=Dilan+1990",
-    "deskripsi_singkat": "Kisah cinta remaja yang penuh dengan kenangan manis dan romantis."
+    "foto": "/static/uploads/books/IMG20250924093407.jpg",
+    "deskripsi_singkat": "Buku “Karat dan Pencegahannya” membahas secara lengkap mengenai proses terjadinya karat pada logam, faktor-faktor yang mempercepat korosi, serta berbagai metode pencegahan yang dapat diterapkan dalam kehidupan sehari-hari maupun industri."
+  },
+  {
+    "id": "31",
+    "judul": "Teknik Membaca Peta dan Kompas",
+    "penulis": "N.S ADIWIYONO",
+    "tag": [
+      "Pembelajaran Mesin"
+    ],
+    "foto": "/static/uploads/books/IMG20250924093400.jpg",
+    "deskripsi_singkat": "Buku “Teknik Membaca Peta dan Kompas” membahas keterampilan dasar yang sangat penting dalam kegiatan orientasi medan, navigasi darat, maupun kegiatan alam terbuka. Materi mencakup pengenalan simbol-simbol pada peta, cara menentukan posisi, membaca kontur, hingga teknik penggunaan kompas untuk menentukan arah dengan tepat."
+  },
+  {
+    "id": "32",
+    "judul": "Dasar-Dasar Deep Learning Dan Implementasinya",
+    "penulis": "Prof. Dr. Ir. Eko Sediyono, M.Kom",
+    "tag": [
+      "Kecerdasan Buatan"
+    ],
+    "foto": "/static/uploads/books/IMG-20250924-WA0039.jpg",
+    "deskripsi_singkat": "Buku “Dasar-Dasar Deep Learning dan Implementasinya” memberikan pemahaman menyeluruh mengenai konsep fundamental deep learning serta penerapannya dalam berbagai bidang. Pembaca diperkenalkan pada arsitektur jaringan saraf tiruan, algoritma pembelajaran, serta peran penting deep learning dalam pengolahan citra, pengenalan suara, pemrosesan bahasa alami, hingga analisis data besar."
+  },
+  {
+    "id": "33",
+    "judul": "Teknologi Kimia",
+    "penulis": "Dr.Ir.lienda Handojo.M.Eng",
+    "tag": [
+      "Kecerdasan Buatan"
+    ],
+    "foto": "/static/uploads/books/IMG20250924093354.jpg",
+    "deskripsi_singkat": "Proses industri kimia skala besar.\r\nTeknologi pemrosesan bahan kimia dan energi.\r\nOperasi dasar teknik kimia (destilasi, absorpsi, filtrasi, reaksi kimia industri).\r\nAplikasi teknologi kimia pada berbagai bidang manufaktur dan energi."
+  },
+  {
+    "id": "34",
+    "judul": "belajar otodidak membuat database menggunakan MySQL",
+    "penulis": "Budi Raharjo",
+    "tag": [
+      "Algoritma",
+      "Basis Data"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758720658324.jpg",
+    "deskripsi_singkat": "Buku ini dirancang sebagai panduan praktis untuk belajar membuat dan mengelola database menggunakan MySQL secara otodidak. Dengan pendekatan studi kasus, pembaca diajak membangun sistem database untuk toko buku online, mulai dari perancangan tabel, relasi antar data, query dasar hingga query lanjutan, serta teknik optimasi database.\r\n\r\nDisusun dengan langkah-langkah yang sistematis dan mudah dipahami, buku ini membantu pemula maupun mahasiswa memahami konsep dasar manajemen basis data, implementasi CRUD (Create, Read, Update, Delete), hingga integrasi dengan aplikasi web sederhana. Melalui contoh nyata toko buku online, pembaca dapat langsung mempraktikkan ilmu yang dipelajari dan mengembangkannya sesuai kebutuhan."
+  },
+  {
+    "id": "35",
+    "judul": "Teknik Digital",
+    "penulis": "Andi Jogyakarta ",
+    "tag": [
+      "Basis Data"
+    ],
+    "foto": "/static/uploads/books/IMG20250924093348.jpg",
+    "deskripsi_singkat": "Proses industri kimia skala besar.\r\nTeknologi pemrosesan bahan kimia dan energi.\r\nOperasi dasar teknik kimia (destilasi, absorpsi, filtrasi, reaksi kimia industri).\r\nAplikasi teknologi kimia pada berbagai bidang manufaktur dan energi."
+  },
+  {
+    "id": "36",
+    "judul": "Teknik Dasar Kelistrikan pada Mobil",
+    "penulis": "N.Apriyanto",
+    "tag": [
+      "Pembelajaran Mesin"
+    ],
+    "foto": "/static/uploads/books/IMG20250924093342.jpg",
+    "deskripsi_singkat": "Buku ini ditujukan sebagai panduan dasar bagi pelajar, mahasiswa otomotif, maupun praktisi bengkel untuk memahami sistem kelistrikan mobil,"
+  },
+  {
+    "id": "37",
+    "judul": "CodeIgniter:cara mudah membangun aplikasi php",
+    "penulis": "Antonius Nugraha Widhi Pratama",
+    "tag": [
+      "Pemrograman"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758720966380.jpg",
+    "deskripsi_singkat": "Buku “CodeIgniter: Cara Mudah Membangun Aplikasi PHP” hadir sebagai panduan praktis untuk membangun aplikasi web berbasis PHP dengan menggunakan framework CodeIgniter. Disusun secara sistematis, buku ini membantu pembaca memahami konsep MVC (Model-View-Controller), pengelolaan database, serta penerapan fitur-fitur penting CodeIgniter dalam pengembangan aplikasi modern."
+  },
+  {
+    "id": "38",
+    "judul": "Teknologi Minyak Bumi",
+    "penulis": "A.Hardjono",
+    "tag": [
+      "Teknik Pertambangan"
+    ],
+    "foto": "/static/uploads/books/IMG20250924093328.jpg",
+    "deskripsi_singkat": "Buku “Teknologi Minyak Bumi” membahas secara komprehensif proses dan teknologi yang digunakan dalam industri minyak bumi, mulai dari eksplorasi, pengeboran, produksi, hingga pengolahan menjadi berbagai produk turunan. Materi disajikan dengan penjelasan ilmiah yang mudah dipahami, dilengkapi ilustrasi proses, metode pemurnian, teknologi kilang, serta tantangan energi masa kini."
+  },
+  {
+    "id": "39",
+    "judul": "Kimia dan Ekotoksikologi Pencemaran ",
+    "penulis": "Des W. Connell Gregory.J.Miller",
+    "tag": [
+      "Teknik Lingkungan"
+    ],
+    "foto": "/static/uploads/books/IMG20250924093308.jpg",
+    "deskripsi_singkat": "Buku “Kimia dan Ekotoksikologi Pencemaran” mengulas hubungan antara ilmu kimia lingkungan dengan dampak pencemaran terhadap ekosistem. Materi mencakup sumber, jenis, serta sifat kimia berbagai polutan seperti logam berat, pestisida, hidrokarbon, hingga senyawa berbahaya lainnya, serta bagaimana zat tersebut berinteraksi di udara, tanah, dan air."
+  },
+  {
+    "id": "40",
+    "judul": "Belajar Cepat Fuzzy Logic Menggunakan Matlab",
+    "penulis": "Dr. eNG .Agus Naba",
+    "tag": [
+      "Kecerdasan Buatan"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758721255223.jpg",
+    "deskripsi_singkat": "Buku “Belajar Cepat Fuzzy Logic Menggunakan MATLAB” disusun untuk memberikan pemahaman praktis tentang konsep logika fuzzy serta penerapannya menggunakan perangkat lunak MATLAB. Dengan pendekatan yang ringkas dan sistematis, pembaca diperkenalkan pada dasar-dasar teori fuzzy, fungsi keanggotaan, inferensi fuzzy, hingga proses defuzzifikasi.\r\nSelain teori, buku ini juga menyajikan berbagai contoh penerapan fuzzy logic dalam pemecahan masalah nyata, seperti sistem pengambilan keputusan, pengendalian, dan prediksi. Setiap bab dilengkapi dengan latihan serta kode program MATLAB yang dapat langsung dijalankan, sehingga memudahkan pembaca dalam memahami konsep sekaligus aplikasinya."
+  },
+  {
+    "id": "41",
+    "judul": "Basis Data",
+    "penulis": "Fathansyah",
+    "tag": [
+      "Basis Data"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758721400571.jpg",
+    "deskripsi_singkat": "Buku “Basis Data” membahas konsep dasar hingga lanjutan dalam perancangan dan pengelolaan sistem basis data. Dimulai dari pengenalan konsep data, model basis data, normalisasi, hingga teknik implementasi menggunakan sistem manajemen basis data relasional (DBMS).\r\nPembaca juga akan diperkenalkan pada bahasa SQL (Structured Query Language) untuk melakukan operasi CRUD (Create, Read, Update, Delete), pembuatan relasi antar tabel, serta pengelolaan transaksi dan keamanan data. Dengan contoh studi kasus nyata, buku ini membantu memahami bagaimana basis data diterapkan dalam sistem informasi dan aplikasi modern."
+  },
+  {
+    "id": "42",
+    "judul": "Belajar Pemrograman Android Berbasis Web Untuk Semua Orang",
+    "penulis": "Elex Media Komputindo",
+    "tag": [
+      "Pemrograman"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758721582090.jpg",
+    "deskripsi_singkat": "Buku “Belajar Pemrograman Android Berbasis Web Untuk Semua Orang” ditulis sebagai panduan praktis bagi siapa saja yang ingin mempelajari cara membangun aplikasi Android dengan memanfaatkan teknologi web. Disajikan dengan bahasa yang sederhana, buku ini menjelaskan konsep dasar pemrograman Android, integrasi dengan HTML, CSS, dan JavaScript, serta cara menghubungkan aplikasi dengan basis data dan server."
+  },
+  {
+    "id": "43",
+    "judul": "Aplikasi Penggajian Dengan Java Untuk Pemula",
+    "penulis": "Jubilee Enterprise",
+    "tag": [
+      "Pemrograman",
+      "Basis Data"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758721761427.jpg",
+    "deskripsi_singkat": "Buku “Aplikasi Penggajian dengan Java untuk Pemula” merupakan panduan praktis dalam membangun aplikasi desktop berbasis Java dengan studi kasus sistem penggajian. Disajikan dengan bahasa yang sederhana dan langkah-langkah sistematis, buku ini membantu pembaca memahami dasar-dasar pemrograman Java sekaligus cara menerapkannya pada proyek nyata."
+  },
+  {
+    "id": "44",
+    "judul": "Belajar Sendiri Mengolah Data Dengan Python & Pandas",
+    "penulis": "Jubilee Enterprise",
+    "tag": [
+      "Basis Data",
+      "Pemrograman"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758721885230.jpg",
+    "deskripsi_singkat": "Buku “Belajar Sendiri Mengolah Data dengan Python & Pandas” dirancang sebagai panduan praktis bagi siapa saja yang ingin mempelajari teknik pengolahan data modern menggunakan bahasa pemrograman Python dan pustaka populer Pandas. Dengan bahasa yang sederhana, buku ini memperkenalkan dasar-dasar Python untuk data, struktur data pada Pandas (Series dan DataFrame), hingga teknik manipulasi, transformasi, dan analisis data."
+  },
+  {
+    "id": "45",
+    "judul": "Aplikasi Sistem Pakar Dengan PHP & Editor Dreamweaver",
+    "penulis": "Bunafit Nugroho",
+    "tag": [
+      "Pemrograman",
+      "Sistem Operasi"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758723252257.jpg",
+    "deskripsi_singkat": "Buku “Aplikasi Sistem Pakar dengan PHP & Editor Dreamweaver” menyajikan panduan praktis membangun aplikasi berbasis web dengan studi kasus sistem pakar. Dengan menggunakan PHP sebagai bahasa pemrograman server-side dan Dreamweaver sebagai editor visual, pembaca diajak memahami bagaimana merancang, membangun, dan mengimplementasikan sistem pakar sederhana yang dapat membantu proses pengambilan keputusan."
+  },
+  {
+    "id": "46",
+    "judul": "Kimia Analitik ",
+    "penulis": "Ni putu aru ayuni",
+    "tag": [
+      "Sistem Operasi"
+    ],
+    "foto": "/static/uploads/books/IMG20250924093259.jpg",
+    "deskripsi_singkat": "Bakaljsbsjlaoala"
+  },
+  {
+    "id": "47",
+    "judul": "Belajar Java Secara Visual + Interaktif",
+    "penulis": "Dr. Ing. Eueung Mulyana",
+    "tag": [
+      "Pemrograman"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758723416323.jpg",
+    "deskripsi_singkat": "Buku “Belajar Java Secara Visual + Interaktif” dirancang khusus untuk membantu pembaca memahami pemrograman Java dengan cara yang lebih mudah, menarik, dan menyenangkan. Dengan pendekatan visual dan interaktif, buku ini tidak hanya menjelaskan teori dasar Java, tetapi juga memperlihatkan alur logika program melalui diagram, ilustrasi, serta contoh kode yang langsung bisa dipraktikkan."
+  },
+  {
+    "id": "48",
+    "judul": "Buku Pintar Pemograman C#",
+    "penulis": "Yulius Eka Agung Seputra",
+    "tag": [
+      "Pemrograman"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758723596029.jpg",
+    "deskripsi_singkat": "Buku “Buku Pintar Pemrograman C#” disusun sebagai panduan lengkap bagi siapa saja yang ingin menguasai bahasa pemrograman C# secara sistematis. Materi disajikan mulai dari konsep dasar pemrograman, struktur data, hingga penerapan Object Oriented Programming (OOP) dalam C#."
+  },
+  {
+    "id": "49",
+    "judul": "Kimia Dasar",
+    "penulis": "Syukri.s",
+    "tag": [
+      "Bisnis Digital"
+    ],
+    "foto": "/static/uploads/books/IMG20250924093314.jpg",
+    "deskripsi_singkat": "Gakaksinsgavjajs"
+  },
+  {
+    "id": "50",
+    "judul": "KALKULUS",
+    "penulis": "A.B. Panggabean",
+    "tag": [
+      "Jaringan Komputer"
+    ],
+    "foto": "/static/uploads/books/IMG20250924092912.jpg",
+    "deskripsi_singkat": "Jakalshujalal"
+  },
+  {
+    "id": "51",
+    "judul": "Pengolahan Citra Digital",
+    "penulis": "T. Sutojo & Muljono",
+    "tag": [
+      "Kecerdasan Buatan"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758723717732.jpg",
+    "deskripsi_singkat": "Buku “Pengolahan Citra Digital” membahas konsep dasar hingga teknik lanjutan dalam pemrosesan citra secara digital. Materi mencakup pengenalan representasi citra, transformasi citra, peningkatan kualitas gambar, segmentasi, ekstraksi fitur, hingga penerapan algoritma dalam berbagai bidang seperti medis, keamanan, dan pengenalan pola."
+  },
+  {
+    "id": "52",
+    "judul": "Keamanan Data Media Digital",
+    "penulis": "Awan Setiatan & Erwin Yulianto",
+    "tag": [
+      "Keamanan Informatika"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758723860149.jpg",
+    "deskripsi_singkat": "Buku “Keamanan Data Media Digital” membahas berbagai konsep, teknik, dan strategi untuk melindungi data yang tersimpan maupun ditransmisikan melalui media digital. Materi meliputi dasar-dasar keamanan informasi, enkripsi, tanda tangan digital, steganografi, hingga metode perlindungan hak cipta digital (DRM)."
+  },
+  {
+    "id": "53",
+    "judul": "Kamis Lengkap Teknik",
+    "penulis": "Gitamedia Press",
+    "tag": [
+      "Teknik Mesin",
+      "Teknik Pertambangan"
+    ],
+    "foto": "/static/uploads/books/IMG20250924092903.jpg",
+    "deskripsi_singkat": "Buku “Kamus Lengkap Teknik” merupakan referensi praktis yang berisi kumpulan istilah-istilah penting dalam dunia teknik, mulai dari teknik mesin, elektro, sipil, hingga teknologi informasi. Disusun secara alfabetis dan dilengkapi dengan penjelasan yang ringkas, buku ini membantu pembaca memahami istilah teknis yang sering digunakan dalam studi maupun praktik lapangan."
+  },
+  {
+    "id": "54",
+    "judul": "Dasar Logika Informatika",
+    "penulis": "Maxirizal, S.Pd.Si., M.Sc.",
+    "tag": [
+      "Struktur Data",
+      "Pemrograman"
+    ],
+    "foto": "/static/uploads/books/IMG-20250924-WA0055.jpg",
+    "deskripsi_singkat": "Buku “Dasar Logika Informatika” menyajikan pembahasan mengenai konsep fundamental logika yang menjadi landasan dalam dunia informatika dan ilmu komputer. Materi yang disampaikan meliputi pengenalan proposisi, tabel kebenaran, logika predikat, kuantor, relasi, fungsi, hingga penerapan logika dalam algoritma dan pemrograman."
+  },
+  {
+    "id": "55",
+    "judul": "Konsep-konsep dasar SISTEM INFORMASI GEOGRAFIS ",
+    "penulis": "Eddy Prahasta",
+    "tag": [
+      "Sistem Operasi"
+    ],
+    "foto": "/static/uploads/books/IMG20250924092855.jpg",
+    "deskripsi_singkat": "Qqisosksnsbsbbsb"
+  },
+  {
+    "id": "56",
+    "judul": "Hukum pertambangan di Indonesia ",
+    "penulis": "H.Salim.HS.,S.H.,M.S.",
+    "tag": [
+      "Teknik Pertambangan"
+    ],
+    "foto": "/static/uploads/books/IMG20250924092831.jpg",
+    "deskripsi_singkat": "Mhdvkbccdvkkhff"
+  },
+  {
+    "id": "57",
+    "judul": "ERGONOMI dan K3",
+    "penulis": "Dr.wowo Sunaryo kuswana,M.pd",
+    "tag": [
+      "Teknik Pertambangan"
+    ],
+    "foto": "/static/uploads/books/IMG20250924092820.jpg",
+    "deskripsi_singkat": "Hkslalanabshakalalaizi"
+  },
+  {
+    "id": "58",
+    "judul": "Aljabar linear ",
+    "penulis": "Rekayasa sains",
+    "tag": [
+      "Algoritma"
+    ],
+    "foto": "/static/uploads/books/IMG20250924092800.jpg",
+    "deskripsi_singkat": "Gjskkwnshsuso"
+  },
+  {
+    "id": "59",
+    "judul": "Penginderaan jauh dengan EMRapper",
+    "penulis": "Erwin Hardikan putra",
+    "tag": [
+      "Data Science"
+    ],
+    "foto": "/static/uploads/books/IMG20250924092724.jpg",
+    "deskripsi_singkat": "Hahakakabsvhsoa"
+  },
+  {
+    "id": "60",
+    "judul": "Metode numerik ",
+    "penulis": "????",
+    "tag": [
+      "Algoritma"
+    ],
+    "foto": "/static/uploads/books/IMG20250924092713.jpg",
+    "deskripsi_singkat": "Jwowkwbahgjkbb"
+  },
+  {
+    "id": "61",
+    "judul": "Kamis Teknik",
+    "penulis": "???",
+    "tag": [
+      "Pembelajaran Mesin"
+    ],
+    "foto": "/static/uploads/books/IMG20250924092706.jpg",
+    "deskripsi_singkat": "Uqikansoalam"
+  },
+  {
+    "id": "62",
+    "judul": "Kalkulus ",
+    "penulis": "Koko kartono",
+    "tag": [
+      "Algoritma"
+    ],
+    "foto": "/static/uploads/books/IMG20250924092658.jpg",
+    "deskripsi_singkat": "Hjkkkjjbddjkmjgfty"
+  },
+  {
+    "id": "63",
+    "judul": "Kamus lengkap teknik",
+    "penulis": "Mega aksara",
+    "tag": [
+      "Pembelajaran Mesin"
+    ],
+    "foto": "/static/uploads/books/IMG20250924092647.jpg",
+    "deskripsi_singkat": "Halaoqkbagayak"
+  },
+  {
+    "id": "64",
+    "judul": "Logika informatika(Dasar-dasar logika untuk pemrograman komputer & perancangan komputer)",
+    "penulis": "Suprapto",
+    "tag": [
+      "Algoritma",
+      "Struktur Data",
+      "Pemrograman"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758805228243.jpg",
+    "deskripsi_singkat": "Buku “Logika Informatika (Dasar-dasar Logika untuk Pemrograman Komputer & Perancangan Komputer)” membahas secara mendalam prinsip-prinsip logika yang menjadi fondasi utama dalam pengembangan perangkat lunak dan perangkat keras. Materi meliputi logika proposisional, logika predikat, tabel kebenaran, aljabar Boolean, serta aplikasinya dalam algoritma, pemrograman komputer, dan perancangan rangkaian digital."
+  },
+  {
+    "id": "65",
+    "judul": "Algoritma dan Pemograman dengan bahasa C",
+    "penulis": "Antonius Rachmat C",
+    "tag": [
+      "Algoritma",
+      "Struktur Data",
+      "Pemrograman"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758805395845.jpg",
+    "deskripsi_singkat": "Buku “Algoritma dan Pemrograman dengan Bahasa C” menyajikan pembahasan mendasar mengenai konsep algoritma serta implementasinya menggunakan bahasa pemrograman C. Materi dimulai dari pengenalan logika pemrograman, tipe data, struktur kontrol, fungsi, array, pointer, hingga struktur data sederhana."
+  },
+  {
+    "id": "66",
+    "judul": "Belajar Otodidak MySQL",
+    "penulis": "Budi Raharjo",
+    "tag": [
+      "Basis Data"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758805531350.jpg",
+    "deskripsi_singkat": "Buku “Belajar Otodidak MySQL” dirancang untuk membantu pembaca memahami konsep dasar hingga lanjutan dalam pengelolaan database relasional menggunakan MySQL. Dengan pendekatan praktis dan bahasa yang sederhana, buku ini menjelaskan langkah-langkah mulai dari instalasi MySQL, pembuatan tabel, pengolahan data menggunakan perintah SQL, hingga pengelolaan relasi antar tabel."
+  },
+  {
+    "id": "67",
+    "judul": "Semua bisa menjadi  android",
+    "penulis": "Ir. Yuniar Supardi",
+    "tag": [
+      "Pemrograman"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758806552591.jpg",
+    "deskripsi_singkat": "Buku “Semua Bisa Menjadi Android” membimbing pembaca untuk memahami dasar-dasar pemrograman aplikasi Android secara mudah dan praktis. Dengan bahasa yang sederhana dan contoh nyata, pembaca diperkenalkan pada konsep mobile programming, mulai dari pengenalan Android Studio, struktur proyek, pembuatan layout, hingga pengolahan data dalam aplikasi."
+  },
+  {
+    "id": "68",
+    "judul": "Komputer akuntansi mengelola keuangan dengan akutansi berbasis komputer",
+    "penulis": "Yulius Eka Seputra, ST., M.Si",
+    "tag": [
+      "Keuangan",
+      "Akuntansi"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758806751571.jpg",
+    "deskripsi_singkat": "Buku “Komputer Akuntansi: Mengelola Keuangan dengan Akuntansi Berbasis Komputer” membahas penerapan teknologi komputer dalam proses akuntansi dan pengelolaan keuangan. Dengan pendekatan praktis, buku ini menjelaskan konsep dasar akuntansi, penggunaan software akuntansi, pencatatan transaksi, pembuatan laporan keuangan, hingga analisis data keuangan yang lebih efektif dan efisien."
+  },
+  {
+    "id": "69",
+    "judul": "Logika Matematika Untuk Ilmu Komputer",
+    "penulis": "F.Soesianto & Djoni Dwijono",
+    "tag": [
+      "Algoritma",
+      "Pemrograman"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758807277970.jpg",
+    "deskripsi_singkat": "Buku “Logika Matematika untuk Ilmu Komputer” membahas konsep-konsep logika yang menjadi dasar dalam pemahaman dan pengembangan ilmu komputer. Materi disajikan secara sistematis mulai dari logika proposisional, logika predikat, pembuktian matematika, hingga penerapannya pada algoritma, pemrograman, serta desain perangkat keras dan perangkat lunak."
+  },
+  {
+    "id": "70",
+    "judul": "Aljabar linear ",
+    "penulis": "Rekayasa sains",
+    "tag": [
+      "Algoritma"
+    ],
+    "foto": "/static/uploads/books/IMG20250924092800.jpg",
+    "deskripsi_singkat": "Hakaoq kn bsgwhwj"
+  },
+  {
+    "id": "71",
+    "judul": "Kumpulan Program Antivirus Dan Firewall",
+    "penulis": "Yrama Widya",
+    "tag": [
+      "Keamanan Informatika",
+      "Jaringan Komputer"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758808328173.jpg",
+    "deskripsi_singkat": "Buku “Kumpulan Program Antivirus dan Firewall” menyajikan berbagai program dan teknik pengamanan komputer untuk melindungi sistem dari ancaman virus, malware, serta serangan jaringan. Pembaca akan diperkenalkan pada konsep dasar keamanan komputer, prinsip kerja antivirus, serta peran firewall dalam mencegah akses tidak sah."
+  },
+  {
+    "id": "72",
+    "judul": "Pengendaraan jauh dengan EMRapper ",
+    "penulis": "Erwin Hardikan putra",
+    "tag": [
+      "Pembelajaran Mesin"
+    ],
+    "foto": "/static/uploads/books/IMG20250924092724.jpg",
+    "deskripsi_singkat": "Kqownssbhska"
+  },
+  {
+    "id": "73",
+    "judul": "Metode numerik ",
+    "penulis": "????",
+    "tag": [
+      "Struktur Data"
+    ],
+    "foto": "/static/uploads/books/IMG20250924092713.jpg",
+    "deskripsi_singkat": "Gwjakansvsooa"
+  },
+  {
+    "id": "74",
+    "judul": "Kamis teknik",
+    "penulis": "????",
+    "tag": [
+      "Pembelajaran Mesin"
+    ],
+    "foto": "/static/uploads/books/IMG20250924092706.jpg",
+    "deskripsi_singkat": "Buku “Kamus Teknik” adalah referensi praktis yang memuat ribuan istilah penting dalam bidang teknik dan rekayasa. Disusun secara alfabetis dengan penjelasan yang jelas, buku ini mencakup berbagai cabang teknik seperti teknik mesin, elektro, sipil, informatika, hingga industri."
+  },
+  {
+    "id": "75",
+    "judul": "Statistika Dasar",
+    "penulis": "Asep Saefuddin, dkk",
+    "tag": [
+      "Data Science"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758809333618.jpg",
+    "deskripsi_singkat": "Buku “Statistika Dasar” membahas konsep-konsep fundamental dalam statistika yang menjadi landasan bagi berbagai bidang ilmu, mulai dari sains, sosial, ekonomi, hingga teknik. Materi yang disajikan mencakup pengumpulan data, penyajian data dalam bentuk tabel maupun grafik, ukuran pemusatan dan penyebaran, peluang, distribusi data, hingga uji hipotesis sederhana."
+  },
+  {
+    "id": "76",
+    "judul": "Aljabar Linear",
+    "penulis": "Heri Purwanto, dkk",
+    "tag": [
+      "Data Science"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758809660720.jpg",
+    "deskripsi_singkat": "Buku “Aljabar Linear” membahas konsep-konsep dasar matematika yang berhubungan dengan ruang vektor dan transformasi linear. Materi mencakup sistem persamaan linear, matriks, determinan, vektor, ruang vektor, basis dan dimensi, nilai eigen serta vektor eigen, hingga aplikasi aljabar linear dalam berbagai bidang ilmu."
+  },
+  {
+    "id": "77",
+    "judul": "Data Mining Untuk Klasifikasi Dan Klasterisasi Data",
+    "penulis": "Dr. Suyanto, S.T., M.Sc.",
+    "tag": [
+      "Kecerdasan Buatan",
+      "Pembelajaran Mesin"
+    ],
+    "foto": "/static/uploads/books/IMG-20250924-WA0069.jpg",
+    "deskripsi_singkat": "Buku “Data Mining untuk Klasifikasi dan Klasterisasi Data” mengupas metode dan teknik dalam mengolah data besar (big data) untuk menemukan pola, hubungan, serta pengetahuan baru. Fokus utama buku ini adalah pada dua aspek penting data mining, yaitu klasifikasi dan klasterisasi, yang sering digunakan dalam analisis bisnis, riset akademik, maupun aplikasi kecerdasan buatan."
+  },
+  {
+    "id": "78",
+    "judul": "Konsep Dasar Rekayasa Perangkat Lunak",
+    "penulis": "Soetam Rizky",
+    "tag": [
+      "Rekayasa Perangkat Lunak"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758810087021.jpg",
+    "deskripsi_singkat": "Buku “Konsep Dasar Rekayasa Perangkat Lunak” membahas prinsip-prinsip fundamental dalam pengembangan perangkat lunak yang terstruktur, efisien, dan berkualitas. Materi mencakup pengenalan rekayasa perangkat lunak, siklus hidup pengembangan sistem (SDLC), analisis kebutuhan, perancangan perangkat lunak, pengujian, hingga pemeliharaan sistem."
+  },
+  {
+    "id": "79",
+    "judul": "Membangun Sistem Database MLM",
+    "penulis": "Eko Indriyawan",
+    "tag": [
+      "Kecerdasan Buatan",
+      "Pembelajaran Mesin"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758810222745.jpg",
+    "deskripsi_singkat": "Buku “Data Mining untuk Klasifikasi dan Klasterisasi Data” mengupas metode dan teknik dalam mengolah data besar (big data) untuk menemukan pola, hubungan, serta pengetahuan baru. Fokus utama buku ini adalah pada dua aspek penting data mining, yaitu klasifikasi dan klasterisasi, yang sering digunakan dalam analisis bisnis, riset akademik, maupun aplikasi kecerdasan buatan."
+  },
+  {
+    "id": "80",
+    "judul": "Microsoft Windown Me Sistem Operasi Masa Depan",
+    "penulis": "Wali Eko Djatmiko",
+    "tag": [
+      "Sistem Operasi",
+      "Jaringan Komputer"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758810362647.jpg",
+    "deskripsi_singkat": "Buku “Microsoft Windows Me: Sistem Operasi Masa Depan” membahas secara lengkap fitur, keunggulan, dan penggunaan sistem operasi Windows Millennium Edition (Windows Me) yang dirancang untuk memberikan pengalaman komputasi yang lebih mudah, cepat, dan modern pada masanya."
+  },
+  {
+    "id": "81",
+    "judul": "Mikrokontroler AVR Atmega8535",
+    "penulis": "Syahrul",
+    "tag": [
+      "Teknik Elektro"
+    ],
+    "foto": "/static/uploads/books/IMG-20250924-WA0072.jpg",
+    "deskripsi_singkat": "Buku “Mikrokontroler AVR ATmega8535” membahas secara mendalam konsep, arsitektur, dan pemrograman mikrokontroler AVR ATmega8535 yang banyak digunakan dalam berbagai aplikasi elektronika dan embedded system. Materi mencakup pengenalan perangkat keras, sistem minimum, pemrograman menggunakan bahasa C maupun assembly, serta antarmuka dengan perangkat eksternal seperti LCD, sensor, motor, dan komunikasi serial."
+  },
+  {
+    "id": "82",
+    "judul": "Menggunakan Adobe Photoshop CS5",
+    "penulis": "Wahana andi",
+    "tag": [
+      "Sistem Operasi"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758810668726.jpg",
+    "deskripsi_singkat": "Buku “Menggunakan Adobe Photoshop CS5” menyajikan panduan lengkap dalam memanfaatkan fitur-fitur terbaru dari Adobe Photoshop CS5 untuk kebutuhan desain grafis, pengolahan foto, maupun pembuatan karya digital. Materi mencakup pengenalan antarmuka, penggunaan layer, teknik seleksi, retouching foto, efek khusus, hingga trik desain profesional."
+  },
+  {
+    "id": "83",
+    "judul": "Mandiri Merawat Dan Memperbaiki PC, Notebook & Tablet",
+    "penulis": "Wahana andi",
+    "tag": [
+      "Pembelajaran Mesin",
+      "Teknik Mesin"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758810845428.jpg",
+    "deskripsi_singkat": "Buku “Mandiri Merawat dan Memperbaiki PC, Notebook & Tablet” merupakan panduan praktis bagi siapa saja yang ingin memahami cara perawatan dan perbaikan perangkat komputer maupun gadget secara mandiri. Materi mencakup pengenalan komponen perangkat keras, instalasi sistem operasi, perawatan software, troubleshooting kerusakan umum, hingga tips menjaga performa perangkat agar tetap optimal."
+  },
+  {
+    "id": "84",
+    "judul": "Microsoft PowerPoin 2007 Untuk Menyusun Presentasi Profesional",
+    "penulis": "Wahana andi",
+    "tag": [
+      "Sistem Operasi"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758811106514.jpg",
+    "deskripsi_singkat": "Buku “Microsoft PowerPoint 2007 untuk Menyusun Presentasi Profesional” memberikan panduan lengkap dalam menggunakan PowerPoint 2007 untuk membuat presentasi yang menarik, efektif, dan komunikatif. Materi mencakup pengenalan antarmuka, pembuatan slide, pengaturan layout, penggunaan gambar, grafik, tabel, animasi, hingga tips mendesain presentasi yang profesional."
+  },
+  {
+    "id": "85",
+    "judul": "Membangun Sistem Jaringan Wireless Untuk Pemula",
+    "penulis": "Madcoms",
+    "tag": [
+      "Jaringan Komputer"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758811279378.jpg",
+    "deskripsi_singkat": "Buku “Membangun Sistem Jaringan Wireless untuk Pemula” memberikan panduan dasar dalam memahami, merancang, dan mengimplementasikan jaringan nirkabel. Materi disusun secara sederhana mulai dari pengenalan konsep jaringan komputer, perangkat keras yang dibutuhkan, cara konfigurasi access point dan router, pengaturan keamanan jaringan, hingga tips optimasi agar koneksi lebih stabil."
+  },
+  {
+    "id": "86",
+    "judul": "Membuat Aplikasi RAB Bangunan Dengan Macro Excel",
+    "penulis": "Yudhy Wicaksono",
+    "tag": [
+      "Sistem Operasi"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758811417851.jpg",
+    "deskripsi_singkat": "Buku “Membuat Aplikasi RAB Bangunan dengan Macro Excel” membahas cara praktis merancang aplikasi Rencana Anggaran Biaya (RAB) untuk proyek bangunan dengan memanfaatkan Microsoft Excel dan pemrograman Macro (VBA). Materi mencakup penyusunan struktur data anggaran, penggunaan formula Excel, pembuatan form input, otomatisasi perhitungan, hingga pembuatan laporan anggaran yang rapi dan profesional."
+  },
+  {
+    "id": "87",
+    "judul": "Manajemen Jaringan Berbasis Cisco Systems",
+    "penulis": "Hamim Tohari",
+    "tag": [
+      "Jaringan Komputer"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758811574125.jpg",
+    "deskripsi_singkat": "Buku “Manajemen Jaringan Berbasis Cisco Systems” membahas konsep, teknik, dan praktik dalam mengelola jaringan komputer dengan perangkat dan teknologi dari Cisco Systems, salah satu vendor jaringan terkemuka di dunia. Materi mencakup pengenalan perangkat jaringan Cisco, konfigurasi router dan switch, manajemen VLAN, routing, keamanan jaringan, hingga monitoring performa jaringan."
+  },
+  {
+    "id": "88",
+    "judul": "Mahir Microsoft Office 2010 Untuk Pemula Secara Otodidak",
+    "penulis": "Tim Dukom",
+    "tag": [
+      "Sistem Operasi"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758811904623.jpg",
+    "deskripsi_singkat": "Buku “Mahir Microsoft Office 2010 Untuk Pemula Secara Otodidak” dirancang khusus bagi siapa saja yang ingin menguasai aplikasi perkantoran Microsoft Office 2010 dengan cara mudah, praktis, dan mandiri. Pembaca akan dipandu langkah demi langkah menggunakan fitur utama Word, Excel, PowerPoint, dan Access, lengkap dengan contoh kasus sehari-hari seperti pembuatan dokumen, laporan keuangan, presentasi profesional, hingga pengolahan database sederhana."
+  },
+  {
+    "id": "89",
+    "judul": "Rekayasa Perangkat Lunak Berorientasi Objek Menggunakan PHP",
+    "penulis": "Prof. Dr. Riri Sari, M, M., M.Sc.,DTM, SMIEEE",
+    "tag": [
+      "Rekayasa Perangkat Lunak"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758812220752.jpg",
+    "deskripsi_singkat": "Buku “Rekayasa Perangkat Lunak Berorientasi Objek Menggunakan PHP” membahas konsep dan penerapan Object-Oriented Programming (OOP) dalam pengembangan perangkat lunak berbasis web. Pembaca akan diperkenalkan pada prinsip dasar rekayasa perangkat lunak, mulai dari analisis kebutuhan, perancangan sistem, hingga implementasi dengan bahasa pemrograman PHP."
+  },
+  {
+    "id": "90",
+    "judul": "Kamis Lengkap Teknik",
+    "penulis": "Mega aksara Jakarta ",
+    "tag": [
+      "Pembelajaran Mesin"
+    ],
+    "foto": "/static/uploads/books/IMG20250924092647.jpg",
+    "deskripsi_singkat": "Jalanshsuakwl"
+  },
+  {
+    "id": "91",
+    "judul": "Kamus pintar kimia",
+    "penulis": "????",
+    "tag": [
+      "Kecerdasan Buatan"
+    ],
+    "foto": "/static/uploads/books/IMG20250924092633.jpg",
+    "deskripsi_singkat": "Nakakhagah"
+  },
+  {
+    "id": "92",
+    "judul": "Kamus pertambangan ",
+    "penulis": "DR.AHMAD REDI,S.H.,M.H.",
+    "tag": [
+      "Teknik Pertambangan"
+    ],
+    "foto": "/static/uploads/books/IMG20250924092517.jpg",
+    "deskripsi_singkat": "Jajahalansbb"
+  },
+  {
+    "id": "93",
+    "judul": "Pengolahan bahan galian industri, batubara,dan minyak bumi",
+    "penulis": "Sukandarrumit",
+    "tag": [
+      "Pembelajaran Mesin"
+    ],
+    "foto": "/static/uploads/books/IMG20250924092508.jpg",
+    "deskripsi_singkat": "Haka km bavajaka"
+  },
+  {
+    "id": "94",
+    "judul": "Lingkungan tambang",
+    "penulis": "Joni afaat adiyansaya, ph.D",
+    "tag": [
+      "Teknik Pertambangan"
+    ],
+    "foto": "/static/uploads/books/IMG20250924091837.jpg",
+    "deskripsi_singkat": "Jajkahagakka"
+  },
+  {
+    "id": "95",
+    "judul": "Sedimentologi",
+    "penulis": "D Hendra amijaya",
+    "tag": [
+      "Teknik Pertambangan"
+    ],
+    "foto": "/static/uploads/books/IMG20250924091758.jpg",
+    "deskripsi_singkat": "Hajkanahaika"
+  },
+  {
+    "id": "96",
+    "judul": "Sistem Informasi Manajemen ",
+    "penulis": "Tata Sutabri",
+    "tag": [
+      "Basis Data"
+    ],
+    "foto": "/static/uploads/books/IMG_0692.jpeg",
+    "deskripsi_singkat": "yyyyyyyyyyyyyy"
+  },
+  {
+    "id": "97",
+    "judul": "Sistem Informasi Geografis ",
+    "penulis": "Eddy Prahasta",
+    "tag": [
+      "Teknik Pertambangan"
+    ],
+    "foto": "/static/uploads/books/IMG_0693.jpeg",
+    "deskripsi_singkat": "tttttttttttttty"
+  },
+  {
+    "id": "98",
+    "judul": "Aplikasi Berbasis Android",
+    "penulis": "Nazruddin Safaat H., M.T.",
+    "tag": [
+      "Pembelajaran Mesin",
+      "Pemrograman"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758978357038.jpg",
+    "deskripsi_singkat": "rrrrrrrttrrrr"
+  },
+  {
+    "id": "99",
+    "judul": "Tool Terbaik Untuk Perawatan PC",
+    "penulis": "Edy Winarno ST,M.Eng",
+    "tag": [
+      "Pembelajaran Mesin"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758978554461.jpg",
+    "deskripsi_singkat": "ppppppppppp"
+  },
+  {
+    "id": "100",
+    "judul": "Keamanan dalam media digital",
+    "penulis": "Awan setiawan dan Erwin yulianto",
+    "tag": [
+      "Analisis Bisnis"
+    ],
+    "foto": "/static/uploads/books/IMG20250926105520.jpg",
+    "deskripsi_singkat": "Hslsbsvxks z ksls s"
+  },
+  {
+    "id": "101",
+    "judul": "Keamanan dalam media digital",
+    "penulis": "Awan setiawan dan Erwin yulianto",
+    "tag": [
+      "Analisis Bisnis"
+    ],
+    "foto": "/static/uploads/books/IMG20250926105520.jpg",
+    "deskripsi_singkat": "Hslsbsvxks z ksls s"
+  },
+  {
+    "id": "102",
+    "judul": "Sistem Teknologi Informasi ",
+    "penulis": "Prof. Jogiyanto HM,Ph.D.,MBA,Akt",
+    "tag": [
+      "Basis Data"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758978968723.jpg",
+    "deskripsi_singkat": "kkkkkkkkkkkkkk"
+  },
+  {
+    "id": "103",
+    "judul": "Rekayasa Perangkat Lunak (Terstruktur Dan Berorientasi Objek)",
+    "penulis": "Rosa A. S Dan M. Shalahuddin",
+    "tag": [
+      "Rekayasa Perangkat Lunak"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758979176505.jpg",
+    "deskripsi_singkat": "aaaaaaaaaaaaaaaaa"
   }
 ]
