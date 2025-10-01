@@ -872,20 +872,20 @@
     "judul": "Sistem Informasi Manajemen ",
     "penulis": "Tata Sutabri",
     "tag": [
-      "Basis Data"
+      "Manajemen Sumber Daya Manusia"
     ],
     "foto": "/static/uploads/books/IMG_0692.jpeg",
-    "deskripsi_singkat": "yyyyyyyyyyyyyy"
+    "deskripsi_singkat": "Buku “Sistem Informasi Manajemen” membahas secara komprehensif bagaimana teknologi informasi dimanfaatkan untuk mendukung proses manajemen dalam organisasi. Sistem Informasi Manajemen (SIM) berperan penting dalam membantu manajer dan pengambil keputusan untuk mengolah data menjadi informasi yang relevan, tepat waktu, dan akurat."
   },
   {
     "id": "97",
     "judul": "Sistem Informasi Geografis ",
     "penulis": "Eddy Prahasta",
     "tag": [
-      "Teknik Pertambangan"
+      "Teknik Lingkungan"
     ],
     "foto": "/static/uploads/books/IMG_0693.jpeg",
-    "deskripsi_singkat": "tttttttttttttty"
+    "deskripsi_singkat": "Buku “Sistem Informasi Geografis” membahas konsep, teori, dan penerapan SIG (Sistem Informasi Geografis) sebagai alat untuk mengelola, menganalisis, dan memvisualisasikan data berbasis lokasi. SIG berperan penting dalam membantu pengambilan keputusan yang terkait dengan aspek keruangan, mulai dari perencanaan tata kota, pemetaan sumber daya alam, mitigasi bencana, hingga analisis lingkungan."
   },
   {
     "id": "98",
@@ -933,10 +933,10 @@
     "judul": "Sistem Teknologi Informasi ",
     "penulis": "Prof. Jogiyanto HM,Ph.D.,MBA,Akt",
     "tag": [
-      "Basis Data"
+      "Manajemen Proyek"
     ],
     "foto": "/static/uploads/books/cropped_image_1758978968723.jpg",
-    "deskripsi_singkat": "kkkkkkkkkkkkkk"
+    "deskripsi_singkat": "Buku “Sistem Teknologi Informasi” mengulas konsep dasar, arsitektur, serta penerapan teknologi informasi dalam mendukung kebutuhan organisasi dan bisnis modern. Pembahasan mencakup komponen utama sistem informasi, perangkat keras, perangkat lunak, jaringan komputer, basis data, hingga keamanan informasi."
   },
   {
     "id": "103",
@@ -946,6 +946,653 @@
       "Rekayasa Perangkat Lunak"
     ],
     "foto": "/static/uploads/books/cropped_image_1758979176505.jpg",
-    "deskripsi_singkat": "aaaaaaaaaaaaaaaaa"
+    "deskripsi_singkat": "Buku “Rekayasa Perangkat Lunak (Terstruktur dan Berorientasi Objek)” membahas konsep, metode, dan teknik pengembangan perangkat lunak secara menyeluruh dengan dua pendekatan utama: terstruktur dan berorientasi objek."
+  },
+  {
+    "id": "104",
+    "judul": "Program \"YUK NABUNG SAHAM\" Cara Mudah Investasi Bagi Usaha Kecil Mikro (UKM)",
+    "penulis": "Zakaria Harahap,S.E.I,M.H.I",
+    "tag": [
+      "Akuntansi",
+      "Keuangan"
+    ],
+    "foto": "/static/uploads/books/IMG20250926105128.jpg",
+    "deskripsi_singkat": "Hahsjakabsbhs"
+  },
+  {
+    "id": "105",
+    "judul": "Metode penelitian Kuantitatif, Kualitatif, dan R & D",
+    "penulis": "Prof. Dr.Sugiyono",
+    "tag": [
+      "Sistem Proses"
+    ],
+    "foto": "/static/uploads/books/IMG20250926105121.jpg",
+    "deskripsi_singkat": "Hakanahaowmbwva"
+  },
+  {
+    "id": "106",
+    "judul": "Manajemen Pemasaran Jasa",
+    "penulis": "Agus Suryanto,s.pd,M.M",
+    "tag": [
+      "Pemasaran"
+    ],
+    "foto": "/static/uploads/books/IMG20250926105113.jpg",
+    "deskripsi_singkat": "Jakabshaoamw"
+  },
+  {
+    "id": "107",
+    "judul": "Akuntansi Desa Panduan Tata Kelola Keuangan Desa",
+    "penulis": "V.Wiratna Sujarweni",
+    "tag": [
+      "Keuangan"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758984917221.jpg",
+    "deskripsi_singkat": "Jwkanabajaknwbw"
+  },
+  {
+    "id": "108",
+    "judul": "AKUNTANSI UMKM (usaha mikro kecil menengah)",
+    "penulis": "V.Wiratna Sujarweni",
+    "tag": [
+      "Akuntansi"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758985201392.jpg",
+    "deskripsi_singkat": "Hehwjensvdujb"
+  },
+  {
+    "id": "109",
+    "judul": "AKUNTANSI MANAJEMEN Teori dan aplikasi ",
+    "penulis": "V.Wiratna Sujarweni",
+    "tag": [
+      "Akuntansi",
+      "Keuangan"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758985333391.jpg",
+    "deskripsi_singkat": "Hejsnbsjsj"
+  },
+  {
+    "id": "110",
+    "judul": "AKUNTANSI BIAYAT Teori & penerapanya Seluk Beluk Akutansi Contoh dan Aplikasi ",
+    "penulis": "V.Wiratna Sujarweni",
+    "tag": [
+      "Akuntansi"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758985490936.jpg",
+    "deskripsi_singkat": "Ghk fjknbdd"
+  },
+  {
+    "id": "111",
+    "judul": "Buku Ajaran BANK & Lembaga Keuangan ",
+    "penulis": "Aris prio agus Santoso,SH,MH",
+    "tag": [
+      "Keuangan"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758985643711.jpg",
+    "deskripsi_singkat": "Bskscshsksbs"
+  },
+  {
+    "id": "112",
+    "judul": "Pengantar Akuntansi ",
+    "penulis": "V.Wiratna Sujarweni",
+    "tag": [
+      "Akuntansi"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1758985858267.jpg",
+    "deskripsi_singkat": "Fgshnsksbz sv"
+  },
+  {
+    "id": "113",
+    "judul": "ANALISIS LAPORAN KEUANGAN Teori, Analisis & Penelitian ",
+    "penulis": "V.Wiratna Sujarweni",
+    "tag": [
+      "Akuntansi"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759063843006.jpg",
+    "deskripsi_singkat": "Hdkkdhdhdodjn"
+  },
+  {
+    "id": "114",
+    "judul": "MANAJEMEN RISIKO",
+    "penulis": "Dedy Prastyo Wicaksono,SE,MM",
+    "tag": [
+      "Manajemen Proyek"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759063924882.jpg",
+    "deskripsi_singkat": "Jakabshshsisk"
+  },
+  {
+    "id": "115",
+    "judul": "VB.Net untuk sripsi",
+    "penulis": "Edy Winarno ST, M.Eng",
+    "tag": [
+      "Basis Data"
+    ],
+    "foto": "/static/uploads/books/IMG-20250928-WA0012.jpg",
+    "deskripsi_singkat": "“VB.Net untuk Skripsi” adalah panduan praktis bagi mahasiswa yang ingin memanfaatkan VB.Net sebagai alat utama dalam pembuatan aplikasi untuk kebutuhan skripsi. Buku ini menjelaskan langkah demi langkah mulai dari perancangan kebutuhan, pembuatan antarmuka pengguna (GUI), koneksi ke database, logika bisnis, sampai pembuatan laporan dan deployment aplikasi. Disajikan dalam bahasa yang mudah dipahami dan dilengkapi contoh proyek skripsi nyata, kode sumber yang dapat langsung digunakan, serta tips teknis untuk menghindari kesalahan umum saat pengembangan."
+  },
+  {
+    "id": "116",
+    "judul": "KOMUNITAS BISNIS UNTUK MANAJEMEN ",
+    "penulis": "Intan Oktaviani,S.Kom.,M.kom",
+    "tag": [
+      "Analisis Bisnis"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759064121755.jpg",
+    "deskripsi_singkat": "Gwuajabjajam"
+  },
+  {
+    "id": "117",
+    "judul": "sistem informasi Akutansi  (Analisis, Desain & Pemograman Komputer)",
+    "penulis": "Tegu Wahyono, S.kom",
+    "tag": [
+      "Basis Data",
+      "Akuntansi"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759064273855.jpg",
+    "deskripsi_singkat": "Buku “Sistem Informasi Akuntansi (Analisis, Desain & Pemrograman Komputer)” membahas secara komprehensif konsep dasar, analisis kebutuhan, desain sistem, hingga implementasi pemrograman komputer dalam membangun sistem informasi akuntansi. Materi disajikan mulai dari teori akuntansi, siklus akuntansi, perancangan basis data, desain alur sistem, sampai penerapan aplikasi akuntansi dengan dukungan teknologi komputer."
+  },
+  {
+    "id": "118",
+    "judul": "Step By Step Facebook Programming",
+    "penulis": "Wiwit Siswoutomo",
+    "tag": [
+      "Pemrograman"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759064467999.jpg",
+    "deskripsi_singkat": "“Step By Step Facebook Programming” adalah panduan praktis yang memandu pembaca dari nol hingga mampu membangun aplikasi dan integrasi berbasis platform Facebook. Buku ini membahas konsep dasar platform pengembang Facebook, autentikasi (OAuth & Social Login), penggunaan Graph API, SDK (JavaScript, PHP, Node.js), pengaturan permission dan access token, serta penerapan webhook untuk notifikasi real-time."
+  },
+  {
+    "id": "119",
+    "judul": "SISTEM INFORMASI MANAJEMEN ",
+    "penulis": "Su'aldy,S.sos.,S.E.M.,",
+    "tag": [
+      "Manajemen Proyek"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759064400880.jpg",
+    "deskripsi_singkat": "Njeknzksnzbshz"
+  },
+  {
+    "id": "120",
+    "judul": "Sistem Komunikasi Data Mutakhir",
+    "penulis": "Rahmat Rafiudin",
+    "tag": [
+      "Jaringan Komputer"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759064570126.jpg",
+    "deskripsi_singkat": "Buku “Sistem Komunikasi Data Mutakhir” membahas perkembangan terbaru dalam teknologi komunikasi data yang menjadi fondasi jaringan komputer dan sistem informasi modern. Materi mencakup prinsip dasar komunikasi data, arsitektur jaringan, protokol komunikasi, teknik transmisi, serta perkembangan mutakhir seperti jaringan nirkabel, internet generasi baru, komunikasi berbasis satelit, IoT (Internet of Things), hingga teknologi 5G."
+  },
+  {
+    "id": "121",
+    "judul": "MANAJEMEN KEUANGAN ",
+    "penulis": "Erna Chatidjah suhatmi, SE,M.Ak",
+    "tag": [
+      "Manajemen Proyek"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759064594480.jpg",
+    "deskripsi_singkat": "Jskanahajak"
+  },
+  {
+    "id": "122",
+    "judul": "Sistem Pendukung Keputusan",
+    "penulis": "Ari Basuki, S.T., M. T.",
+    "tag": [
+      "Kecerdasan Buatan"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759064680367.jpg",
+    "deskripsi_singkat": "Buku “Sistem Pendukung Keputusan” membahas konsep, teori, dan implementasi sistem yang dirancang untuk membantu pengambilan keputusan dalam berbagai bidang. Materi diawali dengan pengertian dasar, komponen utama, serta arsitektur sistem pendukung keputusan (SPK). Selanjutnya, dibahas berbagai metode dan model, seperti analisis multikriteria, metode berbasis pengetahuan, fuzzy logic, AHP (Analytical Hierarchy Process), TOPSIS, hingga integrasi dengan basis data dan teknologi kecerdasan buatan (AI)."
+  },
+  {
+    "id": "123",
+    "judul": "Seri Belajar Cepat SPSS 18",
+    "penulis": "Mikael Sugianto",
+    "tag": [
+      "Analisis Bisnis"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759064803339.jpg",
+    "deskripsi_singkat": "Buku “Seri Belajar Cepat SPSS 18” merupakan panduan praktis untuk mempelajari penggunaan SPSS (Statistical Package for the Social Sciences) versi 18 secara cepat dan mudah. Materi disajikan langkah demi langkah dengan contoh kasus nyata, mulai dari pengolahan data sederhana, analisis statistik deskriptif, uji hipotesis, regresi, korelasi, hingga analisis multivariat."
+  },
+  {
+    "id": "124",
+    "judul": "Sistem Informasi Penjualan Dengan PHP Dan MySql ",
+    "penulis": "Riyanto",
+    "tag": [
+      "Basis Data"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759064943118.jpg",
+    "deskripsi_singkat": "Buku “Sistem Informasi Penjualan dengan PHP dan MySQL” membahas langkah demi langkah pembuatan aplikasi penjualan berbasis web dengan memanfaatkan bahasa pemrograman PHP dan database MySQL. Materi disusun mulai dari perancangan kebutuhan sistem, pembuatan database, desain antarmuka, implementasi logika bisnis, hingga pengolahan laporan penjualan yang interaktif."
+  },
+  {
+    "id": "125",
+    "judul": "SESIKO KEUANGAN UNTUK BISNIS (Strategi Cerdas Mengoptimalkan Keputusan Bisnis Dengan Analisis Rasio Keuangan ",
+    "penulis": "Abdul Rohman Suyuti Dan Tasiman",
+    "tag": [
+      "Analisis Bisnis"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759064803596.jpg",
+    "deskripsi_singkat": "Hakanakanab"
+  },
+  {
+    "id": "126",
+    "judul": "Statistika Untuk Bisnis Dan Ekonomi",
+    "penulis": "Lukas Setia Atmaja, Ph.D",
+    "tag": [
+      "Analisis Bisnis"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759065084350.jpg",
+    "deskripsi_singkat": "Buku “Statistika untuk Bisnis dan Ekonomi” menyajikan konsep-konsep dasar hingga lanjutan dalam statistika yang diterapkan secara khusus pada bidang bisnis dan ekonomi. Materi disusun dengan pendekatan praktis, dilengkapi contoh kasus nyata, serta latihan soal yang relevan dengan dunia usaha, keuangan, pemasaran, dan manajemen."
+  },
+  {
+    "id": "127",
+    "judul": "Struktur Data Pondasi Membuat Program Yang Elegan Dan Efisien",
+    "penulis": "Bambang Hariyanto,IR., M.T.",
+    "tag": [
+      "Struktur Data",
+      "Algoritma"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759065224083.jpg",
+    "deskripsi_singkat": "Buku “Struktur Data: Pondasi Membuat Program yang Elegan dan Efisien” membahas konsep, prinsip, dan implementasi struktur data yang menjadi dasar penting dalam dunia pemrograman. Dengan menguasai struktur data, seorang programmer dapat merancang program yang tidak hanya berjalan dengan benar, tetapi juga efisien, terukur, dan mudah dipelihara."
+  },
+  {
+    "id": "128",
+    "judul": "Sistem Jaringan Fiber Optic",
+    "penulis": "Gunawan Wibisono",
+    "tag": [
+      "Jaringan Komputer"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759065348239.jpg",
+    "deskripsi_singkat": "Buku “Sistem Jaringan Fiber Optic” membahas teknologi jaringan komunikasi berbasis serat optik yang menjadi tulang punggung sistem telekomunikasi modern. Serat optik dipilih karena mampu menghantarkan data dengan kapasitas besar, kecepatan tinggi, dan tingkat keamanan yang lebih baik dibandingkan media transmisi lain."
+  },
+  {
+    "id": "129",
+    "judul": "Step By Step Menjadi Programer Android",
+    "penulis": "Wahana Andi",
+    "tag": [
+      "Pemrograman"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759065537919.jpg",
+    "deskripsi_singkat": "“Step By Step Menjadi Programer Android” adalah panduan praktis yang memimpin pembaca dari nol hingga mampu membangun aplikasi Android fungsional dan siap rilis. Disusun secara bertahap dengan pendekatan hands-on: mulai persiapan lingkungan (Android Studio), dasar bahasa (Kotlin sebagai bahasa utama, plus catatan Java), konsep UI/UX (Material Design), lifecycle Activity & Fragment, manajemen data (SharedPreferences, SQLite, Room), hingga komunikasi jaringan (Retrofit/Volley), integrasi layanan (Firebase), pengujian, optimasi, dan proses publikasi ke Google Play."
+  },
+  {
+    "id": "130",
+    "judul": "PENGANTAR BISNIS ",
+    "penulis": "Rizki Pujiyanto S.E,M,M",
+    "tag": [
+      "Bisnis Digital"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759065621822.jpg",
+    "deskripsi_singkat": "Va ko nagagahag"
+  },
+  {
+    "id": "131",
+    "judul": "Microsoft Word 2007",
+    "penulis": "Wahana Komputer",
+    "tag": [
+      "Algoritma"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759065651890.jpg",
+    "deskripsi_singkat": "Buku “Microsoft Word 2007” merupakan panduan lengkap untuk mempelajari dan menguasai salah satu aplikasi pengolah kata paling populer dari Microsoft Office. Dengan antarmuka Ribbon yang diperkenalkan pada versi 2007, Word menghadirkan cara baru dalam mengelola dokumen dengan lebih mudah, cepat, dan efisien."
+  },
+  {
+    "id": "132",
+    "judul": "ILMU MANAJEMEN (Sebuah Pengantar Memahami Ilmu Manajemen)",
+    "penulis": "Ir.Bidjaksana Arief Fateqah,M.Sc.",
+    "tag": [
+      "Manajemen Proyek"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759065747384.jpg",
+    "deskripsi_singkat": "Bsksnshsbbn"
+  },
+  {
+    "id": "133",
+    "judul": "Step By Step Delphi",
+    "penulis": "Wahana Andi",
+    "tag": [
+      "Basis Data"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759065908468.jpg",
+    "deskripsi_singkat": "“Step By Step Delphi” adalah panduan praktis dan terstruktur yang memandu pembaca dari dasar hingga mahir membuat aplikasi desktop (dan cross-platform) menggunakan Delphi (Object Pascal). Buku ini menggabungkan penjelasan konsep pemrograman, paradigma visual RAD (Rapid Application Development), pemrograman berorientasi objek, pengelolaan basis data, hingga teknik debugging, optimasi, dan deployment. Disertai banyak contoh kode, latihan langkah-demi-langkah, dan proyek nyata sehingga pembaca—baik pemula maupun yang berpengalaman di bahasa lain—dapat cepat produktif membangun aplikasi yang handal."
+  },
+  {
+    "id": "134",
+    "judul": "Sistem Cepat Dan Mudah Menguasai Visual Basic.Net",
+    "penulis": "Mohamad Sukarno",
+    "tag": [
+      "Pemrograman"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759066054639.jpg",
+    "deskripsi_singkat": "Buku “Sistem Cepat dan Mudah Menguasai Visual Basic .NET” disusun untuk membantu pembaca memahami pemrograman Visual Basic .NET dengan cara yang sederhana, sistematis, dan praktis. VB .NET sebagai salah satu bahasa pemrograman modern dalam platform .NET Framework banyak digunakan untuk membangun aplikasi desktop, web, maupun enterprise."
+  },
+  {
+    "id": "135",
+    "judul": "BUM DESA Badan Usaha Milik Desa",
+    "penulis": "David Wijaya,S.E.,M.M.",
+    "tag": [
+      "Manajemen Proyek"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759066028459.jpg",
+    "deskripsi_singkat": "Fajanavhakab"
+  },
+  {
+    "id": "136",
+    "judul": "Network Forensics Panduan Analisis & Investigasi Paket Data Jaringan Menggunakan Wireshark",
+    "penulis": "Agus Kurniawan",
+    "tag": [
+      "Jaringan Komputer"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759066236431.jpg",
+    "deskripsi_singkat": "Buku “Network Forensics: Panduan Analisis & Investigasi Paket Data Jaringan Menggunakan Wireshark” membahas secara komprehensif teknik analisis lalu lintas jaringan dalam konteks keamanan informasi dan investigasi digital. Network forensics merupakan cabang penting dari digital forensics yang berfokus pada pelacakan, pengumpulan, dan analisis bukti digital dari lalu lintas data di jaringan komputer."
+  },
+  {
+    "id": "137",
+    "judul": "5 Proyek Populer SMS Gateway",
+    "penulis": "Sofyan Maulana, S.Kom",
+    "tag": [
+      "Pemrograman"
+    ],
+    "foto": "/static/uploads/books/IMG-20250928-WA0027.jpg",
+    "deskripsi_singkat": "Buku “5 Proyek Populer SMS Gateway” menyajikan panduan praktis dalam membangun berbagai aplikasi SMS Gateway yang banyak digunakan di dunia nyata. SMS Gateway merupakan teknologi yang memungkinkan integrasi aplikasi dengan layanan SMS, sehingga pesan dapat dikirim dan diterima secara otomatis melalui sistem komputer."
+  },
+  {
+    "id": "138",
+    "judul": "Panduan Dasar Manajemen Sumber Daya Manusia ",
+    "penulis": "Naya Yasinta Ramadhani ",
+    "tag": [
+      "Manajemen Sumber Daya Manusia"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759066248883.jpg",
+    "deskripsi_singkat": "Hajanavsjwkwnsbbw"
+  },
+  {
+    "id": "139",
+    "judul": "Sistem Pakar Dengan Metode Case Based Reasoning",
+    "penulis": "Nur Aini H, S.Kom., M.Si., M.Kom",
+    "tag": [
+      "Pemrograman",
+      "Kecerdasan Buatan"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759066532532.jpg",
+    "deskripsi_singkat": "Buku “Sistem Pakar Dengan Metode Case Based Reasoning (CBR)” membahas konsep, teori, serta implementasi sistem pakar berbasis pendekatan penalaran kasus. Metode CBR bekerja dengan cara menyelesaikan masalah baru menggunakan pengalaman atau kasus yang pernah terjadi sebelumnya, sehingga sangat efektif diterapkan dalam bidang diagnosis, prediksi, maupun pengambilan keputusan."
+  },
+  {
+    "id": "140",
+    "judul": "Sukses Berbisnis Toko Online WordPress Dan Woo Commerce",
+    "penulis": "Wahana andi",
+    "tag": [
+      "Bisnis Digital"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759066688491.jpg",
+    "deskripsi_singkat": "Buku “Sukses Berbisnis Toko Online WordPress dan WooCommerce” memberikan panduan lengkap untuk membangun dan mengelola toko online profesional dengan mudah. Dengan memanfaatkan platform WordPress dan plugin WooCommerce, pembaca akan dipandu mulai dari instalasi, pengaturan produk, sistem pembayaran, hingga strategi promosi online."
+  },
+  {
+    "id": "141",
+    "judul": "KOMUNITAS BISNIS UNTUK MANAJEMEN ",
+    "penulis": "Intan Oktaviani,S.Kom.,M.kom",
+    "tag": [
+      "Bisnis Digital"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759066681596.jpg",
+    "deskripsi_singkat": "Hajakaabahajak"
+  },
+  {
+    "id": "142",
+    "judul": "Simulasi Komputer Sistem Diskrit",
+    "penulis": "Asmungi",
+    "tag": [
+      "Pembelajaran Mesin"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759066789974.jpg",
+    "deskripsi_singkat": "Buku “Simulasi Komputer Sistem Diskrit” membahas teori dan penerapan simulasi dalam memodelkan sistem yang berubah secara diskrit sepanjang waktu. Simulasi sistem diskrit digunakan untuk menganalisis dan memahami kinerja sistem kompleks, seperti antrian, produksi, jaringan komputer, transportasi, maupun pelayanan publik, yang sulit dianalisis hanya dengan perhitungan matematis."
+  },
+  {
+    "id": "143",
+    "judul": "ISAK 35, PPh UMKM,dan Inklusi pajak (Teori dan hasil)",
+    "penulis": "Setiadi,S.E.,M.M.,ACPA.,CTA.,CAAT",
+    "tag": [
+      "Bisnis Digital"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759066785017.jpg",
+    "deskripsi_singkat": "Nenwkababbsjaka"
+  },
+  {
+    "id": "144",
+    "judul": "METODE PENELITIAN BISNIS DAN EKONOMI (Pendekatan Kuantitatif)",
+    "penulis": "V.Wiratna Sujarweni",
+    "tag": [
+      "Bisnis Digital"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759067065738.jpg",
+    "deskripsi_singkat": "Vhwksnhaahjaahb"
+  },
+  {
+    "id": "145",
+    "judul": "Step By Step, Simple For Beginner. From Zero to Hero Untuk Hoby Dan Bisnis Smart Book CorelDraw For Distro",
+    "penulis": "Cyber Team Computer",
+    "tag": [
+      "Analisis Bisnis"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759067141938.jpg",
+    "deskripsi_singkat": "Buku “Step By Step, Simple for Beginner. From Zero to Hero: Smart Book CorelDraw for Distro” dirancang khusus bagi pemula yang ingin menguasai desain grafis menggunakan CorelDraw secara cepat dan mudah. Dengan pendekatan langkah demi langkah, buku ini memandu pembaca dari dasar penggunaan CorelDraw hingga mampu menghasilkan desain kreatif yang siap diaplikasikan dalam dunia nyata."
+  },
+  {
+    "id": "146",
+    "judul": "Pemrograman Borland Delphi 7",
+    "penulis": "Madcome",
+    "tag": [
+      "Pemrograman"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759067308216.jpg",
+    "deskripsi_singkat": "Buku “Pemrograman Borland Delphi 7” membahas secara komprehensif teknik pemrograman menggunakan Delphi 7, salah satu bahasa pemrograman visual berbasis Pascal yang populer untuk membangun aplikasi desktop berbasis Windows."
+  },
+  {
+    "id": "147",
+    "judul": "PENGANTAR AKUNTANSI LINGKUNGAN ",
+    "penulis": "Dr.Fitria Husnatarina,S.E.,M.,SI.,AK.,CA.,CSRS.,CSRA.,ACPA.,ACC",
+    "tag": [
+      "Akuntansi"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759067194960.jpg",
+    "deskripsi_singkat": "Nenwnnajakskw"
+  },
+  {
+    "id": "148",
+    "judul": "Sistem Berkas",
+    "penulis": "Dr.Ir.Wahyuni,M.Sc",
+    "tag": [
+      "Sistem Proses"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759067423226.jpg",
+    "deskripsi_singkat": "Buku “Sistem Berkas” membahas konsep dasar hingga implementasi mengenai bagaimana data disimpan, diorganisasi, dan dikelola dalam sebuah sistem operasi. Topik utama mencakup struktur berkas, direktori, alokasi ruang penyimpanan, manajemen akses, serta keamanan dan reliabilitas data."
+  },
+  {
+    "id": "149",
+    "judul": "Yuk Belajar Manajemen Operasional ",
+    "penulis": "Amandin,S.pt.,M,M",
+    "tag": [
+      "Manajemen Sumber Daya Manusia"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759067884169.jpg",
+    "deskripsi_singkat": "Haajkabakaka"
+  },
+  {
+    "id": "150",
+    "judul": "Sistem Informasi Geografis Dengan Quantum GIS",
+    "penulis": "Eko Budiyanto, S.Pd., M.Si.",
+    "tag": [
+      "Teknik Pertambangan"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759068002530.jpg",
+    "deskripsi_singkat": "Buku “Sistem Informasi Geografis dengan Quantum GIS” membahas teori sekaligus praktik penerapan Sistem Informasi Geografis (SIG) menggunakan perangkat lunak Quantum GIS (QGIS), sebuah aplikasi open-source yang populer dan powerful dalam pengelolaan data spasial."
+  },
+  {
+    "id": "151",
+    "judul": "HUKUM BISNIS ",
+    "penulis": "Yelly Aswariningsih.SH..M,H",
+    "tag": [
+      "Analisis Bisnis"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759068041994.jpg",
+    "deskripsi_singkat": "Hjkkkjjbddjkmjgfty "
+  },
+  {
+    "id": "152",
+    "judul": "TEORI AKUNTANSI ",
+    "penulis": "Prof.Dr,Agus Wahyudin,M.SI",
+    "tag": [
+      "Akuntansi"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759068155941.jpg",
+    "deskripsi_singkat": "Jakabahajka"
+  },
+  {
+    "id": "153",
+    "judul": "Buku Ajaran BANK & Lembaga Keuangan ",
+    "penulis": "Aris prio agus Santoso,SH,MH",
+    "tag": [
+      "Akuntansi"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759068282335.jpg",
+    "deskripsi_singkat": "Hakanavajk"
+  },
+  {
+    "id": "154",
+    "judul": "Step By Step Pintar Dan Mahir Microsoft Office 2010",
+    "penulis": "Neneng Asiah & Edi Suhendi",
+    "tag": [
+      "Sistem Operasi"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759068311620.jpg",
+    "deskripsi_singkat": "Buku “Step By Step Pintar dan Mahir Microsoft Office 2010” dirancang sebagai panduan praktis dan terstruktur untuk menguasai paket aplikasi Microsoft Office 2010 dengan cepat — dari level pemula sampai mahir. Disusun langkah-demi-langkah dengan contoh nyata, latihan praktikum, dan tips efisien, buku ini membahas fitur penting Word, Excel, PowerPoint, Access, serta integrasi antar-aplikasi (mail merge, import/export data, automasi sederhana). Cocok untuk pelajar, mahasiswa, staf kantor, dan siapa saja yang ingin meningkatkan produktivitas kerja menggunakan Office 2010."
+  },
+  {
+    "id": "155",
+    "judul": "AKUTANSI KEUANGAN MENENGAH BERPRESTASI PSAK",
+    "penulis": "Dewi Maryani",
+    "tag": [
+      "Akuntansi"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759068374201.jpg",
+    "deskripsi_singkat": "HAkanbaialak"
+  },
+  {
+    "id": "156",
+    "judul": "Sistem Pakar Aplikasinya",
+    "penulis": "Nur Aini H, S.Kom., M.SI., M.Kom",
+    "tag": [
+      "Kecerdasan Buatan",
+      "Pemrograman"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759068463347.jpg",
+    "deskripsi_singkat": "Buku “Sistem Pakar dan Aplikasinya” mengulas teori dasar, metode, serta penerapan sistem pakar dalam berbagai bidang. Sistem pakar merupakan cabang dari kecerdasan buatan (AI) yang dirancang untuk menirukan proses pengambilan keputusan seorang pakar dengan menggunakan basis pengetahuan dan mesin inferensi."
+  },
+  {
+    "id": "157",
+    "judul": "Studi Kasus MS Office Untuk Perhitungan Bisnis Modern",
+    "penulis": "Edy Winarno ST. M.Eng.",
+    "tag": [
+      "Sistem Operasi"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759069295035.jpg",
+    "deskripsi_singkat": "Buku “Studi Kasus MS Office untuk Perhitungan Bisnis Modern” menyajikan panduan praktis dalam memanfaatkan aplikasi Microsoft Office (Word, Excel, dan PowerPoint) untuk kebutuhan bisnis masa kini. Dengan pendekatan berbasis studi kasus, buku ini menunjukkan bagaimana MS Office dapat digunakan untuk mengolah data keuangan, menghitung laba-rugi, membuat laporan penjualan, hingga menyusun strategi bisnis melalui analisis data dan presentasi profesional."
+  },
+  {
+    "id": "158",
+    "judul": "Cepat Mahir Delphi 2011",
+    "penulis": "Wahana Andi",
+    "tag": [
+      "Pemrograman"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759069400088.jpg",
+    "deskripsi_singkat": "Buku “Cepat Mahir Delphi 2011” dirancang untuk membantu pembaca menguasai pemrograman dengan Delphi 2011 secara cepat dan terstruktur. Delphi merupakan bahasa pemrograman visual berbasis Object Pascal yang powerful untuk membangun aplikasi desktop maupun database."
+  },
+  {
+    "id": "159",
+    "judul": "EKONOMI MANAJEMEN (EKONOMI MANAJERIAL)",
+    "penulis": "Intan Oktaviani,S.Kom.,M.kom",
+    "tag": [
+      "Bisnis Digital"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759069387302.jpg",
+    "deskripsi_singkat": "Hakanajkalam"
+  },
+  {
+    "id": "160",
+    "judul": "Steve Jobs Otak Jenius Dibalik Kesuksesan Apple",
+    "penulis": "Hemawan Aksan",
+    "tag": [
+      "Analisis Bisnis"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759069605043.jpg",
+    "deskripsi_singkat": "Buku “Steve Jobs: Otak Jenius di Balik Kesuksesan Apple” mengupas perjalanan hidup seorang tokoh visioner dunia teknologi, Steve Jobs. Ia dikenal sebagai pendiri sekaligus motor penggerak di balik kesuksesan Apple Inc., perusahaan yang merevolusi cara manusia berinteraksi dengan teknologi melalui produk-produk inovatif seperti iPod, iPhone, iPad, dan MacBook."
+  },
+  {
+    "id": "161",
+    "judul": "METODE PENELITIAN (Lengkap, Praktis , dan mudah dipahami))",
+    "penulis": "V.Wiratna Sujarweni",
+    "tag": [
+      "Sistem Operasi"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759069593068.jpg",
+    "deskripsi_singkat": "Gajakavsjwkn"
+  },
+  {
+    "id": "162",
+    "judul": "Step by Step Excel 2013 Tanpa Guru",
+    "penulis": "Arista Prasetyo Adi",
+    "tag": [
+      "Sistem Operasi"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759069915948.jpg",
+    "deskripsi_singkat": "“Step by Step Excel 2013 Tanpa Guru” adalah panduan praktis dan terstruktur yang dirancang untuk pemula hingga pengguna menengah yang ingin menguasai Microsoft Excel 2013 secara otodidak. Disusun dengan pendekatan langkah-demi-langkah, buku ini menjelaskan fitur dasar sampai lanjutan (formula, tabel, pivot, grafik, analisis data, hingga automasi sederhana dengan Macro) menggunakan bahasa yang mudah dipahami serta banyak contoh praktik nyata. Setiap topik disertai latihan yang bisa langsung dicoba, sehingga pembaca dapat belajar mandiri tanpa harus mengikuti kursus formal."
+  },
+  {
+    "id": "163",
+    "judul": "MANAJEMEN OPERASIONAL ",
+    "penulis": "Andri Octaviani,S,PD.,M.Pd",
+    "tag": [
+      "Manajemen Proyek"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759069867431.jpg",
+    "deskripsi_singkat": "Xhkvxjjvcf"
+  },
+  {
+    "id": "164",
+    "judul": "Cara Gampang Memahami Pemrograman Njelimet",
+    "penulis": "Christopher Henry Priyono",
+    "tag": [
+      "Pemrograman"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759070036175.jpg",
+    "deskripsi_singkat": "Belajar pemrograman sering kali terasa “njlimet” alias rumit, penuh aturan, tanda baca, dan logika yang bikin pusing. Buku “Cara Gampang Memahami Pemrograman Njelimet” hadir untuk memecah kerumitan itu menjadi langkah-langkah sederhana dan mudah dipahami. Dengan bahasa sehari-hari yang ringan, banyak ilustrasi, serta contoh kasus nyata, buku ini akan membantu pembaca memahami konsep dasar pemrograman, mulai dari logika, algoritma, struktur data, hingga cara menulis kode yang rapi."
+  },
+  {
+    "id": "165",
+    "judul": "Step By Step Ponsel Android",
+    "penulis": "Jubilee Enterprise",
+    "tag": [
+      "Pembelajaran Mesin"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759070315821.jpg",
+    "deskripsi_singkat": "“Step By Step Ponsel Android” adalah panduan praktis dan terstruktur yang membimbing pengguna mulai dari pengaturan awal sampai menguasai fitur-fitur penting ponsel Android. Ditulis dengan bahasa yang mudah dipahami dan dilengkapi ilustrasi serta langkah-langkah langkah demi langkah, buku ini cocok untuk pemula maupun pengguna yang ingin memaksimalkan fungsi ponselnya — mulai setup akun Google, manajemen aplikasi, keamanan & privasi, optimasi baterai, hingga trik fotografi dan konektivitas."
+  },
+  {
+    "id": "166",
+    "judul": "STRATEGI MANAJEMEN PELAYANAN PUBLIK (pribadi,asas,dan dinamika prosedurnya",
+    "penulis": "Rofi'ah Nurhayati ",
+    "tag": [
+      "Manajemen Sumber Daya Manusia"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759070344534.jpg",
+    "deskripsi_singkat": "Xukbjlnbxsr"
+  },
+  {
+    "id": "167",
+    "judul": "Rekayasa Perangkat Lunak",
+    "penulis": "Janner Simarmata",
+    "tag": [
+      "Rekayasa Perangkat Lunak",
+      "Manajemen Proyek"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759070470069.jpg",
+    "deskripsi_singkat": "Buku “Rekayasa Perangkat Lunak” membahas secara komprehensif konsep, metode, dan praktik dalam pengembangan perangkat lunak. Pembaca akan diajak memahami dasar-dasar analisis kebutuhan, desain sistem, pemrograman, pengujian, hingga pemeliharaan software dengan pendekatan yang sistematis dan terstruktur."
   }
 ]
