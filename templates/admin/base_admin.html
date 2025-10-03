@@ -42,6 +42,11 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'admin_ai_generate' %}active{% endif %}" href="{{ url_for('admin_ai_generate') }}">
+                            <i class="fas fa-magic me-1"></i>AI Generate
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link {% if request.endpoint == 'admin_nlp' %}active{% endif %}" href="{{ url_for('admin_nlp') }}">
                             <i class="fas fa-brain me-1"></i>Model NLP
                         </a>
@@ -106,6 +111,10 @@
         <a href="{{ url_for('admin_users') }}" class="nav-item {% if request.endpoint == 'admin_users' %}active{% endif %}">
             <i class="fas fa-users"></i>
             <span>Pengguna</span>
+        </a>
+        <a href="{{ url_for('admin_ai_generate') }}" class="nav-item {% if request.endpoint == 'admin_ai_generate' %}active{% endif %}">
+            <i class="fas fa-magic"></i>
+            <span>AI Generate</span>
         </a>
         <a href="{{ url_for('admin_nlp') }}" class="nav-item {% if request.endpoint == 'admin_nlp' %}active{% endif %}">
             <i class="fas fa-brain"></i>

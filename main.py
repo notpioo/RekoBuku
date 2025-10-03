@@ -1,8 +1,11 @@
-from dotenv import load_dotenv
-from app import app
+# Load environment variables from .env file (optional - for local development)
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 
-# Load environment variables from .env file
-load_dotenv()
+from application import app
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=False)

@@ -4,11 +4,15 @@ from flask_wtf.csrf import CSRFProtect
 from werkzeug.utils import secure_filename
 from functools import wraps
 import os
+import logging
 from urllib.parse import urlparse, urljoin
-from dotenv import load_dotenv
 
-# Load environment variables from .env file
-load_dotenv()
+# Load environment variables from .env file (optional - for local development)
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 
 app = Flask(__name__)
 # Require SESSION_SECRET to be set for security
@@ -72,7 +76,7 @@ try:
 except ImportError:
     GeminiBookRecommendationService = None
 from app.forms.auth import LoginForm, RegisterForm
-from app.forms.book import BookForm, EditBookForm
+from app.forms.book import BookForm, EditBookForm, AIGenerateForm
 from app.forms.user import UserForm, EditUserForm
 
 # Routes
@@ -168,6 +172,183 @@ def admin_users():
 def admin_nlp():
     return render_template('admin/nlp.html')
 
+@app.route('/admin/ai-generate', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def admin_ai_generate():
+    form = AIGenerateForm()
+    extracted_data = None
+    preview_image = None
+    
+    if form.validate_on_submit():
+        try:
+            # Check if Gemini service is available
+            if GeminiBookRecommendationService is None:
+                flash('Layanan AI tidak tersedia. Pastikan GEMINI_API_KEY sudah diatur.', 'danger')
+                return redirect(url_for('admin_ai_generate'))
+            
+            # Read image data
+            image_file = form.foto.data
+            image_data = image_file.read()
+            
+            # Detect MIME type and file extension
+            import imghdr
+            import time
+            
+            # Determine image type
+            image_type = imghdr.what(None, h=image_data)
+            if image_type is None:
+                flash('Format gambar tidak valid!', 'danger')
+                return redirect(url_for('admin_ai_generate'))
+            
+            # Map image type to MIME type and extension
+            mime_type_map = {
+                'jpeg': ('image/jpeg', 'jpg'),
+                'jpg': ('image/jpeg', 'jpg'),
+                'png': ('image/png', 'png'),
+                'gif': ('image/gif', 'gif')
+            }
+            
+            if image_type not in mime_type_map:
+                flash(f'Format gambar {image_type} tidak didukung!', 'danger')
+                return redirect(url_for('admin_ai_generate'))
+            
+            mime_type, file_ext = mime_type_map[image_type]
+            
+            # Save temporary preview image with correct extension
+            upload_folder = 'static/uploads/books'
+            os.makedirs(upload_folder, exist_ok=True)
+            
+            filename = f"temp_preview_{int(time.time())}.{file_ext}"
+            preview_path = os.path.join(upload_folder, filename)
+            
+            # Initialize Gemini service
+            gemini_service = GeminiBookRecommendationService()
+            
+            # Auto-crop gambar ke area buku
+            flash('Sedang mendeteksi dan memotong area buku...', 'info')
+            cropped_image_data, cropped_mime_type = gemini_service.auto_crop_book(image_data, mime_type=mime_type)
+            
+            # Save cropped image for preview
+            with open(preview_path, 'wb') as f:
+                f.write(cropped_image_data)
+            
+            preview_image = f"/static/uploads/books/{filename}"
+            
+            # Extract book information from cropped image
+            result = gemini_service.extract_book_info_from_image(cropped_image_data, mime_type=cropped_mime_type)
+            
+            if 'error' in result:
+                flash(f'Gagal menganalisis gambar: {result["error"]}', 'danger')
+            else:
+                extracted_data = result
+                flash('Informasi buku berhasil diekstrak! Silakan periksa dan edit jika perlu.', 'success')
+                
+        except Exception as e:
+            flash(f'Terjadi kesalahan: {str(e)}', 'danger')
+    
+    return render_template('admin/ai_generate.html', 
+                         form=form, 
+                         extracted_data=extracted_data,
+                         preview_image=preview_image)
+
+@app.route('/admin/ai-generate/save', methods=['POST'])
+@login_required
+@admin_required
+def admin_ai_generate_save():
+    """Save the AI-extracted book data"""
+    try:
+        # Get data from form
+        judul = request.form.get('judul')
+        penulis = request.form.get('penulis')
+        tag = request.form.getlist('tag')
+        deskripsi_singkat = request.form.get('deskripsi_singkat')
+        foto = request.form.get('foto')  # This is the preview image path
+        
+        # Validate required fields
+        if not all([judul, penulis, tag, deskripsi_singkat]):
+            flash('Semua field harus diisi!', 'danger')
+            return redirect(url_for('admin_ai_generate'))
+        
+        # Create the book
+        Book.create(
+            judul=judul,
+            penulis=penulis,
+            tag=tag,
+            foto=foto,
+            deskripsi_singkat=deskripsi_singkat
+        )
+        
+        flash('Buku berhasil ditambahkan!', 'success')
+        return redirect(url_for('admin_books'))
+        
+    except Exception as e:
+        flash(f'Gagal menyimpan buku: {str(e)}', 'danger')
+        return redirect(url_for('admin_ai_generate'))
+
+@app.route('/admin/regenerate-book-info', methods=['POST'])
+@login_required
+@admin_required
+def regenerate_book_info():
+    """Regenerate book info from existing cover image"""
+    try:
+        # Check if Gemini service is available
+        if GeminiBookRecommendationService is None:
+            return jsonify({'error': 'Layanan AI tidak tersedia. Pastikan GEMINI_API_KEY sudah diatur.'}), 503
+        
+        # Get image path from request
+        data = request.get_json()
+        if not data or 'foto_path' not in data:
+            return jsonify({'error': 'Path gambar tidak ditemukan'}), 400
+        
+        foto_path = data['foto_path']
+        
+        # Remove leading slash if exists and construct full path
+        if foto_path.startswith('/'):
+            foto_path = foto_path[1:]
+        
+        # Read image file
+        try:
+            with open(foto_path, 'rb') as f:
+                image_data = f.read()
+        except FileNotFoundError:
+            return jsonify({'error': 'File gambar tidak ditemukan di server'}), 404
+        except Exception as e:
+            return jsonify({'error': f'Gagal membaca file gambar: {str(e)}'}), 500
+        
+        # Detect MIME type
+        import imghdr
+        image_type = imghdr.what(None, h=image_data)
+        if image_type is None:
+            return jsonify({'error': 'Format gambar tidak valid'}), 400
+        
+        # Map image type to MIME type
+        mime_type_map = {
+            'jpeg': 'image/jpeg',
+            'jpg': 'image/jpeg',
+            'png': 'image/png',
+            'gif': 'image/gif'
+        }
+        
+        if image_type not in mime_type_map:
+            return jsonify({'error': f'Format gambar {image_type} tidak didukung'}), 400
+        
+        mime_type = mime_type_map[image_type]
+        
+        # Initialize Gemini service
+        gemini_service = GeminiBookRecommendationService()
+        
+        # Extract book information
+        result = gemini_service.extract_book_info_from_image(image_data, mime_type=mime_type)
+        
+        if 'error' in result:
+            return jsonify({'error': result['error']}), 400
+        
+        return jsonify(result)
+        
+    except Exception as e:
+        return jsonify({'error': f'Terjadi kesalahan: {str(e)}'}), 500
+
 @app.route('/admin/settings', methods=['GET', 'POST'])
 @login_required
 @admin_required
@@ -252,6 +433,8 @@ def edit_book(book_id):
     form = EditBookForm(obj=book) # Use EditBookForm here
     if form.validate_on_submit():
         foto_path = book.foto # Keep existing photo if not updated
+        old_foto_path = book.foto  # Store old photo path for deletion
+        
         if form.foto.data and hasattr(form.foto.data, 'filename') and form.foto.data.filename:
             # Create upload folder if it doesn't exist
             upload_folder = 'static/uploads/books'
@@ -269,6 +452,17 @@ def edit_book(book_id):
             form.foto.data.save(foto_full_path)
             # Store the web-accessible path (with /static/ prefix)
             foto_path = f"/static/uploads/books/{filename}"
+            
+            # Delete old cover image if it exists and is different from new one
+            if old_foto_path and old_foto_path != foto_path:
+                try:
+                    # Remove leading slash if exists
+                    old_file_path = old_foto_path[1:] if old_foto_path.startswith('/') else old_foto_path
+                    if os.path.exists(old_file_path):
+                        os.remove(old_file_path)
+                        logging.info(f"Deleted old cover: {old_file_path}")
+                except Exception as e:
+                    logging.error(f"Failed to delete old cover {old_foto_path}: {str(e)}")
         
         book.update(
             judul=form.judul.data,
@@ -297,6 +491,17 @@ def delete_book(book_id):
     book = Book.get(book_id)
     if not book:
         return jsonify({'error': 'Buku tidak ditemukan'}), 404
+
+    # Delete cover image file if exists
+    if book.foto:
+        try:
+            # Remove leading slash if exists
+            foto_file_path = book.foto[1:] if book.foto.startswith('/') else book.foto
+            if os.path.exists(foto_file_path):
+                os.remove(foto_file_path)
+                logging.info(f"Deleted cover image: {foto_file_path}")
+        except Exception as e:
+            logging.error(f"Failed to delete cover image {book.foto}: {str(e)}")
 
     Book.delete(book_id)
     flash('Buku berhasil dihapus!', 'success')

@@ -1,0 +1,226 @@
+{% extends "admin/base_admin.html" %}
+
+{% block title %}AI Generate - Admin Panel{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="page-title">
+                    <i class="fas fa-magic text-primary me-2"></i>AI Generate - Tambah Buku Otomatis
+                </h2>
+            </div>
+
+            <div class="row">
+                <!-- Upload Form -->
+                <div class="col-lg-6 mb-4">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0"><i class="fas fa-upload me-2"></i>Upload Gambar Buku</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="alert alert-info">
+                                <i class="fas fa-info-circle me-2"></i>
+                                <strong>Cara Menggunakan:</strong>
+                                <ol class="mb-0 mt-2">
+                                    <li>Upload gambar cover buku (JPG, JPEG, atau PNG)</li>
+                                    <li>Klik "Analisis dengan AI"</li>
+                                    <li>AI akan otomatis mendeteksi dan crop area buku</li>
+                                    <li>AI akan membaca dan mengekstrak informasi buku</li>
+                                    <li>Periksa dan edit jika perlu</li>
+                                    <li>Simpan buku ke database</li>
+                                </ol>
+                            </div>
+                            
+                            <div class="alert alert-success">
+                                <i class="fas fa-magic me-2"></i>
+                                <strong>Fitur Auto-Crop:</strong> AI akan otomatis memotong gambar untuk fokus pada cover buku, menghilangkan background yang tidak perlu!
+                            </div>
+
+                            <form method="POST" enctype="multipart/form-data">
+                                {{ form.hidden_tag() }}
+                                
+                                <div class="mb-3">
+                                    <label for="foto" class="form-label fw-bold">{{ form.foto.label.text }}</label>
+                                    {{ form.foto(class="form-control", accept="image/jpeg,image/jpg,image/png") }}
+                                    {% if form.foto.errors %}
+                                        <div class="invalid-feedback d-block">
+                                            {{ form.foto.errors[0] }}
+                                        </div>
+                                    {% endif %}
+                                    <div class="form-text">
+                                        <i class="fas fa-image me-1"></i>Format: JPG, JPEG, PNG. Maksimal 10MB.
+                                    </div>
+                                </div>
+
+                                <div class="d-grid">
+                                    {{ form.submit(class="btn btn-primary btn-lg") }}
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Preview and Results -->
+                <div class="col-lg-6 mb-4">
+                    {% if preview_image %}
+                    <div class="card shadow-sm border-0 mb-4">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0"><i class="fas fa-image me-2"></i>Preview Gambar</h5>
+                        </div>
+                        <div class="card-body text-center">
+                            <img src="{{ preview_image }}" alt="Preview" class="img-fluid rounded" style="max-height: 300px;">
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="card shadow-sm border-0">
+                        <div class="card-body text-center text-muted py-5">
+                            <i class="fas fa-image fa-5x mb-3 opacity-25"></i>
+                            <p class="lead">Preview gambar akan muncul di sini</p>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Extracted Data -->
+            {% if extracted_data %}
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0"><i class="fas fa-robot me-2"></i>Hasil Ekstraksi AI</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="alert alert-success">
+                                <i class="fas fa-check-circle me-2"></i>
+                                Informasi buku berhasil diekstrak! Periksa dan edit jika perlu sebelum menyimpan.
+                            </div>
+
+                            <form method="POST" action="{{ url_for('admin_ai_generate_save') }}">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                <input type="hidden" name="foto" value="{{ preview_image }}">
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="judul" class="form-label fw-bold">Judul Buku</label>
+                                        <input type="text" class="form-control" id="judul" name="judul" 
+                                               value="{{ extracted_data.judul }}" required>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="penulis" class="form-label fw-bold">Penulis</label>
+                                        <input type="text" class="form-control" id="penulis" name="penulis" 
+                                               value="{{ extracted_data.penulis }}" required>
+                                    </div>
+
+                                    <div class="col-12 mb-3">
+                                        <label for="tag" class="form-label fw-bold">Tag/Genre</label>
+                                        <select class="form-select" id="tag" name="tag" multiple required>
+                                            {% set available_tags = [
+                                                'Algoritma', 'Struktur Data', 'Pemrograman', 'Basis Data',
+                                                'Kecerdasan Buatan', 'Pembelajaran Mesin', 'Sistem Operasi',
+                                                'Jaringan Komputer', 'Keamanan Informatika', 'Komputasi Awan',
+                                                'Data Science', 'Sistem Tertanam', 'Rekayasa Perangkat Lunak',
+                                                'Manajemen Proyek', 'Manajemen Sumber Daya Manusia', 'Akuntansi',
+                                                'Keuangan', 'Analisis Bisnis', 'Bisnis Digital', 'Pemasaran',
+                                                'Ekonomi Mikro/Makro', 'Perilaku Organisasi', 'Audit Internal',
+                                                'Teknik Lingkungan', 'Teknik Pertambangan', 'Teknik Elektro',
+                                                'Teknik Mesin', 'Sistem Proses', 'Kontrol Otomatis', 'Robotika',
+                                                'Arsitektur Komputer', 'Sistem Terdistribusi', 'Komputasi Paralel',
+                                                'Pemrograman Web', 'Pemrograman Mobile', 'Internet of Things (IoT)',
+                                                'Cloud Native', 'Containerization', 'Microservices', 'API Development',
+                                                'Testing & QA', 'Code Review', 'Version Control', 'Dokumentasi Teknis',
+                                                'Manajemen Database', 'Data Warehousing', 'Business Intelligence',
+                                                'Visualisasi Data', 'Statistika Terapan', 'Riset Operasi', 'Optimasi',
+                                                'Simulasi Sistem', 'Pemodelan Matematika', 'Kriptografi', 'Forensik Digital',
+                                                'Etika Teknologi', 'Hukum Siber', 'Manajemen Risiko TI', 'Tata Kelola TI',
+                                                'Audit Sistem'
+                                            ] %}
+                                            {% for tag_option in available_tags %}
+                                                <option value="{{ tag_option }}" 
+                                                    {% if tag_option in extracted_data.tag %}selected{% endif %}>
+                                                    {{ tag_option }}
+                                                </option>
+                                            {% endfor %}
+                                        </select>
+                                        <div class="form-text">
+                                            <i class="fas fa-tags me-1"></i>
+                                            Tag yang dipilih AI: 
+                                            {% for tag in extracted_data.tag %}
+                                                <span class="badge bg-primary">{{ tag }}</span>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 mb-3">
+                                        <label for="deskripsi_singkat" class="form-label fw-bold">Deskripsi Singkat</label>
+                                        <textarea class="form-control" id="deskripsi_singkat" name="deskripsi_singkat" 
+                                                  rows="5" required>{{ extracted_data.deskripsi_singkat }}</textarea>
+                                        <div class="form-text">
+                                            <i class="fas fa-info-circle me-1"></i>
+                                            {{ extracted_data.deskripsi_singkat|length }} karakter
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="d-flex gap-2">
+                                            <button type="submit" class="btn btn-success btn-lg">
+                                                <i class="fas fa-save me-2"></i>Simpan Buku
+                                            </button>
+                                            <a href="{{ url_for('admin_ai_generate') }}" class="btn btn-outline-secondary btn-lg">
+                                                <i class="fas fa-redo me-2"></i>Analisis Ulang
+                                            </a>
+                                            <a href="{{ url_for('admin_books') }}" class="btn btn-outline-primary btn-lg">
+                                                <i class="fas fa-book me-2"></i>Lihat Semua Buku
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Initialize Choices.js for tag selection
+    document.addEventListener('DOMContentLoaded', function() {
+        const tagSelect = document.getElementById('tag');
+        if (tagSelect) {
+            new Choices(tagSelect, {
+                removeItemButton: true,
+                searchEnabled: true,
+                placeholder: true,
+                placeholderValue: 'Pilih tag...',
+                searchPlaceholderValue: 'Cari tag...',
+                noResultsText: 'Tag tidak ditemukan',
+                itemSelectText: 'Klik untuk memilih',
+            });
+        }
+
+        // Preview image before upload
+        const fotoInput = document.getElementById('foto');
+        if (fotoInput) {
+            fotoInput.addEventListener('change', function(e) {
+                if (e.target.files && e.target.files[0]) {
+                    const file = e.target.files[0];
+                    const fileSize = file.size / 1024 / 1024; // in MB
+                    
+                    if (fileSize > 10) {
+                        alert('Ukuran file terlalu besar! Maksimal 10MB.');
+                        e.target.value = '';
+                    }
+                }
+            });
+        }
+    });
+</script>
+{% endblock %}

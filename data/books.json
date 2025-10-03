@@ -362,7 +362,7 @@
       "Sistem Operasi"
     ],
     "foto": "/static/uploads/books/IMG20250924093259.jpg",
-    "deskripsi_singkat": "Bakaljsbsjlaoala"
+    "deskripsi_singkat": "buku seperti ini digunakan sebagai pegangan mahasiswa kimia, farmasi, biologi, maupun bidang lain yang memerlukan keterampilan analisis laboratorium."
   },
   {
     "id": "47",
@@ -392,7 +392,7 @@
       "Bisnis Digital"
     ],
     "foto": "/static/uploads/books/IMG20250924093314.jpg",
-    "deskripsi_singkat": "Gakaksinsgavjajs"
+    "deskripsi_singkat": "buku ini merupakan fondasi awal untuk memahami ilmu kimia sebelum masuk ke cabang-cabang yang lebih khusus, seperti kimia analitik, kimia organik, atau kimia fisik."
   },
   {
     "id": "50",
@@ -402,7 +402,7 @@
       "Jaringan Komputer"
     ],
     "foto": "/static/uploads/books/IMG20250924092912.jpg",
-    "deskripsi_singkat": "Jakalshujalal"
+    "deskripsi_singkat": "Buku ini umumnya dipakai di program studi sains, teknik, ekonomi, maupun komputer, karena kalkulus menjadi dasar untuk memahami model matematis dalam berbagai disiplin ilmu."
   },
   {
     "id": "51",
@@ -454,7 +454,7 @@
       "Sistem Operasi"
     ],
     "foto": "/static/uploads/books/IMG20250924092855.jpg",
-    "deskripsi_singkat": "Qqisosksnsbsbbsb"
+    "deskripsi_singkat": "Buku ini cocok untuk mahasiswa, peneliti, atau praktisi yang ingin memahami dasar teori dan konsep SIG sebelum masuk ke tahap aplikasi yang lebih teknis menggunakan perangkat lunak SIG.\r\n"
   },
   {
     "id": "56",
@@ -464,7 +464,7 @@
       "Teknik Pertambangan"
     ],
     "foto": "/static/uploads/books/IMG20250924092831.jpg",
-    "deskripsi_singkat": "Mhdvkbccdvkkhff"
+    "deskripsi_singkat": "Buku ini banyak digunakan oleh mahasiswa hukum, praktisi hukum, birokrat, serta pihak yang bergerak di sektor pertambangan untuk memahami dasar-dasar regulasi dan kebijakan pertambangan di Indonesia."
   },
   {
     "id": "57",
@@ -474,7 +474,7 @@
       "Teknik Pertambangan"
     ],
     "foto": "/static/uploads/books/IMG20250924092820.jpg",
-    "deskripsi_singkat": "Hkslalanabshakalalaizi"
+    "deskripsi_singkat": "Buku ini biasanya dipakai dalam pendidikan teknik, kesehatan kerja, dan manajemen industri, serta berguna bagi mahasiswa, praktisi K3, pengawas lapangan, maupun manajer perusahaan untuk menciptakan lingkungan kerja yang aman, sehat, dan produktif."
   },
   {
     "id": "58",
@@ -484,7 +484,7 @@
       "Algoritma"
     ],
     "foto": "/static/uploads/books/IMG20250924092800.jpg",
-    "deskripsi_singkat": "Gjskkwnshsuso"
+    "deskripsi_singkat": "Buku ini ditujukan untuk mahasiswa matematika, teknik, komputer, dan fisika, serta siapa pun yang mempelajari metode kuantitatif. Dengan tambahan MATLAB, buku ini memberikan pendekatan modern dan aplikatif."
   },
   {
     "id": "59",
@@ -494,7 +494,7 @@
       "Data Science"
     ],
     "foto": "/static/uploads/books/IMG20250924092724.jpg",
-    "deskripsi_singkat": "Hahakakabsvhsoa"
+    "deskripsi_singkat": "Buku ini cocok untuk mahasiswa geografi, teknik geodesi, geologi, kehutanan, serta praktisi SIG dan penginderaan jauh yang ingin memahami teori sekaligus praktik menggunakan ERMapper."
   },
   {
     "id": "60",
@@ -504,17 +504,17 @@
       "Algoritma"
     ],
     "foto": "/static/uploads/books/IMG20250924092713.jpg",
-    "deskripsi_singkat": "Jwowkwbahgjkbb"
+    "deskripsi_singkat": "Metode Numerik adalah salah satu cabang ilmu matematika terapan yang membahas tentang teknik-teknik perhitungan untuk menyelesaikan masalah matematika secara pendekatan (aproksimasi). Ilmu ini digunakan ketika suatu persoalan sulit atau tidak mungkin diselesaikan dengan metode analitik."
   },
   {
     "id": "61",
-    "judul": "Kamis Teknik",
-    "penulis": "???",
+    "judul": "Kamus Teknik",
+    "penulis": "Balai Pustaka",
     "tag": [
       "Pembelajaran Mesin"
     ],
     "foto": "/static/uploads/books/IMG20250924092706.jpg",
-    "deskripsi_singkat": "Uqikansoalam"
+    "deskripsi_singkat": "Buku ini merupakan sebuah kamus khusus yang menghimpun istilah-istilah teknis dalam berbagai bidang ilmu teknik, seperti teknik sipil, mesin, elektro, kimia, informatika, pertambangan, dan lain-lain."
   },
   {
     "id": "62",
@@ -524,7 +524,7 @@
       "Algoritma"
     ],
     "foto": "/static/uploads/books/IMG20250924092658.jpg",
-    "deskripsi_singkat": "Hjkkkjjbddjkmjgfty"
+    "deskripsi_singkat": "Buku ini membahas cabang matematika yang mempelajari perubahan (melalui diferensial) dan akumulasi (melalui integral)."
   },
   {
     "id": "63",
@@ -534,7 +534,7 @@
       "Pembelajaran Mesin"
     ],
     "foto": "/static/uploads/books/IMG20250924092647.jpg",
-    "deskripsi_singkat": "Halaoqkbagayak"
+    "deskripsi_singkat": "Buku ini merupakan kamus ensiklopedis yang berisi kumpulan istilah-istilah teknis dari berbagai cabang ilmu teknik, mulai dari teknik sipil, mesin, elektro, arsitektur, informatika, kimia, hingga pertambangan."
   },
   {
     "id": "64",
@@ -610,7 +610,7 @@
       "Algoritma"
     ],
     "foto": "/static/uploads/books/IMG20250924092800.jpg",
-    "deskripsi_singkat": "Hakaoq kn bsgwhwj"
+    "deskripsi_singkat": "Buku ini membahas cabang matematika yang mempelajari ruang vektor serta hubungan linier di dalamnya. Konsep utama yang dipelajari antara lain sistem persamaan linear, matriks, determinan, vektor, nilai dan vektor eigen, serta transformasi linear."
   },
   {
     "id": "71",
@@ -631,17 +631,17 @@
       "Pembelajaran Mesin"
     ],
     "foto": "/static/uploads/books/IMG20250924092724.jpg",
-    "deskripsi_singkat": "Kqownssbhska"
+    "deskripsi_singkat": "Buku ini membahas konsep dasar hingga aplikasi praktis penginderaan jauh (remote sensing) dengan bantuan perangkat lunak ERMapper, salah satu software pengolah citra satelit yang banyak digunakan di bidang Sistem Informasi Geografis (SIG)."
   },
   {
     "id": "73",
     "judul": "Metode numerik ",
-    "penulis": "????",
+    "penulis": "Rinaldi Munir",
     "tag": [
       "Struktur Data"
     ],
     "foto": "/static/uploads/books/IMG20250924092713.jpg",
-    "deskripsi_singkat": "Gwjakansvsooa"
+    "deskripsi_singkat": "buku teks atau referensi yang membahas teknik-teknik matematika numerik — yaitu metode untuk menyelesaikan persamaan matematika (linear, nonlinear), interpolasi, integrasi, dan masalah lain secara pendekatan numerik (aproksimasi) menggunakan operasi aritmetika, bukan penyelesaian eksak."
   },
   {
     "id": "74",
@@ -815,17 +815,17 @@
       "Pembelajaran Mesin"
     ],
     "foto": "/static/uploads/books/IMG20250924092647.jpg",
-    "deskripsi_singkat": "Jalanshsuakwl"
+    "deskripsi_singkat": "Buku ini merupakan sebuah kamus rujukan yang menghimpun istilah-istilah teknis dari berbagai cabang ilmu teknik, seperti teknik mesin, elektro, sipil, arsitektur, informatika, kimia, pertambangan, dan bidang rekayasa lainnya."
   },
   {
     "id": "91",
     "judul": "Kamus pintar kimia",
-    "penulis": "????",
+    "penulis": "Pustaka Makmur",
     "tag": [
       "Kecerdasan Buatan"
     ],
     "foto": "/static/uploads/books/IMG20250924092633.jpg",
-    "deskripsi_singkat": "Nakakhagah"
+    "deskripsi_singkat": "kamus istilah khusus di bidang kimia yang menyajikan definisi, rumus, lambang, dan istilah-istilah kimia — biasanya ditujukan untuk siswa, mahasiswa, atau pembaca yang ingin memahami terminologi kimia secara cepat."
   },
   {
     "id": "92",
@@ -835,7 +835,7 @@
       "Teknik Pertambangan"
     ],
     "foto": "/static/uploads/books/IMG20250924092517.jpg",
-    "deskripsi_singkat": "Jajahalansbb"
+    "deskripsi_singkat": "Buku ini merupakan kamus istilah-istilah dalam bidang pertambangan yang dirancang sebagai referensi untuk mengenal dan memahami terminologi teknis dalam industri pertambangan."
   },
   {
     "id": "93",
@@ -892,11 +892,11 @@
     "judul": "Aplikasi Berbasis Android",
     "penulis": "Nazruddin Safaat H., M.T.",
     "tag": [
-      "Pembelajaran Mesin",
-      "Pemrograman"
+      "Pemrograman",
+      "Pembelajaran Mesin"
     ],
     "foto": "/static/uploads/books/cropped_image_1758978357038.jpg",
-    "deskripsi_singkat": "rrrrrrrttrrrr"
+    "deskripsi_singkat": "buku panduan untuk orang yang berminat menjadi pengembang aplikasi Android, dengan syarat sudah memiliki dasar-dasar pemrograman aplikasi Android"
   },
   {
     "id": "99",
@@ -1594,5 +1594,135 @@
     ],
     "foto": "/static/uploads/books/cropped_image_1759070470069.jpg",
     "deskripsi_singkat": "Buku “Rekayasa Perangkat Lunak” membahas secara komprehensif konsep, metode, dan praktik dalam pengembangan perangkat lunak. Pembaca akan diajak memahami dasar-dasar analisis kebutuhan, desain sistem, pemrograman, pengujian, hingga pemeliharaan software dengan pendekatan yang sistematis dan terstruktur."
+  },
+  {
+    "id": "168",
+    "judul": "Thaibbun nabawi",
+    "penulis": "Submit sulaiman",
+    "tag": [
+      "Sistem Tertanam"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759283509936.jpg",
+    "deskripsi_singkat": "Hahahsbbsbsbavavsv"
+  },
+  {
+    "id": "170",
+    "judul": "KEYS TO succesful life",
+    "penulis": "Sabrina jasmine",
+    "tag": [
+      "Perilaku Organisasi"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759283900186.jpg",
+    "deskripsi_singkat": "Hahahvsvsvd"
+  },
+  {
+    "id": "171",
+    "judul": "Orang aneh Albert camus",
+    "penulis": "budi raharjo",
+    "tag": [
+      "Perilaku Organisasi"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759284003436.jpg",
+    "deskripsi_singkat": "Ggfccccvggvdds"
+  },
+  {
+    "id": "172",
+    "judul": "Rekayasa Perangkat Lunak Berorientasi Objek(Edisi Revisi)",
+    "penulis": "Rosa A. S Dan M. Shalahuddin",
+    "tag": [
+      "Rekayasa Perangkat Lunak"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759284124352.jpg",
+    "deskripsi_singkat": "Buku “Rekayasa Perangkat Lunak Berorientasi Objek (Edisi Revisi)” membahas secara menyeluruh pendekatan Object-Oriented Software Engineering (OOSE) dalam membangun perangkat lunak modern. Pembahasan mencakup analisis kebutuhan, pemodelan sistem dengan UML, desain berorientasi objek, implementasi, pengujian, hingga pemeliharaan perangkat lunak."
+  },
+  {
+    "id": "173",
+    "judul": "Moslem idol",
+    "penulis": "Ade rakham N. S. ",
+    "tag": [
+      "Perilaku Organisasi"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759284174406.jpg",
+    "deskripsi_singkat": "Hhahsbsbbshs"
+  },
+  {
+    "id": "174",
+    "judul": "Bahasa Indonesia",
+    "penulis": "Widhjono Hs. ",
+    "tag": [
+      "Perilaku Organisasi"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759284315781.jpg",
+    "deskripsi_singkat": "Hahshsbdbdbbd"
+  },
+  {
+    "id": "175",
+    "judul": "Rahasia Jitu Berpromosi Dengan Google Ad Words",
+    "penulis": "Tikak Sumajaya",
+    "tag": [
+      "Bisnis Digital"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759284327868.jpg",
+    "deskripsi_singkat": "Buku “Rahasia Jitu Berpromosi dengan Google AdWords” membahas strategi efektif dalam menggunakan layanan iklan digital Google untuk meningkatkan visibilitas, trafik, dan penjualan bisnis. Disajikan dengan bahasa sederhana dan contoh praktis, buku ini memandu pembaca dari dasar-dasar penggunaan AdWords, cara menentukan kata kunci yang tepat, mengatur target audiens, membuat iklan menarik, hingga mengoptimalkan biaya iklan agar lebih efisien."
+  },
+  {
+    "id": "178",
+    "judul": "Rekayasa Perangkat Lunak",
+    "penulis": "Roger S. Pressman, Ph.D.",
+    "tag": [
+      "Rekayasa Perangkat Lunak"
+    ],
+    "foto": "/static/uploads/books/cropped-image.jpg",
+    "deskripsi_singkat": "Isi buku mencakup model pengembangan perangkat lunak (waterfall, incremental, spiral, agile), analisis kebutuhan, desain sistem, pemrograman, verifikasi & validasi, pengujian, hingga pemeliharaan perangkat lunak. Pressman juga menguraikan peran penting rekayasa perangkat lunak dalam manajemen proyek, estimasi biaya, pengendalian kualitas, serta dokumentasi."
+  },
+  {
+    "id": "179",
+    "judul": "Router Teknologi, Konsep, Konpigurasi,dan Troubleshooting",
+    "penulis": "Gin-Gin Yugianto & Oscar Rachman",
+    "tag": [
+      "Jaringan Komputer"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759285178635.jpg",
+    "deskripsi_singkat": "Buku “Router: Teknologi, Konsep, Konfigurasi, dan Troubleshooting” membahas secara menyeluruh peran router dalam jaringan komputer modern. Dimulai dari konsep dasar jaringan, arsitektur router, fungsi utama, hingga konfigurasi praktis pada berbagai skenario, buku ini menjadi panduan lengkap untuk memahami dan mengelola perangkat jaringan."
+  },
+  {
+    "id": "180",
+    "judul": "Ilmu dan alat ukur tanah",
+    "penulis": "budi raharjo",
+    "tag": [
+      "Teknik Pertambangan"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759285641966.jpg",
+    "deskripsi_singkat": "Bababbsbsbsv"
+  },
+  {
+    "id": "181",
+    "judul": "Pemrograman CNC & Aplikasi Di Dunia Industri",
+    "penulis": "Dalmasius Ganjar S.",
+    "tag": [
+      "Pemrograman"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759285653218.jpg",
+    "deskripsi_singkat": "Buku “Pemrograman CNC & Aplikasi di Dunia Industri” mengulas secara sistematis konsep, teknik, dan penerapan Computer Numerical Control (CNC) dalam proses manufaktur modern. Pembahasan dimulai dari dasar-dasar mesin CNC, struktur dan fungsi utama, bahasa pemrograman G-Code dan M-Code, hingga strategi pemrograman untuk berbagai jenis operasi pemotongan."
+  },
+  {
+    "id": "182",
+    "judul": "Kisah para penjelajah dan penakluk dunia",
+    "penulis": "Nur iswarso",
+    "tag": [
+      "Teknik Pertambangan"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759285802115.jpg",
+    "deskripsi_singkat": "Hahshsgvdvdvd"
+  },
+  {
+    "id": "183",
+    "judul": "Membuat Aplikasi Web Dengan PHP dan Database MySql",
+    "penulis": "Abdul Kodir",
+    "tag": [
+      "Basis Data"
+    ],
+    "foto": "/static/uploads/books/cropped_image_1759285858033.jpg",
+    "deskripsi_singkat": "Buku “Membuat Aplikasi Web dengan PHP dan Database MySQL” membimbing pembaca untuk memahami dan mempraktikkan pembuatan aplikasi berbasis web secara lengkap. Dengan bahasa pemrograman PHP dan sistem manajemen basis data MySQL, pembaca diajak mulai dari konsep dasar pemrograman web, pembuatan database, koneksi PHP–MySQL, hingga membangun aplikasi dinamis."
   }
 ]

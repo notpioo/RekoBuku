@@ -107,7 +107,7 @@
                             {% for error in form.deskripsi_singkat.errors %}
                                 <div class="text-danger small mt-1">{{ error }}</div>
                             {% endfor %}
-                            <div class="form-text">Maksimal 800 karakter</div>
+                            <div class="form-text">Maksimal 2000 karakter</div>
                         </div>
 
                         <div class="mb-4">
@@ -140,10 +140,17 @@
                              style="max-height: 250px;">
                     </div>
                     <small class="text-muted d-block mt-2">Preview otomatis akan diperbarui saat Anda memasukkan URL gambar.</small>
-                    
+
                     <button type="button" id="crop-image-btn" class="btn btn-info mt-3 w-100" style="display: none;">
                         <i class="fas fa-crop me-1"></i> Crop Gambar
                     </button>
+
+                    {% if book and book.foto %}
+                    <button type="button" id="regenerate-info-btn" class="btn btn-primary mt-2 w-100">
+                        <i class="fas fa-sync-alt me-1"></i> Generate Ulang dengan AI
+                    </button>
+                    <small class="text-muted d-block mt-2 text-center">Generate ulang informasi buku dari cover yang ada</small>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -436,19 +443,19 @@
             cropper.getCroppedCanvas().toBlob((blob) => {
                 // Create a new filename for the cropped image
                 const filename = `cropped_image_${Date.now()}.jpg`;
-                
+
                 // Create a new File object from the blob
                 const croppedFile = new File([blob], filename, { type: 'image/jpeg' });
-                
+
                 // Update the preview only for this specific form
                 const preview = document.getElementById('cover-preview');
                 const newImageUrl = URL.createObjectURL(blob);
-                
+
                 // Revoke old object URL to prevent memory leaks
                 if (preview.src.startsWith('blob:')) {
                     URL.revokeObjectURL(preview.src);
                 }
-                
+
                 preview.src = newImageUrl;
 
                 // Store the cropped blob for form submission
@@ -484,8 +491,9 @@
 
 
     // Initialize Choices.js for tag selection
+    let tagChoices; // Store globally for regenerate function
     document.addEventListener('DOMContentLoaded', function() {
-        const tagSelect = new Choices('#tag', {
+        tagChoices = new Choices('#tag', {
             removeItemButton: true,
             searchEnabled: true,
             placeholderValue: 'Pilih tag yang sesuai...',
@@ -501,9 +509,12 @@
             }
         });
 
+        // Store globally
+        window.tagChoices = tagChoices;
+
         // Update tag count
         function updateTagCount() {
-            const selectedTags = tagSelect.getValue();
+            const selectedTags = tagChoices.getValue();
             const countElement = document.getElementById('tag-count');
             if (selectedTags.length > 0) {
                 countElement.textContent = `(${selectedTags.length} dipilih)`;
@@ -545,7 +556,7 @@
         if (uploadMethod === 'file-upload') {
             const fileInput = document.getElementById('foto-file');
             const hasFileSelected = fileInput.files.length > 0;
-            
+
             // For add mode, file is required
             if (!isEditMode && !hasFileSelected && !currentImageFile) {
                 e.preventDefault();
@@ -559,13 +570,13 @@
                 const formData = new FormData(form);
                 formData.delete('foto');
                 formData.append('foto', currentImageFile, currentImageFile.name || 'cropped-image.jpg');
-                
+
                 // Validate file size
                 if (currentImageFile.size > 5 * 1024 * 1024) {
                     alert('Ukuran file terlalu besar. Maksimal 5MB.');
                     return;
                 }
-                
+
                 submitForm(formData, form.action);
                 return;
             }
@@ -610,18 +621,92 @@
     // Cleanup camera and blob URLs on page unload
     window.addEventListener('beforeunload', function() {
         stopCamera();
-        
+
         // Clean up any blob URLs to prevent memory leaks
         const preview = document.getElementById('cover-preview');
         if (preview && preview.src.startsWith('blob:')) {
             URL.revokeObjectURL(preview.src);
         }
-        
+
         const cropImage = document.getElementById('image-to-crop');
         if (cropImage && cropImage.src.startsWith('blob:')) {
             URL.revokeObjectURL(cropImage.src);
         }
     });
+
+    // Regenerate book info from existing cover
+    {% if book and book.foto %}
+    document.getElementById('regenerate-info-btn').addEventListener('click', async function() {
+        const btn = this;
+        const originalHTML = btn.innerHTML;
+
+        // Disable button and show loading
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i> Sedang menganalisis...';
+
+        try {
+            // Get the current cover image path
+            const currentFoto = "{{ book.foto }}";
+            
+            // Get CSRF token
+            const csrfToken = document.querySelector('input[name="csrf_token"]').value;
+
+            // Call the regenerate endpoint with the image path
+            const regenerateResponse = await fetch('{{ url_for("regenerate_book_info") }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                },
+                body: JSON.stringify({
+                    foto_path: currentFoto
+                })
+            });
+
+            if (!regenerateResponse.ok) {
+                // Try to get error message from response body
+                const errorText = await regenerateResponse.text();
+                throw new Error(`Gagal menganalisis gambar: ${regenerateResponse.status} ${regenerateResponse.statusText} - ${errorText}`);
+            }
+
+            const result = await regenerateResponse.json();
+
+            if (result.error) {
+                alert('Error: ' + result.error);
+                return;
+            }
+
+            // Update form fields with the extracted data
+            document.getElementById('judul').value = result.judul || '';
+            document.getElementById('penulis').value = result.penulis || '';
+            document.getElementById('deskripsi_singkat').value = result.deskripsi_singkat || '';
+
+            // Update tags
+            if (result.tag && result.tag.length > 0) {
+                const tagSelect = document.getElementById('tag');
+                // Clear current selections
+                Array.from(tagSelect.options).forEach(option => {
+                    option.selected = result.tag.includes(option.value);
+                });
+
+                // Trigger Choices.js update if available
+                if (window.tagChoices) {
+                    window.tagChoices.setChoiceByValue(result.tag);
+                }
+            }
+
+            alert('✅ Informasi buku berhasil di-generate ulang! Silakan periksa dan edit jika perlu.');
+
+        } catch (error) {
+            console.error('Error regenerating book info:', error);
+            alert('Terjadi kesalahan: ' + error.message);
+        } finally {
+            // Restore button
+            btn.disabled = false;
+            btn.innerHTML = originalHTML;
+        }
+    });
+    {% endif %}
 </script>
 {% endblock %}
 {% endblock %}
