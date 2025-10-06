@@ -71,24 +71,26 @@ Preferred communication style: Simple, everyday language.
 ## Project Status
 
 ### Replit Environment Setup (October 2025)
-✅ **Successfully Migrated to Replit**: The application has been successfully configured to run in the Replit environment.
+✅ **Successfully Imported from GitHub**: The application has been successfully imported and configured to run in the Replit environment.
 
 **Setup Changes:**
 - Renamed `app.py` to `application.py` to avoid naming conflict with the `app/` package directory
 - Updated `main.py` to import from `application` module
 - Made dotenv dependency optional for Replit environment (uses Replit secrets instead)
-- Configured workflow to use gunicorn on port 5000 with webview output
-- Set up deployment configuration for autoscale deployment
+- Configured workflow "RekoBuku App" with gunicorn on port 5000 and webview output type
+- Set up deployment configuration for autoscale deployment (production-ready)
 - Added comprehensive .gitignore for Python projects
+- All dependencies managed via uv (pyproject.toml)
 
 **Environment Variables Required:**
-- `SESSION_SECRET`: Required for Flask session management (already configured in Replit)
+- `SESSION_SECRET`: Required for Flask session management (✓ configured in Replit)
 - `GEMINI_API_KEY`: Optional - Required only if using AI-powered book recommendations
 
 **Running the Application:**
-- The app runs automatically via the configured workflow using gunicorn
-- Access the app through the Replit webview
+- The app runs automatically via the configured workflow using `uv run gunicorn`
+- Access the app through the Replit webview at port 5000
 - Production-ready deployment configured for autoscale
+- Data persistence using JSON files in `data/` directory (users.json, books.json, settings.json)
 
 ### Implementation Complete (September 2025)
 ✅ **Fully Functional Web Application**: RekoBuku is now complete and running successfully on port 5000

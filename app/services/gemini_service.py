@@ -370,7 +370,7 @@ class GeminiBookRecommendationService:
                - HANYA gunakan tag dari daftar di atas, JANGAN buat tag baru
                - Pilih tag yang paling spesifik dan sesuai
                
-            4. Buat DESKRIPSI LENGKAP (MINIMAL 1300 KARAKTER) yang FOKUS pada topik utama buku:
+            4. Buat DESKRIPSI LENGKAP (MINIMAL 3500 KARAKTER) yang FOKUS pada topik utama buku:
                
                - Jelaskan apa topik utama buku ini secara detail
                - Apa saja yang dibahas dalam buku (konsep, metode, pembahasan)
@@ -383,7 +383,7 @@ class GeminiBookRecommendationService:
             - Jika teks dalam bahasa Inggris, pertahankan bahasa Inggris
             - Pastikan judul dan penulis PERSIS seperti yang tertulis di buku
             - Tag HARUS dipilih dari daftar yang tersedia, jangan buat tag baru
-            - Deskripsi HARUS MINIMAL 1300 KARAKTER (bukan kata), lebih panjang lebih baik
+            - Deskripsi HARUS MINIMAL 3500 KARAKTER (bukan kata), lebih panjang lebih baik
             - Fokus pada TOPIK UTAMA buku, bukan hal-hal umum
             - Gunakan bahasa yang informatif, profesional, dan menarik
             - Jelaskan secara DETAIL dan RELEVAN dengan isi buku
@@ -437,6 +437,15 @@ class GeminiBookRecommendationService:
                 # Ensure tag is a list
                 if isinstance(result['tag'], str):
                     result['tag'] = [result['tag']]
+                
+                # Convert all-caps title to title case
+                if result.get('judul'):
+                    judul = result['judul']
+                    # Check if the title is all uppercase (with tolerance for spaces and punctuation)
+                    words = judul.split()
+                    if all(word.isupper() or not word.isalpha() for word in words):
+                        # Convert to title case
+                        result['judul'] = judul.title()
                 
                 logging.info(f"Successfully extracted book info: {result.get('judul', 'Unknown')}")
                 return result

@@ -81,7 +81,7 @@ class BookForm(FlaskForm):
     ])
     deskripsi_singkat = TextAreaField('Deskripsi Singkat', validators=[
         DataRequired(message='Deskripsi singkat harus diisi'),
-        Length(min=10, max=2000, message='Deskripsi harus antara 10-2000 karakter')
+        Length(min=10, max=3500, message='Deskripsi harus antara 10-3500 karakter')
     ])
     submit = SubmitField('Simpan Buku')
 
@@ -162,7 +162,7 @@ class EditBookForm(FlaskForm):
     ])
     deskripsi_singkat = TextAreaField('Deskripsi Singkat', validators=[
         DataRequired(message='Deskripsi singkat harus diisi'),
-        Length(min=10, max=2000, message='Deskripsi harus antara 10-2000 karakter')
+        Length(min=10, max=3500, message='Deskripsi harus antara 10-3500 karakter')
     ])
     submit = SubmitField('Update Buku')
 
