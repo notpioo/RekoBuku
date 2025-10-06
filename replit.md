@@ -118,4 +118,9 @@ Preferred communication style: Simple, everyday language.
 - Gemini Vision integration with automatic MIME type detection (JPEG, PNG, GIF)
 - Robust JSON parsing with error handling for AI responses
 - Image preprocessing with imghdr for accurate format detection
-- Temporary preview image system with correct file extensions
+- **Smart Cover Management System** (October 2025):
+  - Auto-generate clean filenames from book titles (max 50 chars, lowercase, underscores)
+  - Automatically delete old covers when uploading new ones
+  - Cleanup temporary preview files older than 1 hour
+  - Consistent naming across all features (add, edit, AI generate)
+  - No duplicate or orphaned image files

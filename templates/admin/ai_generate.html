@@ -26,24 +26,19 @@
                                 <ol class="mb-0 mt-2">
                                     <li>Upload gambar cover buku (JPG, JPEG, atau PNG)</li>
                                     <li>Klik "Analisis dengan AI"</li>
-                                    <li>AI akan otomatis mendeteksi dan crop area buku</li>
                                     <li>AI akan membaca dan mengekstrak informasi buku</li>
-                                    <li>Periksa dan edit jika perlu</li>
+                                    <li><strong>Crop manual gambar</strong> jika diperlukan</li>
+                                    <li>Periksa dan edit hasil ekstraksi</li>
                                     <li>Simpan buku ke database</li>
                                 </ol>
-                            </div>
-                            
-                            <div class="alert alert-success">
-                                <i class="fas fa-magic me-2"></i>
-                                <strong>Fitur Auto-Crop:</strong> AI akan otomatis memotong gambar untuk fokus pada cover buku, menghilangkan background yang tidak perlu!
                             </div>
 
                             <form method="POST" enctype="multipart/form-data">
                                 {{ form.hidden_tag() }}
-                                
+
                                 <div class="mb-3">
                                     <label for="foto" class="form-label fw-bold">{{ form.foto.label.text }}</label>
-                                    {{ form.foto(class="form-control", accept="image/jpeg,image/jpg,image/png") }}
+                                    {{ form.foto(class="form-control", accept="image/jpeg,image/jpg,image/png", id="foto-file") }}
                                     {% if form.foto.errors %}
                                         <div class="invalid-feedback d-block">
                                             {{ form.foto.errors[0] }}
@@ -55,22 +50,25 @@
                                 </div>
 
                                 <div class="d-grid">
-                                    {{ form.submit(class="btn btn-primary btn-lg") }}
+                                    {{ form.submit(class="btn btn-success btn-lg") }}
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
 
-                <!-- Preview and Results -->
+                <!-- Preview -->
                 <div class="col-lg-6 mb-4">
                     {% if preview_image %}
-                    <div class="card shadow-sm border-0 mb-4">
+                    <div class="card shadow-sm border-0">
                         <div class="card-header bg-success text-white">
                             <h5 class="mb-0"><i class="fas fa-image me-2"></i>Preview Gambar</h5>
                         </div>
                         <div class="card-body text-center">
-                            <img src="{{ preview_image }}" alt="Preview" class="img-fluid rounded" style="max-height: 300px;">
+                            <img id="cover-preview" src="{{ preview_image }}" alt="Preview" class="img-fluid rounded" style="max-height: 300px;">
+                            <button type="button" id="crop-image-btn" class="btn btn-info mt-3 w-100">
+                                <i class="fas fa-crop me-1"></i> Crop Gambar
+                            </button>
                         </div>
                     </div>
                     {% else %}
@@ -98,20 +96,20 @@
                                 Informasi buku berhasil diekstrak! Periksa dan edit jika perlu sebelum menyimpan.
                             </div>
 
-                            <form method="POST" action="{{ url_for('admin_ai_generate_save') }}">
+                            <form method="POST" action="{{ url_for('admin_ai_generate_save') }}" id="saveForm">
                                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                                <input type="hidden" name="foto" value="{{ preview_image }}">
+                                <input type="hidden" name="foto" id="fotoPath" value="{{ preview_image }}">
 
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="judul" class="form-label fw-bold">Judul Buku</label>
-                                        <input type="text" class="form-control" id="judul" name="judul" 
+                                        <input type="text" class="form-control" id="judul" name="judul"
                                                value="{{ extracted_data.judul }}" required>
                                     </div>
 
                                     <div class="col-md-6 mb-3">
                                         <label for="penulis" class="form-label fw-bold">Penulis</label>
-                                        <input type="text" class="form-control" id="penulis" name="penulis" 
+                                        <input type="text" class="form-control" id="penulis" name="penulis"
                                                value="{{ extracted_data.penulis }}" required>
                                     </div>
 
@@ -139,7 +137,7 @@
                                                 'Audit Sistem'
                                             ] %}
                                             {% for tag_option in available_tags %}
-                                                <option value="{{ tag_option }}" 
+                                                <option value="{{ tag_option }}"
                                                     {% if tag_option in extracted_data.tag %}selected{% endif %}>
                                                     {{ tag_option }}
                                                 </option>
@@ -147,7 +145,7 @@
                                         </select>
                                         <div class="form-text">
                                             <i class="fas fa-tags me-1"></i>
-                                            Tag yang dipilih AI: 
+                                            Tag yang dipilih AI:
                                             {% for tag in extracted_data.tag %}
                                                 <span class="badge bg-primary">{{ tag }}</span>
                                             {% endfor %}
@@ -156,7 +154,7 @@
 
                                     <div class="col-12 mb-3">
                                         <label for="deskripsi_singkat" class="form-label fw-bold">Deskripsi Singkat</label>
-                                        <textarea class="form-control" id="deskripsi_singkat" name="deskripsi_singkat" 
+                                        <textarea class="form-control" id="deskripsi_singkat" name="deskripsi_singkat"
                                                   rows="5" required>{{ extracted_data.deskripsi_singkat }}</textarea>
                                         <div class="form-text">
                                             <i class="fas fa-info-circle me-1"></i>
@@ -187,12 +185,55 @@
         </div>
     </div>
 </div>
+
+<!-- Crop Modal - SAMA SEPERTI DI BOOK_FORM.HTML -->
+<div class="modal fade" id="cropModal" tabindex="-1" aria-labelledby="cropModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cropModalLabel">
+                    <i class="fas fa-crop me-2"></i>Crop Foto Cover Buku
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center mb-3">
+                    <small class="text-muted">
+                        <i class="fas fa-info-circle me-1"></i>
+                        Seret untuk memindahkan area crop, gunakan sudut untuk mengubah ukuran
+                    </small>
+                </div>
+                <div class="img-container crop-container">
+                    <img id="image-to-crop" src="" alt="Image to crop" style="max-width: 100%; height: auto;">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-1"></i>Batal
+                </button>
+                <button type="button" id="crop-save-btn" class="btn btn-primary">
+                    <i class="fas fa-check me-1"></i>Simpan Hasil Crop
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet">
 <script>
-    // Initialize Choices.js for tag selection
+    // COPY LANGSUNG DARI BOOK_FORM.HTML - IMPLEMENTASI YANG SUDAH BERFUNGSI
+    let cropper = null;
+    let currentImageFile = null;
+    let cropModal = null;
+
+    // Initialize modal
     document.addEventListener('DOMContentLoaded', function() {
+        cropModal = new bootstrap.Modal(document.getElementById('cropModal'));
+
+        // Initialize Choices.js for tag selection
         const tagSelect = document.getElementById('tag');
         if (tagSelect) {
             new Choices(tagSelect, {
@@ -205,21 +246,236 @@
                 itemSelectText: 'Klik untuk memilih',
             });
         }
+    });
 
-        // Preview image before upload
-        const fotoInput = document.getElementById('foto');
-        if (fotoInput) {
-            fotoInput.addEventListener('change', function(e) {
-                if (e.target.files && e.target.files[0]) {
-                    const file = e.target.files[0];
-                    const fileSize = file.size / 1024 / 1024; // in MB
-                    
-                    if (fileSize > 10) {
-                        alert('Ukuran file terlalu besar! Maksimal 10MB.');
-                        e.target.value = '';
-                    }
+    // Auto-update cover preview for file upload
+    document.getElementById('foto-file').addEventListener('change', function() {
+        const file = this.files[0];
+        const preview = document.getElementById('cover-preview');
+        const cropBtn = document.getElementById('crop-image-btn');
+
+        if (!preview) return; // Tidak ada preview image jika belum upload
+
+        // Clear previous blob URLs to prevent memory leaks
+        if (preview && preview.src.startsWith('blob:')) {
+            URL.revokeObjectURL(preview.src);
+        }
+
+        if (file) {
+            // Check file size (10MB limit)
+            if (file.size > 10 * 1024 * 1024) {
+                alert('Ukuran file terlalu besar. Maksimal 10MB.');
+                this.value = '';
+                if (cropBtn) cropBtn.style.display = 'none';
+                currentImageFile = null;
+                return;
+            }
+
+            // Check file type
+            const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+            if (!allowedTypes.includes(file.type)) {
+                alert('Format file tidak didukung. Gunakan JPG, JPEG, atau PNG.');
+                this.value = '';
+                if (cropBtn) cropBtn.style.display = 'none';
+                currentImageFile = null;
+                return;
+            }
+
+            // Store the file for cropping
+            currentImageFile = file;
+
+            // Preview the image
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                if (preview) {
+                    preview.src = e.target.result;
+                    if (cropBtn) cropBtn.style.display = 'inline-block';
                 }
-            });
+            };
+            reader.readAsDataURL(file);
+        } else {
+            if (cropBtn) cropBtn.style.display = 'none';
+            currentImageFile = null;
+        }
+    });
+
+    // Crop Image functionality
+    const cropImageBtn = document.getElementById('crop-image-btn');
+    if (cropImageBtn) {
+        cropImageBtn.addEventListener('click', function() {
+            const imageElement = document.getElementById('image-to-crop');
+            const preview = document.getElementById('cover-preview');
+
+            if (preview && preview.src) {
+                // Set the image source for cropping
+                imageElement.src = preview.src;
+
+                // Initialize Cropper.js
+                if (cropper) {
+                    cropper.destroy();
+                }
+                cropper = new Cropper(imageElement, {
+                    aspectRatio: 2 / 3, // 2:3 aspect ratio for book covers
+                    viewMode: 1,
+                    responsive: true,
+                    autoCropArea: 0.8,
+                    zoomable: true,
+                    scalable: true,
+                    rotatable: true,
+                    background: true,
+                    modal: true,
+                    guides: true,
+                    center: true,
+                    highlight: true,
+                    cropBoxMovable: true,
+                    cropBoxResizable: true,
+                    toggleDragModeOnDblclick: true,
+                    minContainerWidth: 300,
+                    minContainerHeight: 400,
+                    ready: function() {
+                        // Ensure cropper is initialized before showing modal
+                        cropModal.show();
+                    }
+                });
+            } else {
+                alert('Pilih gambar terlebih dahulu.');
+            }
+        });
+    }
+
+    const cropSaveBtn = document.getElementById('crop-save-btn');
+    if (cropSaveBtn) {
+        cropSaveBtn.addEventListener('click', function() {
+            if (cropper) {
+                // Get cropped image data as a Blob
+                cropper.getCroppedCanvas().toBlob((blob) => {
+                    // Create a new filename for the cropped image
+                    const filename = `cropped_image_${Date.now()}.jpg`;
+
+                    // Create a new File object from the blob
+                    const croppedFile = new File([blob], filename, { type: 'image/jpeg' });
+
+                    // Update the preview
+                    const preview = document.getElementById('cover-preview');
+                    if (preview) {
+                        const newImageUrl = URL.createObjectURL(blob);
+
+                        // Revoke old object URL to prevent memory leaks
+                        if (preview.src.startsWith('blob:')) {
+                            URL.revokeObjectURL(preview.src);
+                        }
+
+                        preview.src = newImageUrl;
+                    }
+
+                    // For AI Generate, upload the cropped image to server
+                    uploadCroppedImage(croppedFile);
+
+                    // Destroy cropper instance
+                    cropper.destroy();
+                    cropper = null;
+
+                    // Close the modal
+                    cropModal.hide();
+                }, 'image/jpeg', 0.8);
+            }
+        });
+    }
+
+    // Handle modal hidden event to clean up cropper
+    document.getElementById('cropModal').addEventListener('hidden.bs.modal', function (e) {
+        if (cropper) {
+            cropper.destroy();
+            cropper = null;
+        }
+        // Clear the crop image source to prevent memory leaks
+        const imageElement = document.getElementById('image-to-crop');
+        if (imageElement.src.startsWith('blob:')) {
+            URL.revokeObjectURL(imageElement.src);
+        }
+        imageElement.src = '';
+    });
+
+    // Upload cropped image to server
+    function uploadCroppedImage(file) {
+        const formData = new FormData();
+        formData.append('file', file);
+
+        // Send old preview path to be deleted
+        const preview = document.getElementById('cover-preview');
+        if (preview && preview.src) {
+            const currentSrc = preview.src;
+            console.log('🔍 Current preview src:', currentSrc);
+            
+            // Check if it's not a blob URL
+            if (!currentSrc.startsWith('blob:')) {
+                if (currentSrc.includes('temp_preview_') || currentSrc.includes('cropped_image_')) {
+                    // Extract path from full URL
+                    const url = new URL(currentSrc);
+                    const oldPath = url.pathname;
+                    formData.append('old_preview_path', oldPath);
+                    console.log('📤 Sending old path to delete:', oldPath);
+                } else {
+                    console.log('⚠️ Current image is not a temp file, skipping deletion');
+                }
+            } else {
+                console.log('⚠️ Current image is a blob URL, skipping deletion');
+            }
+        } else {
+            console.log('⚠️ No preview image found');
+        }
+
+        const csrfToken = document.querySelector('input[name="csrf_token"]').value;
+
+        fetch('/admin/ai-generate/upload-cropped', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': csrfToken
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                console.log('✅ Upload successful, new path:', data.path);
+                
+                // Update preview with new path from server
+                const preview = document.getElementById('cover-preview');
+                if (preview) {
+                    // Revoke old blob URL if exists
+                    if (preview.src.startsWith('blob:')) {
+                        URL.revokeObjectURL(preview.src);
+                    }
+                    preview.src = data.path;
+                }
+                
+                // Update hidden input with new path
+                const fotoPath = document.getElementById('fotoPath');
+                if (fotoPath) {
+                    fotoPath.value = data.path;
+                }
+                alert('✅ Crop berhasil! File temp_preview sudah dihapus dan diganti dengan cropped_image.');
+            } else {
+                console.error('❌ Upload failed:', data.error);
+                alert('Gagal mengupload gambar crop: ' + (data.error || 'Unknown error'));
+            }
+        })
+        .catch(error => {
+            console.error('❌ Upload error:', error);
+            alert('Terjadi kesalahan saat mengupload gambar crop: ' + error.message);
+        });
+    }
+
+    // Cleanup blob URLs on page unload
+    window.addEventListener('beforeunload', function() {
+        const preview = document.getElementById('cover-preview');
+        if (preview && preview.src.startsWith('blob:')) {
+            URL.revokeObjectURL(preview.src);
+        }
+
+        const cropImage = document.getElementById('image-to-crop');
+        if (cropImage && cropImage.src.startsWith('blob:')) {
+            URL.revokeObjectURL(cropImage.src);
         }
     });
 </script>
